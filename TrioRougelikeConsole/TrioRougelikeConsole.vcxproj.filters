@@ -27,6 +27,18 @@
     <ClCompile Include="main.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="GraphicalSymbol.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="CreatureGameObject.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemGameObject.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -43,6 +55,27 @@
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Pliki nagłówkowe\Main game controls</Filter>
+    </ClInclude>
+    <ClInclude Include="WallGameObject.h">
+      <Filter>Pliki nagłówkowe\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemGameObject.h">
+      <Filter>Pliki nagłówkowe\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerGameObject.h">
+      <Filter>Pliki nagłówkowe\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="BossGameObject.h">
+      <Filter>Pliki nagłówkowe\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemieGameObject.h">
+      <Filter>Pliki nagłówkowe\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="FloorGameObject.h">
+      <Filter>Pliki nagłówkowe\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="CreatureGameObject.h">
+      <Filter>Pliki nagłówkowe\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

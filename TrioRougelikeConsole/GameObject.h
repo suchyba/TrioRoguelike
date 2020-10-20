@@ -10,10 +10,11 @@ protected:
 	string name;
 	GraphicalSymbol representation;
 public:
-	GameObject(string, GraphicalSymbol);
+	GameObject(string Name, GraphicalSymbol Symbol);
+	GameObject();
 
-	const string getName();
-	const GraphicalSymbol getRepresentation();
+	string getName() const;
+	GraphicalSymbol getRepresentation() const;
 
 	void setGraphicalRepresentation(GraphicalSymbol);
 };
