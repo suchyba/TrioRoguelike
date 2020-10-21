@@ -1,4 +1,5 @@
 #include "ItemGameObject.h"
+#include "CreatureGameObject.h"
 
 int ItemGameObject::getArmor() const
 {
@@ -26,4 +27,9 @@ void ItemGameObject::onDamege(int damage)
 
 void ItemGameObject::onActivation()
 {
+}
+
+void ItemGameObject::onEquipping(CreatureGameObject* creature)
+{
+
 }

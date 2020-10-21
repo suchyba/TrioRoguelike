@@ -144,9 +144,11 @@
     <ClCompile Include="GraphicalSymbol.cpp" />
     <ClCompile Include="ItemGameObject.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="WallGameObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BossGameObject.h" />
+    <ClInclude Include="Colliding.h" />
     <ClInclude Include="CreatureGameObject.h" />
     <ClInclude Include="DynamicGameObject.h" />
     <ClInclude Include="EnemieGameObject.h" />

@@ -1,4 +1,5 @@
 #include "CreatureGameObject.h"
+#include "ItemGameObject.h"
 
 CreatureGameObject::CreatureGameObject(int hp, int armor, int activeItemsCount) : healthPoints(hp), baseArmor(armor), activeInventorySize(activeItemsCount)
 {
@@ -44,6 +45,19 @@ void CreatureGameObject::onAttack(CreatureGameObject* opponent)
 	opponent->onHit(damage);
 	for (int i = 0; i < activeInventorySize; ++i)
 		activeInventory[i].onAttack(opponent);
+}
+
+void CreatureGameObject::onRefresh()
+{
+}
+
+void CreatureGameObject::onInteraction()
+{
+}
+
+void CreatureGameObject::onCollide(GameObject sender)
+{
+
 }
 
 CreatureGameObject::~CreatureGameObject()

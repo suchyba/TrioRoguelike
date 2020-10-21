@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
-#include "CreatureGameObject.h"
+
+class CreatureGameObject;
 
 class ItemGameObject : public GameObject
 {
@@ -16,4 +17,5 @@ public:
 	virtual void onAttack(CreatureGameObject* opponent);
 	virtual void onDamege(int damage);
 	virtual void onActivation();
+	virtual void onEquipping(CreatureGameObject* creature);
 };

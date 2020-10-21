@@ -39,6 +39,9 @@
     <ClCompile Include="ItemGameObject.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="WallGameObject.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -75,6 +78,9 @@
       <Filter>Pliki nagłówkowe\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="CreatureGameObject.h">
+      <Filter>Pliki nagłówkowe\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Colliding.h">
       <Filter>Pliki nagłówkowe\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>

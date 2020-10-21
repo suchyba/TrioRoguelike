@@ -1,8 +1,10 @@
 #pragma once
 #include "DynamicGameObject.h"
-#include "ItemGameObject.h"
+#include "Colliding.h"
 
-class CreatureGameObject : public DynamicGameObject
+class ItemGameObject;
+
+class CreatureGameObject : public DynamicGameObject, public Colliding
 {
 protected:
 	int healthPoints;
@@ -15,7 +17,8 @@ public:
 	virtual void onHit(int dmg);
 	virtual void onDeath();
 	virtual void onAttack(CreatureGameObject* opponent);
-	virtual void onRefresh();
-	virtual void onInteraction();
+	virtual void onRefresh() override;
+	virtual void onInteraction() override;
+	virtual void onCollide(GameObject sender) override;
 	~CreatureGameObject();
 };

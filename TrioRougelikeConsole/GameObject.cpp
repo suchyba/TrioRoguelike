@@ -5,7 +5,7 @@ GameObject::GameObject(string Name, GraphicalSymbol GSymbol) : name(Name), repre
 
 }
 
-GameObject::GameObject() : name("<NONE>"), representation(new GraphicalSymbol(' '))
+GameObject::GameObject() : name("<NONE>"), representation(' ', -1, -1)
 {
 
 }
