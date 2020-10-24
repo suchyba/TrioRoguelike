@@ -1,17 +1,19 @@
 #include "CreatureGameObject.h"
 #include "ItemGameObject.h"
 
-CreatureGameObject::CreatureGameObject(int hp, int armor, int activeItemsCount) : healthPoints(hp), baseArmor(armor), activeInventorySize(activeItemsCount)
+CreatureGameObject::CreatureGameObject(int hp, int armor, int exp, int activeItemsCount) : healthPoints(hp), baseArmor(armor), baseHealthPoints(hp), experience(exp)
 {
-	activeInventory = new ItemGameObject[activeInventorySize];
+	for (int i = 0; i < activeItemsCount; ++i)
+		activeInventory.push_back(NULL);
 }
 
 void CreatureGameObject::onHit(int dmg)
 {
 	int bonusArmor = 0;
-	for (int i = 0; i < activeInventorySize; ++i)
+	for (ItemGameObject* item : activeInventory)
 	{
-		bonusArmor += activeInventory[i].getArmor();
+		if (item)
+			bonusArmor += item->getArmor();
 	}
 	int damage = dmg - (baseArmor + bonusArmor);
 
@@ -24,9 +26,10 @@ void CreatureGameObject::onHit(int dmg)
 		onDeath();
 		return;
 	}
-	for (int i = 0; i < activeInventorySize; ++i)
+	for (ItemGameObject* item : activeInventory)
 	{
-		activeInventory[i].onDamege(damage);
+		if (item)
+			item->onDamege(damage);
 	}
 }
 
@@ -35,16 +38,19 @@ void CreatureGameObject::onDeath()
 	alive = false;
 }
 
-void CreatureGameObject::onAttack(CreatureGameObject* opponent)
+void CreatureGameObject::onAttack(CreatureGameObject& opponent)
 {
 	int damage = 0;
-	for (int i = 0; i < activeInventorySize; ++i)
-	{
-		damage += activeInventory[i].getDamage();
-	}
-	opponent->onHit(damage);
-	for (int i = 0; i < activeInventorySize; ++i)
-		activeInventory[i].onAttack(opponent);
+
+	for (ItemGameObject* item : activeInventory)
+		if (item)
+			damage += item->getDamage();
+
+	opponent.onHit(damage);
+
+	for (ItemGameObject* item : activeInventory)
+		if (item)
+			item->onAttack(opponent);
 }
 
 void CreatureGameObject::onRefresh()
@@ -55,12 +61,61 @@ void CreatureGameObject::onInteraction()
 {
 }
 
-void CreatureGameObject::onCollide(GameObject sender)
+void CreatureGameObject::onCollide(GameObject& sender)
 {
 
 }
 
+int CreatureGameObject::getHealthPoints() const
+{
+	return healthPoints;
+}
+
+int CreatureGameObject::getBaseHealthPoints() const
+{
+	return baseHealthPoints;
+}
+
+int CreatureGameObject::getBaseArmor() const
+{
+	return baseArmor;
+}
+
+ItemGameObject* CreatureGameObject::getItemFromSlot(int slot) const
+{
+	ItemGameObject* item = NULL;
+	if (slot < activeInventory.size())
+		item = activeInventory[slot];
+	return item;
+}
+
+bool CreatureGameObject::isAlive() const
+{
+	return alive;
+}
+
+int CreatureGameObject::getExperience() const
+{
+	return experience;
+}
+
+void CreatureGameObject::addEffect(const EffectGameObject& effect)
+{
+	activeEffects.push_back(effect);
+}
+
+bool CreatureGameObject::equipItem(ItemGameObject item, int slot)
+{
+	if (slot < activeInventory.size())
+	{
+		if (activeInventory[slot] == NULL)
+			activeInventory[slot] = &item;
+	}
+	return false;
+}
+
 CreatureGameObject::~CreatureGameObject()
 {
-	delete[] activeInventory;
+	for (ItemGameObject* item : activeInventory)
+		delete item;
 }

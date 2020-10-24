@@ -140,10 +140,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CreatureGameObject.cpp" />
+    <ClCompile Include="EffectGameObject.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GraphicalSymbol.cpp" />
     <ClCompile Include="ItemGameObject.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PlayerGameObject.cpp" />
     <ClCompile Include="WallGameObject.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +153,7 @@
     <ClInclude Include="Colliding.h" />
     <ClInclude Include="CreatureGameObject.h" />
     <ClInclude Include="DynamicGameObject.h" />
+    <ClInclude Include="EffectGameObject.h" />
     <ClInclude Include="EnemieGameObject.h" />
     <ClInclude Include="FloorGameObject.h" />
     <ClInclude Include="Game.h" />

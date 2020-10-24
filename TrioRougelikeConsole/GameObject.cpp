@@ -20,7 +20,7 @@ GraphicalSymbol GameObject::getRepresentation() const
     return representation;
 }
 
-void GameObject::setGraphicalRepresentation(GraphicalSymbol newRepresentation)
+void GameObject::setGraphicalRepresentation(const GraphicalSymbol& newRepresentation)
 {
     representation = newRepresentation;
 }

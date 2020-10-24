@@ -42,6 +42,12 @@
     <ClCompile Include="WallGameObject.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="EffectGameObject.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerGameObject.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -81,6 +87,9 @@
       <Filter>Pliki nagłówkowe\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="Colliding.h">
+      <Filter>Pliki nagłówkowe\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectGameObject.h">
       <Filter>Pliki nagłówkowe\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>

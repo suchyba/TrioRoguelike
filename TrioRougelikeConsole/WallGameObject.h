@@ -5,5 +5,5 @@
 class WallGameObject : public GameObject, public Colliding
 {
 public:
-	virtual void onCollide(GameObject sender) override;
+	virtual void onCollide(GameObject& sender) override;
 };

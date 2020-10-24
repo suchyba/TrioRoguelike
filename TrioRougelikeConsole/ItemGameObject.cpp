@@ -16,20 +16,21 @@ int ItemGameObject::getValue() const
     return value;
 }
 
-void ItemGameObject::onAttack(CreatureGameObject* opponent)
+void ItemGameObject::onAttack(CreatureGameObject& opponent)
 {
 
 }
 
-void ItemGameObject::onDamege(int damage)
+int ItemGameObject::onDamege(int damage)
 {
+    return damage;
 }
 
 void ItemGameObject::onActivation()
 {
 }
 
-void ItemGameObject::onEquipping(CreatureGameObject* creature)
+void ItemGameObject::onEquipping(CreatureGameObject& creature)
 {
 
 }
