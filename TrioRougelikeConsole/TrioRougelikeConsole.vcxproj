@@ -140,9 +140,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CreatureGameObject.cpp" />
+    <ClCompile Include="DynamicGameObject.cpp" />
     <ClCompile Include="EffectGameObject.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GraphicalSymbol.cpp" />
+    <ClCompile Include="InteractionalbeGameObject.cpp" />
     <ClCompile Include="ItemGameObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayerGameObject.cpp" />
@@ -163,6 +166,10 @@
     <ClInclude Include="ItemGameObject.h" />
     <ClInclude Include="PlayerGameObject.h" />
     <ClInclude Include="WallGameObject.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

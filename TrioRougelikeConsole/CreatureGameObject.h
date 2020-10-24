@@ -50,7 +50,9 @@ public:
 	/// <param name="armor">Bazowa iloœæ pancerza</param>
 	/// <param name="activeItemsCount">Iloœæ mo¿liwego do za³o¿enia ekwipunku</param>
 	/// <param name="exp">Iloœæ punktów doœwiadczenia</param>
-	CreatureGameObject(int hp, int armor, int exp, int activeItemsCount);
+	/// <param name="Name">Nazwa stworzenia</param>
+	/// <param name="Symbol">Graficzna reprezentacja stworzenia</param>
+	CreatureGameObject(int hp, int armor, int exp, int activeItemsCount, string Name, GraphicalSymbol Symbol);
 	/// <summary>
 	/// Metoda wywo³ywana podczas ataku.
 	/// </summary>

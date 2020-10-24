@@ -14,6 +14,7 @@ private:
 protected:
 
 public:
+	EffectGameObject(string Name, GraphicalSymbol Symbol);
 	/// <summary>
 	/// Nieobowi¹zkowa metoda wywo³ywana w ka¿dym odœwierzeniu gry.
 	/// </summary>

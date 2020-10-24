@@ -40,6 +40,9 @@ public:
 	/// <param name="startStrength">Pocz¹tkowa wartoœæ punktów si³y</param>
 	/// <param name="startArmor">Pocz¹tkowa wartoœæ bazowej wartoœci pancerza bohatera</param>
 	/// <param name="startMagicPow">Pocz¹tkowa wartoœæ si³y magicznej bohatera</param>
-	PlayerGameObject(int inventoryHeight, int inventoryWidth, int startHp, int activeInventorySize, int experienceToSecondLvl, int startStrength, int startArmor, int startMagicPow);
+	/// <param name="Name">Nazwa gracza</param>
+	/// <param name="Symbol">Graficzna reprezentacja gracza</param>
+	PlayerGameObject(int inventoryHeight, int inventoryWidth, int startHp, int activeInventorySize, int experienceToSecondLvl, int startStrength, int startArmor, 
+		int startMagicPow, string Name, GraphicalSymbol Symbol);
 
 };

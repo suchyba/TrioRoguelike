@@ -1,13 +1,20 @@
 #include "GameObject.h"
+#include <iostream>
+#include <Windows.h>
+
+using namespace std;
 
 GameObject::GameObject(string Name, GraphicalSymbol GSymbol) : name(Name), representation(GSymbol)
 {
+    //  DEBUG
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    cout << "[" << name << "] Created GameObject (" << name << ", ";
+    SetConsoleTextAttribute(hConsole, representation.getColor());
+    cout << representation.getCharSymbol();
+    SetConsoleTextAttribute(hConsole, 7);
+    // END DEBUG
 
-}
-
-GameObject::GameObject() : name("<NONE>"), representation(' ', -1, -1)
-{
-
+    cout << ")" << endl;
 }
 
 string GameObject::getName() const
@@ -23,4 +30,9 @@ GraphicalSymbol GameObject::getRepresentation() const
 void GameObject::setGraphicalRepresentation(const GraphicalSymbol& newRepresentation)
 {
     representation = newRepresentation;
+}
+
+string GameObject::getTag() const
+{
+    return "[" + name + "] ";
 }

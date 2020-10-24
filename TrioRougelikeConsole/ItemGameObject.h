@@ -10,6 +10,7 @@ class CreatureGameObject;
 /// </summary>
 class ItemGameObject : public GameObject
 {
+private:
 protected:
 	/// <summary>
 	/// Dodatkowe punkty pancerza, które zapewnia przedmiot.
@@ -26,8 +27,36 @@ protected:
 	/// <summary>
 	/// Tablica efektów dodawanych przez przedmiot stworzeniu, które go nosi.
 	/// </summary>
-	EffectGameObject* effect = NULL;
+	EffectGameObject* effect;
 public:
+	/// <summary>
+	/// Konstruktor dla elementu zbroi.
+	/// </summary>
+	/// <param name="armor">Wartoœæ dodatkowego poncerza</param>
+	/// <param name="value">Wartoœæ przedmiotu</param>
+	/// <param name="Effect">Efekt, który nak³ada przedmiot</param>
+	/// <param name="Name">Nazwa przedmiotu</param>
+	/// <param name="Symbol">Graficzna reprezentacja przedmiotu</param>
+	ItemGameObject(int armor, int value, const EffectGameObject* Effect, string Name, GraphicalSymbol Symbol);
+	/// <summary>
+	/// Konstruktor dla broni
+	/// </summary>
+	/// <param name="damage">Obra¿enia zadawane przez przedmiot</param>
+	/// <param name="value">Wartoœæ przedmiotu</param>
+	/// <param name="Effect">Efekt, który nak³ada przedmiot</param>
+	/// <param name="Name">Nazwa przedmiotu</param>
+	/// <param name="Symbol">Graficzna reprezentacja przedmiotu</param>
+	ItemGameObject(string Name, int Damage, int Value, const EffectGameObject* Effect, GraphicalSymbol Symbol);
+	/// <summary>
+	/// Konstruktor dla elementu dodatkowego
+	/// </summary>
+	/// <param name="armor">Wartoœæ dodatkowego poncerza</param>
+	/// <param name="damage">Obra¿enia zadawane przez przedmiot</param>
+	/// <param name="value">Wartoœæ przedmiotu</param>
+	/// <param name="Effect">Efekt, który nak³ada przedmiot</param>
+	/// <param name="Name">Nazwa przedmiotu</param>
+	/// <param name="Symbol">Graficzna reprezentacja przedmiotu</param>
+	ItemGameObject(int armor, int Damage, int Value, const EffectGameObject* Effect, string Name, GraphicalSymbol Symbol);
 	/// <summary>
 	/// Metoda dostêpowa do pola bonusArmor.
 	/// </summary>

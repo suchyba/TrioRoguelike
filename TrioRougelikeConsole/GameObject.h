@@ -25,10 +25,6 @@ public:
 	/// <param name="Name">Nazwa obiektu</param>
 	/// <param name="Symbol">Reprezentacja graficzna obiektu</param>
 	GameObject(string Name, GraphicalSymbol Symbol);
-	/// <summary>
-	/// Konstruktor domyœlny u¿ywany do tworzenia pustych obiektów.
-	/// </summary>
-	GameObject();
 
 	/// <summary>
 	/// Metoda dostêpowa do pola name.
@@ -46,4 +42,9 @@ public:
 	/// </summary>
 	/// <param name="rep">Nowa reprezentacja graficzna obiektu</param>
 	void setGraphicalRepresentation(const GraphicalSymbol& rep);
+	/// <summary>
+	/// Metoda do pobierania tagu pomocna w debugowaniu
+	/// </summary>
+	/// <returns>name w nawiasach kwadratowych</returns>
+	virtual string getTag() const;
 };

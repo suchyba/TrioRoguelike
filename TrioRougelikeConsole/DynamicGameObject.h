@@ -8,6 +8,12 @@ class DynamicGameObject : public InteractionableGameObject
 {
 public:
 	/// <summary>
+	/// Konstruktor
+	/// </summary>
+	/// <param name="Name">Nazwa obiektu</param>
+	/// <param name="Symbol">Graficzna reprezentacja obiektu</param>
+	DynamicGameObject(string Name, GraphicalSymbol Symbol);
+	/// <summary>
 	/// Metowa wywo³ywana podczas odœwierzenia gry.
 	/// </summary>
 	virtual void onRefresh() = 0;

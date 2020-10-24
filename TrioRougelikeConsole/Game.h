@@ -1,6 +1,8 @@
 #pragma once
 
-class Game
+class Game final 
 {
-
+private:
+	Game();
+public:
 };
