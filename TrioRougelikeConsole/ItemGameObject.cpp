@@ -51,8 +51,7 @@ int ItemGameObject::getValue() const
 
 void ItemGameObject::onAttack(CreatureGameObject& opponent)
 {
-    cout << getTag() << "Effect on attacking with this item." << endl;
-    opponent.addEffect(*effect);
+    cout << getTag() << "Effect when attacking with this item." << endl;
 }
 
 int ItemGameObject::onDamege(int damage)
