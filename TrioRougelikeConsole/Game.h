@@ -1,20 +1,28 @@
 #pragma once
-#include <vector>
+#include <map>
 #include "CreatureGameObject.h"
 #include "ItemGameObject.h"
 #include "PlayerGameObject.h"
 #include "GameObject.h"
 
+using namespace std;
 
-class Game final 
+class Game final
 {
 private:
 	Game();
-	vector<CreatureGameObject*> creatureList;
-	vector<ItemGameObject*> itemList;
-	vector<GameObject*> otherObjectsList;
-	PlayerGameObject* player;
-public:
+	static map<string, const CreatureGameObject&> templateCreatureList;
+	static map<string, const ItemGameObject&> templateItemList;
+	static map<string, const GameObject&> templateOtherObjectsList;
+	
+	static map<string, DynamicGameObject*> creatureList;
+	static PlayerGameObject* player;
+
 	static void mainLoop();
 	static void init();
+	static void registerObjects();
+	static void logMessage(string message);
+	static void quit();
+public:
+	static void start();
 };
