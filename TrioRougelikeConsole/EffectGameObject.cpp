@@ -19,10 +19,5 @@ EffectGameObject::EffectGameObject(string Name, GraphicalSymbol Symbol) : Dynami
 bool EffectGameObject::onRefresh(GameObject& object)
 {
 	cout << getTag() << "Effect is affecting: " << object.getName() << endl;
-	CreatureGameObject* c = dynamic_cast<CreatureGameObject*>(&object);
-	if (c)
-	{
-		c->directDmg(2);
-	}
-	return true;
+	return false;
 }
