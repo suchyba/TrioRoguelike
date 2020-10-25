@@ -4,3 +4,8 @@ DynamicGameObject::DynamicGameObject(string Name, GraphicalSymbol Symbol) : Inte
 {
 
 }
+
+bool DynamicGameObject::onRefresh(GameObject& object)
+{
+    return false;
+}

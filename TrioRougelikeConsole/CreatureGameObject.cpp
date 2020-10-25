@@ -22,7 +22,7 @@ void CreatureGameObject::onHit(int dmg)
 	}
 	int damage = dmg - (baseArmor + bonusArmor);
 
-	cout << getTag() << "Taking " << damage << " damage" << endl;
+	cout << getTag() << "Taking " << damage << " damage (tried: " << dmg << ")" << endl;
 
 	if (damage > 0)
 	{
@@ -58,11 +58,12 @@ void CreatureGameObject::onAttack(CreatureGameObject& opponent)
 
 	cout << getTag() << "Attacking " << opponent.getName() << " for " << damage << " damage" << endl;
 
-	opponent.onHit(damage);
 
 	for (int i = 0; i < activeInventory.size(); ++i)
 		if (activeInventory[i])
 			activeInventory[i]->onAttack(opponent);
+
+	opponent.onHit(damage);
 }
 
 void CreatureGameObject::onRefresh()
@@ -113,8 +114,9 @@ int CreatureGameObject::getExperience() const
 
 void CreatureGameObject::addEffect(const EffectGameObject& effect)
 {
-	activeEffects.push_back(effect);
+	activeEffects.push_back(EffectGameObject(effect));
 	cout << getTag() << "Effect applied on this creature: " << effect.getName() << endl;
+	activeEffects.back().onRefresh(*this);
 }
 
 bool CreatureGameObject::equipItem(ItemGameObject item, int slot)
@@ -129,6 +131,17 @@ bool CreatureGameObject::equipItem(ItemGameObject item, int slot)
 		}
 	}
 	return false;
+}
+
+void CreatureGameObject::directDmg(int dmg)
+{
+	healthPoints -= dmg;
+	cout << getTag() << "Taking direct damage: " << dmg << endl;
+	cout << getTag() << healthPoints << "/" << baseHealthPoints << endl;
+	if (healthPoints < 0)
+	{
+		onDeath();
+	}
 }
 
 CreatureGameObject::~CreatureGameObject()

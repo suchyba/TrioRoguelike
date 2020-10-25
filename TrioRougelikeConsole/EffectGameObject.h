@@ -11,12 +11,18 @@ private:
 	/// Prywatna implementacja metody onInteraction by uniemo¿liwiæ jej wywo³anie.
 	/// </summary>
 	virtual void onInteraction() override;
+	/// <summary>
+	/// Ukrycie metody bezparametrowej.
+	/// </summary>
+	virtual void onRefresh() override;
 protected:
 
 public:
 	EffectGameObject(string Name, GraphicalSymbol Symbol);
 	/// <summary>
-	/// Nieobowi¹zkowa metoda wywo³ywana w ka¿dym odœwierzeniu gry.
+	/// Metoda wywo³ywana w ka¿dej klatce gry (efekt wp³ywa na obiekt)
 	/// </summary>
-	virtual void onRefresh() override;
+	/// <param name="object">Obiekt, na który wp³ywa efekt</param>
+	/// <returns>True - jeœli efekt wp³yn¹³ na obiekt, False - jeœli nie (domyœlnie)</returns>
+	virtual bool onRefresh(GameObject& object) override;
 };

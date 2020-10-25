@@ -125,6 +125,7 @@ public:
 	/// <param name="slot">Miejsce w ekwipunku, w które ma zostaæ za³o¿ony obiekt.</param>
 	/// <returns>true - jeœli operacja siê powiod³a, w przeciwnym wypadku false</returns>
 	bool equipItem(ItemGameObject item, int slot);
+	void directDmg(int dmg);
 
 	~CreatureGameObject();
 };
