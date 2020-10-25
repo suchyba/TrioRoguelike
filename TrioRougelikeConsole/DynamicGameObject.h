@@ -17,4 +17,10 @@ public:
 	/// Metowa wywo³ywana podczas odœwierzenia gry.
 	/// </summary>
 	virtual void onRefresh() = 0;
+	/// <summary>
+	/// Opcjonalna metoda wywo³ywana, kiedy obiekt wp³ywa na inny obiekt.
+	/// </summary>
+	/// <param name="object">Obiekt na którym obiekt wywiera akcjê</param>
+	/// <returns>True - jeœli meltoda jest obs³ugiwana, False - jeœli nie (domyœlnie)</returns>
+	virtual bool onRefresh(GameObject& object);
 };
