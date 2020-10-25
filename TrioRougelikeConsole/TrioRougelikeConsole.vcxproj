@@ -139,14 +139,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CreatureGameObject.cpp" />
+    <ClCompile Include="DynamicGameObject.cpp" />
+    <ClCompile Include="EffectGameObject.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GraphicalSymbol.cpp" />
+    <ClCompile Include="InteractionalbeGameObject.cpp" />
+    <ClCompile Include="ItemGameObject.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PlayerGameObject.cpp" />
+    <ClCompile Include="WallGameObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BossGameObject.h" />
+    <ClInclude Include="Colliding.h" />
+    <ClInclude Include="CreatureGameObject.h" />
     <ClInclude Include="DynamicGameObject.h" />
+    <ClInclude Include="EffectGameObject.h" />
+    <ClInclude Include="EnemieGameObject.h" />
+    <ClInclude Include="FloorGameObject.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GraphicalSymbol.h" />
     <ClInclude Include="InteractionalbeGameObject.h" />
+    <ClInclude Include="ItemGameObject.h" />
+    <ClInclude Include="PlayerGameObject.h" />
+    <ClInclude Include="WallGameObject.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
