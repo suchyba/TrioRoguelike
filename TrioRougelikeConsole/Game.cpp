@@ -4,8 +4,10 @@
 #include "GameObject.h"
 #include "FloorGameObject.h"
 #include "BleedingEffectGameObject.h"
+#include "RegenerationEffectGameObject.h"
 #include "EnemyGameObject.h"
 #include "WeaponGameObject.h"
+#include "ArmorGameObject.h"
 
 map<string, const GameObject*> Game::templateOtherObjectsList;
 map<string, const CreatureGameObject*> Game::templateCreatureList;
@@ -19,9 +21,12 @@ void Game::mainLoop()
 	auto c1 = dynamic_cast<CreatureGameObject*>(dynamicList[0]);
 	auto c2 = dynamic_cast<CreatureGameObject*>(dynamicList[1]);
 	c1->onAttack(*c2);
+
+	int i = 0;
+
 	while (true)
 	{
-		logMessage("iteration");
+		logMessage("Iteration");
 		
 		
 		// odœwierzanie obiektów dynamicznych
@@ -33,8 +38,9 @@ void Game::mainLoop()
 
 
 
-		if(!c1->isAlive() || !c2->isAlive())
+		if(!c1->isAlive() || !c2->isAlive() || i > 20)
 			return;
+		++i;
 	}
 }
 
@@ -54,10 +60,12 @@ void Game::registerObjects()
 	templateOtherObjectsList.insert({ "DR", new GameObject("Door", GraphicalSymbol((char)219, 6, 0)) });
 
 	templateEffectObjectList.insert({ "BLEFF", new BleedingEffectGameObject(3, 3, 1, 15, "Bleeding", GraphicalSymbol('!', 4, 0)) });
+	templateEffectObjectList.insert({ "HEAL", new RegenerationEffectGameObject(1, 10, 2, "Regeneration", GraphicalSymbol('+', 10, 0)) });
 
-	templateItemList.insert({ "GHHD", new WeaponGameObject(3, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"GhulHand", GraphicalSymbol('L', 4, 0), 10) });
+	templateItemList.insert({ "GHHD", new WeaponGameObject(3, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"Ghul Hand", GraphicalSymbol('L', 4, 0), 13, 20) });
+	templateItemList.insert({ "HLARM", new ArmorGameObject(10, (EffectGameObject*)templateEffectObjectList["HEAL"]->clone(), "Heal Chain Armor", GraphicalSymbol((char)177, 10, 0), 4)});
 	
-	templateCreatureList.insert({ "GH", new EnemyGameObject(20, 10, 5, 1, "Ghul", GraphicalSymbol('&', 4, 0), {(ItemGameObject*) templateItemList.at("GHHD")->clone()}) });
+	templateCreatureList.insert({ "GH", new EnemyGameObject(20, 10, 5, 2, "Ghul", GraphicalSymbol('&', 4, 0), {(ItemGameObject*) templateItemList.at("GHHD")->clone(), (ItemGameObject*)templateItemList.at("HLARM")->clone()}) });
 }
 
 void Game::logMessage(string message)

@@ -16,9 +16,9 @@ private:
 	/// </summary>
 	virtual void onRefresh() override;
 protected:
-
+	int duration;
 public:
-	EffectGameObject(string Name, GraphicalSymbol Symbol);
+	EffectGameObject(int Duration, string Name, GraphicalSymbol Symbol);
 	/// <summary>
 	/// Metoda wywo³ywana w ka¿dej klatce gry (efekt wp³ywa na obiekt)
 	/// </summary>
@@ -26,4 +26,5 @@ public:
 	/// <returns>True - jeœli efekt wp³yn¹³ na obiekt, False - jeœli nie (domyœlnie)</returns>
 	virtual bool onRefresh(GameObject& object) override;
 	virtual GameObject* clone() const override;
+	int getDuration() const;
 };

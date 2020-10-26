@@ -17,9 +17,13 @@ protected:
 	/// </summary>
 	int bonusArmor;
 	/// <summary>
-	/// Obra¿enia, które zapewnia przedmiot.
+	/// Minimalne obra¿enia, które zapewnia przedmiot.
 	/// </summary>
-	int damage;
+	int minDamage;
+	/// <summary>
+	/// Maksymalne obra¿enia, które zapewnia przedmiot.
+	/// </summary>
+	int maxDamage;
 	/// <summary>
 	/// Wartoœæ przedmiotu.
 	/// </summary>
@@ -38,17 +42,22 @@ public:
 	/// <param name="Effect">Efekt, który nak³ada przedmiot</param>
 	/// <param name="Name">Nazwa przedmiotu</param>
 	/// <param name="Symbol">Graficzna reprezentacja przedmiotu</param>
-	ItemGameObject(int Value, const EffectGameObject* Effect, string Name, GraphicalSymbol Symbol, int Armor = 0, int Damage = 0);
+	ItemGameObject(int Value, const EffectGameObject* Effect, string Name, GraphicalSymbol Symbol, int Armor = 0, int MinDamage = 0, int MaxDamage = 0);
 	/// <summary>
 	/// Metoda dostêpowa do pola bonusArmor.
 	/// </summary>
 	/// <returns>bonusArmor</returns>
 	int getArmor() const;
 	/// <summary>
-	/// Metoda dostêpowa do pola damage.
+	/// Metoda dostêpowa do pola minDamage.
 	/// </summary>
-	/// <returns>damage</returns>
-	int getDamage() const;
+	/// <returns>Minimalne obra¿enia</returns>
+	int getMinDamage() const;
+	/// <summary>
+	/// Metoda dostêpowa do pola maxDamage.
+	/// </summary>
+	/// <returns>Maksymalne obra¿enia</returns>
+	int getMaxDamage() const;
 	/// <summary>
 	/// Metoda dostêpowa do pola value.
 	/// </summary>
@@ -64,8 +73,9 @@ public:
 	/// Metoda wywo³ywana bezpoœrednio przed otrzymaniem obra¿eñ.
 	/// </summary>
 	/// <param name="damage">Obra¿enia, które s¹ otrzymywane.</param>
+	/// <param name="self">Stworzenie, na które jest za³o¿ony przedmiot</param>
 	/// <returns>Przetworzone obra¿enia, które s¹ otrzymywane przez stworzenie.</returns>
-	virtual int onDamege(int damage);
+	virtual int onDamege(int damage, CreatureGameObject& self);
 	/// <summary>
 	/// Metoda wywo³ywana w momencie aktywowania przez stworzenie.
 	/// </summary>

@@ -69,6 +69,12 @@
     <ClCompile Include="WeaponGameObject.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="ArmorGameObject.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="RegenerationEffectGameObject.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -117,6 +123,12 @@
       <Filter>Pliki nagłówkowe\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="WeaponGameObject.h">
+      <Filter>Pliki nagłówkowe\PersonalizedGameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ArmorGameObject.h">
+      <Filter>Pliki nagłówkowe\PersonalizedGameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="RegenerationEffectGameObject.h">
       <Filter>Pliki nagłówkowe\PersonalizedGameObject</Filter>
     </ClInclude>
   </ItemGroup>

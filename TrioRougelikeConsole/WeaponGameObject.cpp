@@ -1,8 +1,8 @@
 #include "WeaponGameObject.h"
 #include "CreatureGameObject.h"
 
-WeaponGameObject::WeaponGameObject(int Value, const EffectGameObject* Effect, string Name, GraphicalSymbol Symbol, int Damage) :
-    ItemGameObject(Value, Effect, Name, Symbol, 0, Damage)
+WeaponGameObject::WeaponGameObject(int Value, const EffectGameObject* Effect, string Name, GraphicalSymbol Symbol, int MinDamage, int MaxDamage) :
+    ItemGameObject(Value, Effect, Name, Symbol, 0, MinDamage, MaxDamage)
 {
     cout << getTag() << "Created WeaponGameObject" << endl;
 }

@@ -2,8 +2,8 @@
 #include "CreatureGameObject.h"
 
 BleedingEffectGameObject::BleedingEffectGameObject(int Offset, int Duration, int MinDamage, int MaxDamage, string Name, GraphicalSymbol Symbol) : 
-	offset(Offset), duration(Duration), minDamage(MinDamage), maxDamage(MaxDamage),
-	EffectGameObject(Name, Symbol)
+	offset(Offset), minDamage(MinDamage), maxDamage(MaxDamage),
+	EffectGameObject(Duration, Name, Symbol)
 {
 	cout << getTag() << "Created BleedingEffectGameObject (offset=" << offset << ", duration=" << duration << ", minDmg=" << minDamage << ", maxDmg=" << maxDamage << ")" << endl;
 }
@@ -29,11 +29,6 @@ bool BleedingEffectGameObject::onRefresh(GameObject& object)
 		++frameFromStart;
 
 	return true;
-}
-
-int BleedingEffectGameObject::getDuration() const
-{
-	return duration;
 }
 
 GameObject* BleedingEffectGameObject::clone() const

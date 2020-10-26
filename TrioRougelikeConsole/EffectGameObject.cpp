@@ -11,7 +11,9 @@ void EffectGameObject::onRefresh()
 
 }
 
-EffectGameObject::EffectGameObject(string Name, GraphicalSymbol Symbol) : DynamicGameObject(Name, Symbol)
+EffectGameObject::EffectGameObject(int Duration, string Name, GraphicalSymbol Symbol) : 
+	duration(Duration),
+	DynamicGameObject(Name, Symbol)
 {
 	cout << getTag() << "Created EffectGameObject" << endl;
 }
@@ -25,4 +27,9 @@ bool EffectGameObject::onRefresh(GameObject& object)
 GameObject* EffectGameObject::clone() const
 {
 	return new EffectGameObject(*this);
+}
+
+int EffectGameObject::getDuration() const
+{
+	return duration;
 }

@@ -1,21 +1,24 @@
 #include "ItemGameObject.h"
 #include "CreatureGameObject.h"
 
-ItemGameObject::ItemGameObject(int Value, const EffectGameObject* Effect, string Name, GraphicalSymbol Symbol, int Armor, int Damage) :
-    bonusArmor(Armor), value(Value), damage(Damage), GameObject(Name, Symbol)
+ItemGameObject::ItemGameObject(int Value, const EffectGameObject* Effect, string Name, GraphicalSymbol Symbol, int Armor, int MinDamage, int MaxDamage) :
+    bonusArmor(Armor), value(Value), minDamage(MinDamage), maxDamage(MaxDamage), GameObject(Name, Symbol)
 {
     effect = dynamic_cast<EffectGameObject*>(Effect->clone());
-    cout << getTag() << "Created ItemGameObject (armor=" << bonusArmor << ", damage=" << damage << ", value=" << value << ", effect=" << (effect == NULL ? "NULL" : effect->getName()) << ")" << endl;
+    cout << getTag() << "Created ItemGameObject (armor=" << bonusArmor << ", minDamage=" << minDamage << ", maxDamage=" << maxDamage<< ", value=" << value << ", effect=" << (effect == NULL ? "NULL" : effect->getName()) << ")" << endl;
 }
 
 int ItemGameObject::getArmor() const
 {
     return bonusArmor;
 }
-
-int ItemGameObject::getDamage() const
+int ItemGameObject::getMinDamage() const
 {
-    return damage;
+    return minDamage;
+}
+int ItemGameObject::getMaxDamage() const
+{
+    return maxDamage;
 }
 
 int ItemGameObject::getValue() const
@@ -25,11 +28,10 @@ int ItemGameObject::getValue() const
 
 void ItemGameObject::onAttack(CreatureGameObject& opponent)
 {
-    cout << getTag() << "Effect when attacking with this item." << endl;
-    opponent.addEffect(*effect);
+    cout << getTag() << "No effect when attacking with this item." << endl;
 }
 
-int ItemGameObject::onDamege(int damage)
+int ItemGameObject::onDamege(int damage, CreatureGameObject& self)
 {
     return damage;
 }

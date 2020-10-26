@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ArmorGameObject.cpp" />
     <ClCompile Include="BleedingEffectGameObject.cpp" />
     <ClCompile Include="CreatureGameObject.cpp" />
     <ClCompile Include="DynamicGameObject.cpp" />
@@ -151,10 +152,12 @@
     <ClCompile Include="ItemGameObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayerGameObject.cpp" />
+    <ClCompile Include="RegenerationEffectGameObject.cpp" />
     <ClCompile Include="WallGameObject.cpp" />
     <ClCompile Include="WeaponGameObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArmorGameObject.h" />
     <ClInclude Include="BleedingEffectGameObject.h" />
     <ClInclude Include="BossGameObject.h" />
     <ClInclude Include="Colliding.h" />
@@ -169,6 +172,7 @@
     <ClInclude Include="InteractionalbeGameObject.h" />
     <ClInclude Include="ItemGameObject.h" />
     <ClInclude Include="PlayerGameObject.h" />
+    <ClInclude Include="RegenerationEffectGameObject.h" />
     <ClInclude Include="WallGameObject.h" />
     <ClInclude Include="WeaponGameObject.h" />
   </ItemGroup>
