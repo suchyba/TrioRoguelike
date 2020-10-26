@@ -25,4 +25,5 @@ public:
 	/// <param name="object">Obiekt, na który wp³ywa efekt</param>
 	/// <returns>True - jeœli efekt wp³yn¹³ na obiekt, False - jeœli nie (domyœlnie)</returns>
 	virtual bool onRefresh(GameObject& object) override;
+	virtual GameObject* clone() const override;
 };

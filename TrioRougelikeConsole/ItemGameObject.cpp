@@ -4,22 +4,14 @@
 ItemGameObject::ItemGameObject(int armor, int Value, const EffectGameObject* Effect, string Name, GraphicalSymbol Symbol) :
     bonusArmor(armor), value(Value), damage(0), GameObject(Name, Symbol)
 {
-    if (Effect)
-        effect = new EffectGameObject(*Effect);
-    else
-        effect = NULL;
-
+    effect = dynamic_cast<EffectGameObject*>(Effect->clone());
     cout << getTag() << "Created armor ItemGameObject (armor=" << bonusArmor << ", value=" << value << ", effect=" << (effect == NULL ? "NULL" : effect->getName()) << ")" << endl;
 }
 
 ItemGameObject::ItemGameObject(string Name, int Damage, int Value, const EffectGameObject* Effect, GraphicalSymbol Symbol) :
     bonusArmor(0), value(Value), damage(Damage), GameObject(Name, Symbol)
 {
-    if (Effect)
-        effect = new EffectGameObject(*Effect);
-    else
-        effect = NULL;
-
+    effect = dynamic_cast<EffectGameObject*>(Effect->clone());
     cout << getTag() << "Created weapon ItemGameObject (damage=" << damage << ", value=" << value << ", effect=" << (effect == NULL ? "NULL" : effect->getName()) << ")" << endl;
 }
 

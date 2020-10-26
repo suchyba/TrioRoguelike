@@ -21,3 +21,8 @@ bool EffectGameObject::onRefresh(GameObject& object)
 	cout << getTag() << "Effect is affecting: " << object.getName() << endl;
 	return false;
 }
+
+GameObject* EffectGameObject::clone() const
+{
+	return new EffectGameObject(*this);
+}

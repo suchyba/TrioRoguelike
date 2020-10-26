@@ -23,4 +23,5 @@ public:
 	/// <param name="object">Obiekt na którym obiekt wywiera akcjê</param>
 	/// <returns>True - jeœli meltoda jest obs³ugiwana, False - jeœli nie (domyœlnie)</returns>
 	virtual bool onRefresh(GameObject& object);
+	virtual GameObject* clone() const override = 0;
 };
