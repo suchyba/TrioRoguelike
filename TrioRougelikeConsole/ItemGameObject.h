@@ -32,31 +32,13 @@ public:
 	/// <summary>
 	/// Konstruktor dla elementu zbroi.
 	/// </summary>
-	/// <param name="armor">Wartoœæ dodatkowego poncerza</param>
-	/// <param name="value">Wartoœæ przedmiotu</param>
+	/// <param name="Armor">Wartoœæ dodatkowego poncerza</param>
+	/// <param name="Damage">Wartoœæ obra¿eñ zadawanych przez przedmiot</param>
+	/// <param name="Value">Wartoœæ przedmiotu</param>
 	/// <param name="Effect">Efekt, który nak³ada przedmiot</param>
 	/// <param name="Name">Nazwa przedmiotu</param>
 	/// <param name="Symbol">Graficzna reprezentacja przedmiotu</param>
-	ItemGameObject(int armor, int value, const EffectGameObject* Effect, string Name, GraphicalSymbol Symbol);
-	/// <summary>
-	/// Konstruktor dla broni
-	/// </summary>
-	/// <param name="damage">Obra¿enia zadawane przez przedmiot</param>
-	/// <param name="value">Wartoœæ przedmiotu</param>
-	/// <param name="Effect">Efekt, który nak³ada przedmiot</param>
-	/// <param name="Name">Nazwa przedmiotu</param>
-	/// <param name="Symbol">Graficzna reprezentacja przedmiotu</param>
-	ItemGameObject(string Name, int Damage, int Value, const EffectGameObject* Effect, GraphicalSymbol Symbol);
-	/// <summary>
-	/// Konstruktor dla elementu dodatkowego
-	/// </summary>
-	/// <param name="armor">Wartoœæ dodatkowego poncerza</param>
-	/// <param name="damage">Obra¿enia zadawane przez przedmiot</param>
-	/// <param name="value">Wartoœæ przedmiotu</param>
-	/// <param name="Effect">Efekt, który nak³ada przedmiot</param>
-	/// <param name="Name">Nazwa przedmiotu</param>
-	/// <param name="Symbol">Graficzna reprezentacja przedmiotu</param>
-	ItemGameObject(int armor, int Damage, int Value, const EffectGameObject* Effect, string Name, GraphicalSymbol Symbol);
+	ItemGameObject(int Value, const EffectGameObject* Effect, string Name, GraphicalSymbol Symbol, int Armor = 0, int Damage = 0);
 	/// <summary>
 	/// Metoda dostêpowa do pola bonusArmor.
 	/// </summary>
@@ -93,4 +75,6 @@ public:
 	/// </summary>
 	/// <param name="creature">Obiekt stworzenia, które zak³ada przedmiot.</param>
 	virtual void onEquipping(CreatureGameObject& creature);
+
+	virtual GameObject* clone() const override = 0;
 };

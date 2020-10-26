@@ -5,6 +5,7 @@
 #include "FloorGameObject.h"
 #include "BleedingEffectGameObject.h"
 #include "EnemyGameObject.h"
+#include "WeaponGameObject.h"
 
 map<string, const GameObject*> Game::templateOtherObjectsList;
 map<string, const CreatureGameObject*> Game::templateCreatureList;
@@ -54,9 +55,9 @@ void Game::registerObjects()
 
 	templateEffectObjectList.insert({ "BLEFF", new BleedingEffectGameObject(3, 3, 1, 15, "Bleeding", GraphicalSymbol('!', 4, 0)) });
 
-	templateItemList.insert({ "GHHD", new ItemGameObject("GhulHand", 3, 0, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(), GraphicalSymbol('L', 4, 0)) });
+	templateItemList.insert({ "GHHD", new WeaponGameObject(3, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"GhulHand", GraphicalSymbol('L', 4, 0), 10) });
 	
-	templateCreatureList.insert({ "GH", new EnemyGameObject(20, 10, 5, 1, "Ghul", GraphicalSymbol('&', 4, 0), {new ItemGameObject(*templateItemList.at("GHHD"))}) });
+	templateCreatureList.insert({ "GH", new EnemyGameObject(20, 10, 5, 1, "Ghul", GraphicalSymbol('&', 4, 0), {(ItemGameObject*) templateItemList.at("GHHD")->clone()}) });
 }
 
 void Game::logMessage(string message)

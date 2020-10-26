@@ -1,29 +1,11 @@
 #include "ItemGameObject.h"
 #include "CreatureGameObject.h"
 
-ItemGameObject::ItemGameObject(int armor, int Value, const EffectGameObject* Effect, string Name, GraphicalSymbol Symbol) :
-    bonusArmor(armor), value(Value), damage(0), GameObject(Name, Symbol)
+ItemGameObject::ItemGameObject(int Value, const EffectGameObject* Effect, string Name, GraphicalSymbol Symbol, int Armor, int Damage) :
+    bonusArmor(Armor), value(Value), damage(Damage), GameObject(Name, Symbol)
 {
     effect = dynamic_cast<EffectGameObject*>(Effect->clone());
-    cout << getTag() << "Created armor ItemGameObject (armor=" << bonusArmor << ", value=" << value << ", effect=" << (effect == NULL ? "NULL" : effect->getName()) << ")" << endl;
-}
-
-ItemGameObject::ItemGameObject(string Name, int Damage, int Value, const EffectGameObject* Effect, GraphicalSymbol Symbol) :
-    bonusArmor(0), value(Value), damage(Damage), GameObject(Name, Symbol)
-{
-    effect = dynamic_cast<EffectGameObject*>(Effect->clone());
-    cout << getTag() << "Created weapon ItemGameObject (damage=" << damage << ", value=" << value << ", effect=" << (effect == NULL ? "NULL" : effect->getName()) << ")" << endl;
-}
-
-ItemGameObject::ItemGameObject(int armor, int Damage, int Value, const EffectGameObject* Effect, string Name, GraphicalSymbol Symbol) :
-    bonusArmor(armor), value(Value), damage(Damage), GameObject(Name, Symbol)
-{
-    if (Effect)
-        effect = new EffectGameObject(*Effect);
-    else
-        effect = NULL;
-
-    cout << getTag() << "Created addon ItemGameObject (armor=" << bonusArmor << ", damage = " << damage << ", value=" << value << ", effect=" << (effect == NULL ? "NULL" : effect->getName()) << ")" << endl;
+    cout << getTag() << "Created ItemGameObject (armor=" << bonusArmor << ", damage=" << damage << ", value=" << value << ", effect=" << (effect == NULL ? "NULL" : effect->getName()) << ")" << endl;
 }
 
 int ItemGameObject::getArmor() const
@@ -54,6 +36,7 @@ int ItemGameObject::onDamege(int damage)
 
 void ItemGameObject::onActivation()
 {
+
 }
 
 void ItemGameObject::onEquipping(CreatureGameObject& creature)

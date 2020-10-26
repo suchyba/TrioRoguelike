@@ -152,6 +152,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayerGameObject.cpp" />
     <ClCompile Include="WallGameObject.cpp" />
+    <ClCompile Include="WeaponGameObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BleedingEffectGameObject.h" />
@@ -169,10 +170,9 @@
     <ClInclude Include="ItemGameObject.h" />
     <ClInclude Include="PlayerGameObject.h" />
     <ClInclude Include="WallGameObject.h" />
+    <ClInclude Include="WeaponGameObject.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
-    <None Include="ClassDiagram1.cd" />
     <None Include="ClassDiagram2.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -66,6 +66,9 @@
     <ClCompile Include="EnemyGameObject.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="WeaponGameObject.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -113,10 +116,11 @@
     <ClInclude Include="EnemyGameObject.h">
       <Filter>Pliki nagłówkowe\GameObjects</Filter>
     </ClInclude>
+    <ClInclude Include="WeaponGameObject.h">
+      <Filter>Pliki nagłówkowe\PersonalizedGameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
-    <None Include="ClassDiagram1.cd" />
     <None Include="ClassDiagram2.cd" />
   </ItemGroup>
 </Project>

@@ -153,15 +153,15 @@ void CreatureGameObject::removeEffect(string Name)
 	}
 }
 
-bool CreatureGameObject::equipItem(ItemGameObject item, int slot)
+bool CreatureGameObject::equipItem(ItemGameObject* item, int slot)
 {
 	if (slot < activeInventory.size())
 	{
 		if (activeInventory[slot] == NULL)
 		{
-			cout << "[" << name << "] Equipping " << item.getName() << " in slot " << slot << endl;
-			activeInventory[slot] = new ItemGameObject(item);
-			item.onEquipping(*this);
+			cout << "[" << name << "] Equipping " << item->getName() << " in slot " << slot << endl;
+			activeInventory[slot] = (ItemGameObject*)item->clone();
+			item->onEquipping(*this);
 		}
 	}
 	return false;
