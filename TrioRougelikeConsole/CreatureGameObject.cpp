@@ -177,11 +177,6 @@ void CreatureGameObject::directDmg(int dmg)
 		onDeath();
 	}
 }
-// to delete
-GameObject* CreatureGameObject::clone() const
-{
-	return new CreatureGameObject(*this);
-}
 
 CreatureGameObject::~CreatureGameObject()
 {

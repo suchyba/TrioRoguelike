@@ -143,6 +143,7 @@
     <ClCompile Include="CreatureGameObject.cpp" />
     <ClCompile Include="DynamicGameObject.cpp" />
     <ClCompile Include="EffectGameObject.cpp" />
+    <ClCompile Include="EnemyGameObject.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GraphicalSymbol.cpp" />
@@ -159,7 +160,7 @@
     <ClInclude Include="CreatureGameObject.h" />
     <ClInclude Include="DynamicGameObject.h" />
     <ClInclude Include="EffectGameObject.h" />
-    <ClInclude Include="EnemieGameObject.h" />
+    <ClInclude Include="EnemyGameObject.h" />
     <ClInclude Include="FloorGameObject.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />

@@ -4,26 +4,34 @@
 #include "GameObject.h"
 #include "FloorGameObject.h"
 #include "BleedingEffectGameObject.h"
+#include "EnemyGameObject.h"
 
 map<string, const GameObject*> Game::templateOtherObjectsList;
 map<string, const CreatureGameObject*> Game::templateCreatureList;
 map<string, const ItemGameObject*> Game::templateItemList;
 map<string, const EffectGameObject*> Game::templateEffectObjectList;
-vector<DynamicGameObject*> Game::creatureList;
+vector<DynamicGameObject*> Game::dynamicList;
 
 void Game::mainLoop()
 {
 	logMessage("Entering main loop");
-	auto c1 = dynamic_cast<CreatureGameObject*>(creatureList[0]);
-	auto c2 = dynamic_cast<CreatureGameObject*>(creatureList[1]);
+	auto c1 = dynamic_cast<CreatureGameObject*>(dynamicList[0]);
+	auto c2 = dynamic_cast<CreatureGameObject*>(dynamicList[1]);
 	c1->onAttack(*c2);
 	while (true)
 	{
 		logMessage("iteration");
-		for (auto obj : creatureList)
+		
+		
+		// odœwierzanie obiektów dynamicznych
+		for (auto obj : dynamicList)
 		{
-			obj->onRefresh();
+			if(obj)
+				obj->onRefresh();
 		}
+
+
+
 		if(!c1->isAlive() || !c2->isAlive())
 			return;
 	}
@@ -33,8 +41,8 @@ void Game::init()
 {
 	logMessage("Entering init");
 	registerObjects();
-	creatureList.push_back(new CreatureGameObject(*templateCreatureList.at("GH")));
-	creatureList.push_back(new CreatureGameObject(*templateCreatureList.at("GH")));
+	dynamicList.push_back((CreatureGameObject*) templateCreatureList.at("GH")->clone());
+	dynamicList.push_back((CreatureGameObject*) templateCreatureList.at("GH")->clone());
 }
 
 void Game::registerObjects()
@@ -48,7 +56,7 @@ void Game::registerObjects()
 
 	templateItemList.insert({ "GHHD", new ItemGameObject("GhulHand", 3, 0, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(), GraphicalSymbol('L', 4, 0)) });
 	
-	templateCreatureList.insert({ "GH", new CreatureGameObject(20, 10, 5, 1, "Ghul", GraphicalSymbol('&', 4, 0), {new ItemGameObject(*templateItemList.at("GHHD"))}) });
+	templateCreatureList.insert({ "GH", new EnemyGameObject(20, 10, 5, 1, "Ghul", GraphicalSymbol('&', 4, 0), {new ItemGameObject(*templateItemList.at("GHHD"))}) });
 }
 
 void Game::logMessage(string message)

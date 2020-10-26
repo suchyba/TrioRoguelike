@@ -17,7 +17,7 @@ private:
 	static map<string, const GameObject*> templateOtherObjectsList;
 	static map<string, const EffectGameObject*> templateEffectObjectList;
 	
-	static vector<DynamicGameObject*> creatureList;
+	static vector<DynamicGameObject*> dynamicList;
 	static PlayerGameObject* player;
 
 	static void mainLoop();

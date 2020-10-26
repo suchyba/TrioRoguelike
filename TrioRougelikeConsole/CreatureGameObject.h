@@ -146,7 +146,7 @@ public:
 	/// <param name="dmg">Obra¿enia, które maj¹ zostaæ zadane</param>
 	void directDmg(int dmg);
 
-	virtual GameObject* clone() const override;
+	virtual GameObject* clone() const override = 0;
 
 	~CreatureGameObject();
 };
