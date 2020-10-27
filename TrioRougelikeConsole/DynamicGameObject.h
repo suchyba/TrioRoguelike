@@ -23,5 +23,9 @@ public:
 	/// <param name="object">Obiekt na którym obiekt wywiera akcjê</param>
 	/// <returns>True - jeœli meltoda jest obs³ugiwana, False - jeœli nie (domyœlnie)</returns>
 	virtual bool onRefresh(GameObject& object);
+	/// <summary>
+	/// Metoda czysto abstrakcyjna tworz¹ca dok³adn¹ kopiê obiektu.
+	/// </summary>
+	/// <returns>Kopia obiektu</returns>
 	virtual GameObject* clone() const override = 0;
 };

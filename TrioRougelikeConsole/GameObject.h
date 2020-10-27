@@ -47,5 +47,9 @@ public:
 	/// </summary>
 	/// <returns>name w nawiasach kwadratowych</returns>
 	virtual string getTag() const;
+	/// <summary>
+	/// Metoda tworz¹ca kopiê obiektu.
+	/// </summary>
+	/// <returns>Kopia obiektu</returns>
 	virtual GameObject* clone() const;
 };

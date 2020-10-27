@@ -86,5 +86,9 @@ public:
 	/// <param name="creature">Obiekt stworzenia, które zak³ada przedmiot.</param>
 	virtual void onEquipping(CreatureGameObject& creature);
 
+	/// <summary>
+	/// Metoda czysto abstrakcyjna tworz¹ca kopiê obiektu.
+	/// </summary>
+	/// <returns>Kopia obiektu</returns>
 	virtual GameObject* clone() const override = 0;
 };

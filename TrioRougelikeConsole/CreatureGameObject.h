@@ -146,6 +146,10 @@ public:
 	/// <param name="dmg">Obra¿enia, które maj¹ zostaæ zadane</param>
 	void directDmg(int dmg);
 
+	/// <summary>
+	/// Metoda czysto abstrakcyjna tworz¹ca kopiê obiektu.
+	/// </summary>
+	/// <returns>Kopia obiektu</returns>
 	virtual GameObject* clone() const override = 0;
 
 	~CreatureGameObject();
