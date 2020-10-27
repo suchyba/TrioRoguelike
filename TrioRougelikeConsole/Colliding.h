@@ -14,4 +14,9 @@ public:
 	/// </summary>
 	/// <param name="sender">Obiekt wywo³uj¹cy metodê (stworzenie)</param>
 	void virtual onCollide(GameObject& sender) = 0;
+
+	/// <summary>
+	/// Wirtualny destruktor
+	/// </summary>
+	virtual ~Colliding();
 };

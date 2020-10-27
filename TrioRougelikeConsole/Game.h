@@ -16,6 +16,14 @@ private:
 	/// </summary>
 	Game();
 	/// <summary>
+	/// Prywatny konstruktor kopiuj¹cy.
+	/// </summary>
+	Game(const Game&);
+	/// <summary>
+	/// Prywatny operator przypisania.
+	/// </summary>
+	const Game& operator=(const Game&);
+	/// <summary>
 	/// Wzorcowe stworzenia, które póŸniej mo¿na umieszczaæ na mapie.
 	/// </summary>
 	static map<string, const CreatureGameObject*> templateCreatureList;

@@ -1,19 +1,19 @@
 #include "CreatureGameObject.h"
 #include "ItemGameObject.h"
 
-CreatureGameObject::CreatureGameObject(int hp, int armor, int exp, int activeItemsCount, string Name, GraphicalSymbol Symbol) : 
+CreatureGameObject::CreatureGameObject(int hp, int armor, int exp, int activeItemsCount, string Name, GraphicalSymbol Symbol) :
 	healthPoints(hp), baseArmor(armor), baseHealthPoints(hp), experience(exp),
 	DynamicGameObject(Name, Symbol)
 {
 	//	DEBUG
-	cout << getTag() <<"Created CreatureGameObject (hp=" << hp << ", armor=" << armor << ", actItems=" << activeItemsCount << ")" << endl;
+	cout << getTag() << "Created CreatureGameObject (hp=" << hp << ", armor=" << armor << ", actItems=" << activeItemsCount << ")" << endl;
 	//	END DEBUG
 
 	for (int i = 0; i < activeItemsCount; ++i)
 		activeInventory.push_back(NULL);
 }
 
-CreatureGameObject::CreatureGameObject(int hp, int armor, int exp, int activeItemsCount, string Name, GraphicalSymbol Symbol, const vector<ItemGameObject*>& itemList):
+CreatureGameObject::CreatureGameObject(int hp, int armor, int exp, int activeItemsCount, string Name, GraphicalSymbol Symbol, const vector<ItemGameObject*>& itemList) :
 	healthPoints(hp), baseArmor(armor), baseHealthPoints(hp), experience(exp),
 	DynamicGameObject(Name, Symbol)
 {
@@ -90,7 +90,7 @@ void CreatureGameObject::onRefresh()
 {
 	for (auto effect : activeEffects)
 	{
-		if(alive)
+		if (alive)
 			effect->onRefresh(*this);
 	}
 }
@@ -190,5 +190,9 @@ void CreatureGameObject::directDmg(int dmg)
 CreatureGameObject::~CreatureGameObject()
 {
 	for (ItemGameObject* item : activeInventory)
-		delete item;
+		if (item)
+			delete item;
+	for (EffectGameObject* effect : activeEffects)
+		if (effect)
+			delete effect;
 }

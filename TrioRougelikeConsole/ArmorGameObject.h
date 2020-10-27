@@ -30,4 +30,9 @@ public:
 	/// <param name="self">Obiekt stworzenia nosz¹cego.</param>
 	/// <returns>Ostateczna iloœæ obra¿eñ otrzymywanych przez stworzenie.</returns>
 	virtual int onDamege(int damage, CreatureGameObject& self) override;
+
+	/// <summary>
+	/// Wirtualny destruktor
+	/// </summary>
+	virtual ~ArmorGameObject();
 };

@@ -45,3 +45,9 @@ void ItemGameObject::onEquipping(CreatureGameObject& creature)
 {
     cout << getTag() << "Event when equipping!" << endl;
 }
+
+ItemGameObject::~ItemGameObject()
+{
+    if (effect)
+        delete effect;
+}

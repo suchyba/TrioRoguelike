@@ -42,4 +42,9 @@ public:
 	/// </summary>
 	/// <returns>Kopia obiektu</returns>
 	virtual GameObject* clone() const override;
+
+	/// <summary>
+	/// Wirtualny destruktor
+	/// </summary>
+	virtual ~BleedingEffectGameObject();
 };

@@ -52,4 +52,8 @@ public:
 	/// </summary>
 	/// <returns>Kopia obiektu</returns>
 	virtual GameObject* clone() const;
+	/// <summary>
+	/// Wirtualny destruktor
+	/// </summary>
+	virtual ~GameObject();
 };

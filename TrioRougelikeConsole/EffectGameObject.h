@@ -38,4 +38,9 @@ public:
 	/// </summary>
 	/// <returns>Wartoœæ pola duration</returns>
 	int getDuration() const;
+
+	/// <summary>
+	/// Wirtualny destruktor
+	/// </summary>
+	virtual ~EffectGameObject();
 };

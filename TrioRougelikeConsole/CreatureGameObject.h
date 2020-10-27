@@ -152,5 +152,8 @@ public:
 	/// <returns>Kopia obiektu</returns>
 	virtual GameObject* clone() const override = 0;
 
-	~CreatureGameObject();
+	/// <summary>
+	/// Wirtualny destruktor
+	/// </summary>
+	virtual ~CreatureGameObject();
 };

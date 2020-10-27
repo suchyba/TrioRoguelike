@@ -92,9 +92,6 @@
     <ClInclude Include="Game.h">
       <Filter>Pliki nagłówkowe\Main game controls</Filter>
     </ClInclude>
-    <ClInclude Include="WallGameObject.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
     <ClInclude Include="ItemGameObject.h">
       <Filter>Pliki nagłówkowe\GameObjects</Filter>
     </ClInclude>
@@ -102,9 +99,6 @@
       <Filter>Pliki nagłówkowe\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="BossGameObject.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="FloorGameObject.h">
       <Filter>Pliki nagłówkowe\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="CreatureGameObject.h">
@@ -131,8 +125,11 @@
     <ClInclude Include="RegenerationEffectGameObject.h">
       <Filter>Pliki nagłówkowe\PersonalizedGameObject</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram2.cd" />
+    <ClInclude Include="WallGameObject.h">
+      <Filter>Pliki nagłówkowe\PersonalizedGameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="FloorGameObject.h">
+      <Filter>Pliki nagłówkowe\PersonalizedGameObject</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

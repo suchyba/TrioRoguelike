@@ -29,4 +29,9 @@ public:
 	/// </summary>
 	/// <param name="opponent">Stworzenie, które atakujemy</param>
 	virtual void onAttack(CreatureGameObject& opponent) override;
+
+	/// <summary>
+	/// Wirtualny destruktor
+	/// </summary>
+	virtual ~WeaponGameObject();
 };
