@@ -1,10 +1,10 @@
 #pragma once
-#include "EnemieGameObject.h"
+#include "EnemyGameObject.h"
 
 /// <summary>
 /// Klasa reprezentuj¹ca du¿ych przeciwników.
 /// </summary>
-class BossGameObject : public EnemieGameObject
+class BossGameObject : public EnemyGameObject
 {
 
 };

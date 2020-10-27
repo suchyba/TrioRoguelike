@@ -1,47 +1,24 @@
 #include "ItemGameObject.h"
 #include "CreatureGameObject.h"
 
-ItemGameObject::ItemGameObject(int armor, int Value, const EffectGameObject* Effect, string Name, GraphicalSymbol Symbol) :
-    bonusArmor(armor), value(Value), damage(0), GameObject(Name, Symbol)
+ItemGameObject::ItemGameObject(int Value, const EffectGameObject* Effect, string Name, GraphicalSymbol Symbol, int Armor, int MinDamage, int MaxDamage) :
+    bonusArmor(Armor), value(Value), minDamage(MinDamage), maxDamage(MaxDamage), GameObject(Name, Symbol)
 {
-    if (Effect)
-        effect = new EffectGameObject(*Effect);
-    else
-        effect = NULL;
-
-    cout << getTag() << "Created armor ItemGameObject (armor=" << bonusArmor << ", value=" << value << ", effect=" << (effect == NULL ? "NULL" : effect->getName()) << ")" << endl;
-}
-
-ItemGameObject::ItemGameObject(string Name, int Damage, int Value, const EffectGameObject* Effect, GraphicalSymbol Symbol) :
-    bonusArmor(0), value(Value), damage(Damage), GameObject(Name, Symbol)
-{
-    if (Effect)
-        effect = new EffectGameObject(*Effect);
-    else
-        effect = NULL;
-
-    cout << getTag() << "Created weapon ItemGameObject (damage=" << damage << ", value=" << value << ", effect=" << (effect == NULL ? "NULL" : effect->getName()) << ")" << endl;
-}
-
-ItemGameObject::ItemGameObject(int armor, int Damage, int Value, const EffectGameObject* Effect, string Name, GraphicalSymbol Symbol) :
-    bonusArmor(armor), value(Value), damage(Damage), GameObject(Name, Symbol)
-{
-    if (Effect)
-        effect = new EffectGameObject(*Effect);
-    else
-        effect = NULL;
-
-    cout << getTag() << "Created addon ItemGameObject (armor=" << bonusArmor << ", damage = " << damage << ", value=" << value << ", effect=" << (effect == NULL ? "NULL" : effect->getName()) << ")" << endl;
+    effect = dynamic_cast<EffectGameObject*>(Effect->clone());
+    cout << getTag() << "Created ItemGameObject (armor=" << bonusArmor << ", minDamage=" << minDamage << ", maxDamage=" << maxDamage<< ", value=" << value << ", effect=" << (effect == NULL ? "NULL" : effect->getName()) << ")" << endl;
 }
 
 int ItemGameObject::getArmor() const
 {
     return bonusArmor;
 }
-
-int ItemGameObject::getDamage() const
+int ItemGameObject::getMinDamage() const
 {
-    return damage;
+    return minDamage;
+}
+int ItemGameObject::getMaxDamage() const
+{
+    return maxDamage;
 }
 
 int ItemGameObject::getValue() const
@@ -51,20 +28,26 @@ int ItemGameObject::getValue() const
 
 void ItemGameObject::onAttack(CreatureGameObject& opponent)
 {
-    cout << getTag() << "Effect when attacking with this item." << endl;
-    opponent.addEffect(*effect);
+    cout << getTag() << "No effect when attacking with this item." << endl;
 }
 
-int ItemGameObject::onDamege(int damage)
+int ItemGameObject::onDamege(int damage, CreatureGameObject& self)
 {
     return damage;
 }
 
 void ItemGameObject::onActivation()
 {
+
 }
 
 void ItemGameObject::onEquipping(CreatureGameObject& creature)
 {
     cout << getTag() << "Event when equipping!" << endl;
+}
+
+ItemGameObject::~ItemGameObject()
+{
+    if (effect)
+        delete effect;
 }

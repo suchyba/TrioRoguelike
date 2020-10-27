@@ -17,4 +17,13 @@ public:
 	/// Metoda wywo³ywana w momencie, gdy inny obiekt wchodzi w interakcjê z obecnym obeiktem.
 	/// </summary>
 	virtual void onInteraction() = 0;
+	/// <summary>
+	/// Metoda czysto abstrakcyjna tworz¹ca kopiê obiektu.
+	/// </summary>
+	/// <returns>Kopia obiektu</returns>
+	virtual GameObject* clone() const override = 0;
+	/// <summary>
+	/// Wirtualny destruktor
+	/// </summary>
+	virtual ~InteractionableGameObject();
 };
