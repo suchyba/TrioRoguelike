@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BossGameObject">
+    <Position X="2.75" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BossGameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Colliding">
+    <Position X="4.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAICAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Colliding.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CreatureGameObject">
+    <Position X="1.5" Y="7" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>CCFAACIBAAAAAEAAAAAhgAEABAKAAMgAAABAUIUEAIA=</HashCode>
+      <FileName>CreatureGameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DynamicGameObject">
+    <Position X="1.5" Y="4.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAABUAAAAAA=</HashCode>
+      <FileName>DynamicGameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EffectGameObject">
+    <Position X="6.5" Y="7" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAIAAABAABAAEAAAAAAAAAAAAAEAAAAIA=</HashCode>
+      <FileName>EffectGameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyGameObject">
+    <Position X="2.75" Y="14" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAEAAAABA=</HashCode>
+      <FileName>EnemyGameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameObject" Collapsed="true">
+    <Position X="5.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAACAAAAAAAAAAAAAAAAAAAAAEEAAACCAEEAIAAAA=</HashCode>
+      <FileName>GameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InteractionableGameObject">
+    <Position X="1.25" Y="1.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAQAAAAAAAAAAAEAAAAIA=</HashCode>
+      <FileName>InteractionalbeGameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ItemGameObject">
+    <Position X="11.75" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAKAAAAQAgAIABAAABDAIAEAIEAAAAAA=</HashCode>
+      <FileName>ItemGameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerGameObject">
+    <Position X="0.5" Y="14" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAgAAAAAAAAAAAEAABAGQAAAAAAAAAA=</HashCode>
+      <FileName>PlayerGameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GraphicalSymbol">
+    <Position X="17.25" Y="0.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAgCAAAAAAAAAAAAAAAAAAAAAAAAgAAAACgQAIAAA=</HashCode>
+      <FileName>GraphicalSymbol.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game">
+    <Position X="14.75" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQgAAAAIAAgAAAgAAAAIQAAAIgAAAIFAAAlAAAAAAA=</HashCode>
+      <FileName>Game.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArmorGameObject">
+    <Position X="13" Y="7" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAEAAAAAAAIAAAAEAAACAA=</HashCode>
+      <FileName>ArmorGameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BleedingEffectGameObject">
+    <Position X="4.5" Y="10.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAIAAAAAAAAMIAAAAAAAEAEAAEAAAAAA=</HashCode>
+      <FileName>BleedingEffectGameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RegenerationEffectGameObject">
+    <Position X="7.25" Y="10.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAEAgAAAAAAAAAAAEAAAQAAAAAAEAAEAAAAAA=</HashCode>
+      <FileName>RegenerationEffectGameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeaponGameObject">
+    <Position X="10.25" Y="7" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAgAAAAAAARAAAAAAAEAAAAAA=</HashCode>
+      <FileName>WeaponGameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WallGameObject">
+    <Position X="5.5" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAQAAAAAAAAABAAAAAAAEAAAAAA=</HashCode>
+      <FileName>WallGameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FloorGameObject">
+    <Position X="8" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FloorGameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
