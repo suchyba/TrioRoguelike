@@ -20,6 +20,11 @@ private:
 	int backgroundColor;
 public:
 	/// <summary>
+	/// Dmoyœlny konstruktor
+	/// </summary>
+	GraphicalSymbol();
+
+	/// <summary>
 	/// Konstruktor
 	/// </summary>
 	/// <param name="charSymbol">Reprezentacja za pomoc¹ znaku z tablicy ASCI</param>

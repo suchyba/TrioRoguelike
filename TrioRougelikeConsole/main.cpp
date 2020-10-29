@@ -8,6 +8,7 @@
 #include "ItemGameObject.h"
 #include "EffectGameObject.h"
 #include "Game.h"
+#include "Test.h"
 
 using namespace std;
 
@@ -55,8 +56,14 @@ int main()
 		}
 	}*/
 
-	Game::start();
-
+	//Game::start();
+	
+	Test t1;
+	/*t1.roomCreation();
+	t1.getSetRoom();
+	t1.changeRoomElement();
+	t1.getRoomElement();*/
+	t1.roomCreationWithJsTool();
 
 	return 0;
 }
