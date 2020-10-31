@@ -23,3 +23,7 @@ GameObject* EnemyGameObject::clone() const
 {
     return new EnemyGameObject(*this);
 }
+
+EnemyGameObject::~EnemyGameObject()
+{
+}

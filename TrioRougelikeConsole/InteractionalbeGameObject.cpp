@@ -3,3 +3,7 @@
 InteractionableGameObject::InteractionableGameObject(string Name, GraphicalSymbol Symbol) : GameObject(Name, Symbol)
 {
 }
+
+InteractionableGameObject::~InteractionableGameObject()
+{
+}

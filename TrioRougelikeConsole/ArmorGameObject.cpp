@@ -18,3 +18,7 @@ int ArmorGameObject::onDamege(int damage, CreatureGameObject& self)
 	return damage;
 }
 
+ArmorGameObject::~ArmorGameObject()
+{
+}
+

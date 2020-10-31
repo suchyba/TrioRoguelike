@@ -33,3 +33,7 @@ int EffectGameObject::getDuration() const
 {
 	return duration;
 }
+
+EffectGameObject::~EffectGameObject()
+{
+}

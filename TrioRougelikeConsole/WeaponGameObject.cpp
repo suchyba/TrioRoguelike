@@ -19,3 +19,8 @@ void WeaponGameObject::onAttack(CreatureGameObject& opponent)
         opponent.addEffect(*effect);
     }
 }
+
+WeaponGameObject::~WeaponGameObject()
+{
+
+}

@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="ArmorGameObject.cpp" />
     <ClCompile Include="BleedingEffectGameObject.cpp" />
+    <ClCompile Include="Colliding.cpp" />
     <ClCompile Include="CreatureGameObject.cpp" />
     <ClCompile Include="DynamicGameObject.cpp" />
     <ClCompile Include="EffectGameObject.cpp" />

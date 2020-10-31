@@ -35,3 +35,7 @@ GameObject* RegenerationEffectGameObject::clone() const
 {
 	return new RegenerationEffectGameObject(*this);
 }
+
+RegenerationEffectGameObject::~RegenerationEffectGameObject()
+{
+}
