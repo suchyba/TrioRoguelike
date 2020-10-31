@@ -14,3 +14,7 @@ GameObject* WallGameObject::clone() const
 {
 	return new WallGameObject(*this);
 }
+
+WallGameObject::~WallGameObject()
+{
+}

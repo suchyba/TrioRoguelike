@@ -40,3 +40,8 @@ GameObject* GameObject::clone() const
 {
     return new GameObject(*this);
 }
+
+GameObject::~GameObject()
+{
+
+}

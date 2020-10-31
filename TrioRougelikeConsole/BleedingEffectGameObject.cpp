@@ -35,3 +35,8 @@ GameObject* BleedingEffectGameObject::clone() const
 {
 	return new BleedingEffectGameObject(*this);
 }
+
+BleedingEffectGameObject::~BleedingEffectGameObject()
+{
+
+}
