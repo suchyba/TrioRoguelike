@@ -1,6 +1,7 @@
 #pragma once
 #include "Room.h"
 #include <vector>
+#include "FloorGameObject.h"
 class Map
 {
 protected:
@@ -20,6 +21,11 @@ protected:
 	vector<Room*> rooms;
 	int size = 0;
 
+	/// <summary>
+	/// Obiekt floor wykorzystywany do laczenia pokoji.
+	/// </summary>
+	FloorGameObject* floor;
+
 public:
 	/// <summary>
 	/// Konstruktor tworz¹cy obiekt.
@@ -27,6 +33,18 @@ public:
 	/// <param name="_width">D³ugoœæ obiektu</param>
 	/// <param name="_height">Wysokoœæ obiektu</param>
 	Map(int _width, int _height);
+
+	/// <summary>
+	/// Metoda zwracajaca pole floor.
+	/// </summary>
+	/// <returns>floor</returns>
+	FloorGameObject* getFloor() const;
+
+	/// <summary>
+	/// Metoda zmieniajaca pole floor.
+	/// </summary>
+	/// <returns>floor</returns>
+	void setFloor(FloorGameObject& _object);
 
 	/// <summary>
 	/// Metoda dostêpowa do pola width.
@@ -94,6 +112,7 @@ public:
 		{
 			delete rooms[i];
 		}
+		delete floor;
 	}
 };
 

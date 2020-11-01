@@ -9,6 +9,8 @@ using namespace std;
 
 Map::Map(int _width, int _height) : width(_width), height(_height)
 {
+	GraphicalSymbol g2('O', 1, 2);
+	floor = new FloorGameObject("floor", g2);
 	for (int i = 0; i < _width; i++)
 	{
 		vector<Room*> tmp;
@@ -18,6 +20,14 @@ Map::Map(int _width, int _height) : width(_width), height(_height)
 		}
 		mapDesign.push_back(tmp);
 	}
+}
+FloorGameObject* Map::getFloor() const
+{
+	return floor;
+}
+void Map::setFloor(FloorGameObject& _object)
+{
+	floor = &_object;
 }
 int Map::getWidth() const
 {
@@ -82,6 +92,7 @@ int Map::generateMap()
 	{
 		return -1;
 	}
+	delete chosArr;
 }
 struct A {
 public:
@@ -188,6 +199,12 @@ int Map::generateMapConnections()
 			randheightStart = list[end].array[1];
 		}
 	}
+	for (int i = 0; i < width; i++)
+	{
+		delete visited[i];
+	}
+	delete visited;
+	delete list;
 }
 
 int Map :: createPath(Room& room, Room& room1, Room& room2, int possitionX, int possitionY)
@@ -207,15 +224,11 @@ int Map :: createPath(Room& room, Room& room1, Room& room2, int possitionX, int 
 			visited[i][j] = false;
 		}
 	}
-	std::list <A>* pathList = new std::list<A>;
 	A* list = new A[room.getWidth() * room.getHeight()];
 	int end = 0;
 	list[end] = A(randWidthStart, randheightStart);
 	end++;
 	visited[randWidthStart][randheightStart] = true;
-
-	GraphicalSymbol g2('O', 1, 2);
-	FloorGameObject* floor2 = new FloorGameObject("floor", g2);
 
 	if (room.getHeight() > 11)
 	{
@@ -228,7 +241,7 @@ int Map :: createPath(Room& room, Room& room1, Room& room2, int possitionX, int 
 				visited[randWidthStart][randheightStart] = true;
 				list[end] = A(randWidthStart, randheightStart);
 				end++;
-				room.setElementInRoom(randWidthStart, randheightStart, 0, *floor2);
+				room.setElementInRoom(randWidthStart, randheightStart, 0, *getFloor());
 			}
 			else if (randWidthStart + 1 < room.getWidth() && visited[randWidthStart + 1][randheightStart] == false)
 			{
@@ -237,7 +250,7 @@ int Map :: createPath(Room& room, Room& room1, Room& room2, int possitionX, int 
 				visited[randWidthStart][randheightStart] = true;
 				list[end] = A(randWidthStart, randheightStart);
 				end++;
-				room.setElementInRoom(randWidthStart, randheightStart, 0, *floor2);
+				room.setElementInRoom(randWidthStart, randheightStart, 0, *getFloor());
 			}
 			else if (randWidthStart - 1 >=0 && visited[randWidthStart - 1][randheightStart] == false)
 			{
@@ -246,7 +259,7 @@ int Map :: createPath(Room& room, Room& room1, Room& room2, int possitionX, int 
 				visited[randWidthStart][randheightStart] = true;
 				list[end] = A(randWidthStart, randheightStart);
 				end++;
-				room.setElementInRoom(randWidthStart, randheightStart, 0, *floor2);
+				room.setElementInRoom(randWidthStart, randheightStart, 0, *getFloor());
 			}
 
 			else
@@ -300,7 +313,7 @@ int Map :: createPath(Room& room, Room& room1, Room& room2, int possitionX, int 
 				visited[randWidthStart][randheightStart] = true;
 				list[end] = A(randWidthStart, randheightStart);
 				end++;
-				room.setElementInRoom(randWidthStart, randheightStart, 0, *floor2);
+				room.setElementInRoom(randWidthStart, randheightStart, 0, *getFloor());
 
 			}
 			else if (randheightStart + 1 < room.getHeight() && visited[randWidthStart][randheightStart + 1] == false)
@@ -310,7 +323,7 @@ int Map :: createPath(Room& room, Room& room1, Room& room2, int possitionX, int 
 				visited[randWidthStart][randheightStart] = true;
 				list[end] = A(randWidthStart, randheightStart);
 				end++;
-				room.setElementInRoom(randWidthStart, randheightStart, 0, *floor2);
+				room.setElementInRoom(randWidthStart, randheightStart, 0, *getFloor());
 			}
 			else if (randheightStart - 1 <= 0 && visited[randWidthStart][randheightStart - 1] == false)
 			{
@@ -319,7 +332,7 @@ int Map :: createPath(Room& room, Room& room1, Room& room2, int possitionX, int 
 				visited[randWidthStart][randheightStart] = true;
 				list[end] = A(randWidthStart, randheightStart);
 				end++;
-				room.setElementInRoom(randWidthStart, randheightStart, 0, * floor2);
+				room.setElementInRoom(randWidthStart, randheightStart, 0, *getFloor());
 			}
 			else
 			{
@@ -394,6 +407,12 @@ int Map :: createPath(Room& room, Room& room1, Room& room2, int possitionX, int 
 			}
 		}
 	}
+	for (int i = 0; i < room.getWidth(); i++)
+	{
+		delete visited[i];
+	}
+	delete visited;
+	delete list;
 }
 int Map::connect(Room& room1, Room& room2, int direction)
 {
@@ -447,7 +466,7 @@ int Map::connect(Room& room1, Room& room2, int direction)
 			{
 				if (room1.getRoomElement(i, j, 0)->getRepresentation().getCharSymbol() == 'O')
 				{
-					possitionX = i;//tu mo¿liwy b³¹d
+					possitionX = i;
 					possitionY = j;
 					flag = true;
 					break;
