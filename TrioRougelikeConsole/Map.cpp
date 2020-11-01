@@ -9,11 +9,14 @@ using namespace std;
 
 Map::Map(int _width, int _height) : width(_width), height(_height)
 {
-	mapDesign = new Room * [_width];
-	rooms = new Room[100];
 	for (int i = 0; i < _width; i++)
 	{
-		mapDesign[i] = new Room[_height];
+		vector<Room*> tmp;
+		for (int j = 0; j < _height; j++)
+		{
+			tmp.push_back(nullptr);
+		}
+		mapDesign.push_back(tmp);
 	}
 }
 int Map::getWidth() const
@@ -26,64 +29,24 @@ int Map::getHeight() const
 	return height;
 }
 
-void Map::setRoomInMap(int _width, int _height, Room _object)
+void Map::setRoomInMap(int _width, int _height, Room& _object)
 {
-	mapDesign[_width][_height] = _object;
+	*mapDesign[_width][_height] = _object;
 }
-void Map::showMap()
+Room* Map::getRoomFromMap(int _width, int _height)
 {
-	GraphicalSymbol** mapArr;
-	int wys = height * 10;
-	int dlu = width * 10;
-	mapArr = new GraphicalSymbol* [dlu];
-	for (int i = 0; i < dlu; i++)
-	{
-		mapArr[i] = new GraphicalSymbol[wys];
-	}
-	int x = 0;
-	int y = 0;
-	for (int i = 0; i < width; i++)
-	{
-		for (int j = 0; j < height; j++)
-		{
-			for (int k = 0; k < mapDesign[i][j].getWidth(); k++)
-			{
-				for (int m = 0; m < mapDesign[i][j].getHeight(); m++)
-				{
-					x = k + (10 * i);
-					y = m + (10 * j);
-					mapArr[x][y] = mapDesign[i][j].getRoomElementRepresentation(k, m, 0);
-				}
-			}
-		}
-	}
-
-	for (int i = 0; i < dlu; i++)
-	{
-		for (int j = 0; j < wys; j++)
-		{
-			HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-			SetConsoleTextAttribute(hConsole, mapArr[i][j].getColor());
-			cout << mapArr[i][j].getCharSymbol();
-			SetConsoleTextAttribute(hConsole, 7);
-		}
-		cout << endl;
-	}
-
-}
-void Map::getRoomFromMap(int _width, int _height)
-{
-	return mapDesign[_width][_height].showRoom();
+	return mapDesign[_width][_height];
 }
 void Map::addRoom(Room& _object)
 {
-	rooms[size] = _object;
+	rooms.push_back(&_object);
 	size++;
 }
 int Map::generateMap()
 {
 	int randRoom;
-	int* chosArr = new int[width * height];
+	int roz = width * height;
+	int* chosArr = new int[roz];
 	int end = 0;
 	srand(time(NULL));
 	int zakres = size;
@@ -173,7 +136,7 @@ int Map::generateMapConnections()
 			list[end] = A(randWidthStart, randheightStart);
 			end++;
 			iterator += 1;
-			if (connect(mapDesign[randWidthStart][randheightStart], mapDesign[randWidthStart][randheightStart + 1], 0) == -1)
+			if (connect(*mapDesign[randWidthStart][randheightStart], *mapDesign[randWidthStart][randheightStart + 1], 0) == -1)
 			{
 				return -1;
 			}
@@ -185,7 +148,7 @@ int Map::generateMapConnections()
 			list[end] = A(randWidthStart, randheightStart);
 			end++;
 			iterator += 1;
-			if (connect(mapDesign[randWidthStart][randheightStart], mapDesign[randWidthStart + 1][randheightStart], 1) == -1)
+			if (connect(*mapDesign[randWidthStart][randheightStart], *mapDesign[randWidthStart + 1][randheightStart], 1) == -1)
 			{
 				return -1;
 			}
@@ -198,7 +161,7 @@ int Map::generateMapConnections()
 			end++;
 			iterator += 1;
 
-			if (connect(mapDesign[randWidthStart][randheightStart - 1], mapDesign[randWidthStart][randheightStart], 2) == -1)
+			if (connect(*mapDesign[randWidthStart][randheightStart - 1], *mapDesign[randWidthStart][randheightStart], 2) == -1)
 			{
 				return -1;
 			}
@@ -211,7 +174,7 @@ int Map::generateMapConnections()
 			end++;
 			iterator += 1;
 
-			if (connect(mapDesign[randWidthStart - 1][randheightStart], mapDesign[randWidthStart][randheightStart], 3) == -1)
+			if (connect(*mapDesign[randWidthStart - 1][randheightStart], *mapDesign[randWidthStart][randheightStart], 3) == -1)
 			{
 				return -1;
 			}
@@ -250,11 +213,10 @@ int Map :: createPath(Room& room, Room& room1, Room& room2, int possitionX, int 
 	list[end] = A(randWidthStart, randheightStart);
 	end++;
 	visited[randWidthStart][randheightStart] = true;
-	GraphicalSymbol g2('O', 1, 2);
-	GraphicalSymbol g3('O', 5,1);
 
-	FloorGameObject floor("floor", g2);
-	FloorGameObject floor2("floor", g3);
+	GraphicalSymbol g2('O', 1, 2);
+	FloorGameObject* floor2 = new FloorGameObject("floor", g2);
+
 	if (room.getHeight() > 11)
 	{
 		while (true)
@@ -266,16 +228,7 @@ int Map :: createPath(Room& room, Room& room1, Room& room2, int possitionX, int 
 				visited[randWidthStart][randheightStart] = true;
 				list[end] = A(randWidthStart, randheightStart);
 				end++;
-				room.setElementInRoom(randWidthStart, randheightStart, 0, floor2);
-				/*cout << "----------------------------------------------------------" << endl;
-				for (size_t i = 0; i < room.getWidth(); i++)
-				{
-					for (int j = 0; j < room.getHeight(); j++)
-					{
-						cout << room.getRoomElementRepresentation(i, j, 0).getCharSymbol();
-					}
-					cout << endl;
-				}*/
+				room.setElementInRoom(randWidthStart, randheightStart, 0, *floor2);
 			}
 			else if (randWidthStart + 1 < room.getWidth() && visited[randWidthStart + 1][randheightStart] == false)
 			{
@@ -284,16 +237,7 @@ int Map :: createPath(Room& room, Room& room1, Room& room2, int possitionX, int 
 				visited[randWidthStart][randheightStart] = true;
 				list[end] = A(randWidthStart, randheightStart);
 				end++;
-				room.setElementInRoom(randWidthStart, randheightStart, 0, floor2);
-			/*	cout << "----------------------------------------------------------" << endl;
-				for (size_t i = 0; i < room.getWidth(); i++)
-				{
-					for (int j = 0; j < room.getHeight(); j++)
-					{
-						cout << room.getRoomElementRepresentation(i, j, 0).getCharSymbol();
-					}
-					cout << endl;
-				}*/
+				room.setElementInRoom(randWidthStart, randheightStart, 0, *floor2);
 			}
 			else if (randWidthStart - 1 >=0 && visited[randWidthStart - 1][randheightStart] == false)
 			{
@@ -302,16 +246,7 @@ int Map :: createPath(Room& room, Room& room1, Room& room2, int possitionX, int 
 				visited[randWidthStart][randheightStart] = true;
 				list[end] = A(randWidthStart, randheightStart);
 				end++;
-				room.setElementInRoom(randWidthStart, randheightStart, 0, floor2);
-				//cout << "----------------------------------------------------------" << endl;
-				//for (size_t i = 0; i < room.getWidth(); i++)
-				//{
-				//	for (int j = 0; j < room.getHeight(); j++)
-				//	{
-				//		cout << room.getRoomElementRepresentation(i, j, 0).getCharSymbol();
-				//	}
-				//	cout << endl;
-				//}
+				room.setElementInRoom(randWidthStart, randheightStart, 0, *floor2);
 			}
 
 			else
@@ -328,58 +263,24 @@ int Map :: createPath(Room& room, Room& room1, Room& room2, int possitionX, int 
 			if (randheightStart > room.getHeight() / 2 && room.getHeight() > 11) 
 			{
 				if (randheightStart + 1 < room.getHeight())
-				{
-					if (room.getRoomElementRepresentation(randWidthStart, randheightStart + 1, 0).getCharSymbol() == 'O')
+				{	
+					if (room.getRoomElement(randWidthStart, randheightStart + 1, 0)->getRepresentation().getCharSymbol() == 'O')
 					{
-						//room.setElementInRoom(randWidthStart , randheightStart + 1, 0, floor2);
-						/*cout << "----------------------------------------------------------" << endl;
-						for (size_t i = 0; i < room.getWidth(); i++)
-						{
-							for (int j = 0; j < room.getHeight(); j++)
-							{
-								cout << room.getRoomElementRepresentation(i, j, 0).getCharSymbol();
-							}
-							cout << endl;
-						}*/
 						break;
 					}
 				}
-				else if (randWidthStart + 1 < room.getWidth())
+				if (randWidthStart + 1 < room.getWidth())
 				{
-
-					if (room.getRoomElementRepresentation(randWidthStart + 1, randheightStart, 0).getCharSymbol() == 'O')
+					if (room.getRoomElement(randWidthStart + 1, randheightStart, 0)->getRepresentation().getCharSymbol() == 'O')
 					{
-						//room.setElementInRoom(randWidthStart + 1, randheightStart, 0, floor2);
-						/*cout << "----------------------------------------------------------" << endl;
-						for (size_t i = 0; i < room.getWidth(); i++)
-						{
-							for (int j = 0; j < room.getHeight(); j++)
-							{
-								cout << room.getRoomElementRepresentation(i, j, 0).getCharSymbol();
-							}
-							cout << endl;
-						}*/
-
 						break;
 					}
 				}
 
-				else if (randWidthStart - 1>=0)
+				if (randWidthStart - 1>=0)
 				{
-
-					if (room.getRoomElementRepresentation(randWidthStart - 1, randheightStart, 0).getCharSymbol() == 'O')
+					if (room.getRoomElement(randWidthStart - 1, randheightStart, 0)->getRepresentation().getCharSymbol() == 'O')
 					{
-						//room.setElementInRoom(randWidthStart - 1, randheightStart, 0, floor2);
-						/*cout << "----------------------------------------------------------" << endl;
-						for (size_t i = 0; i < room.getWidth(); i++)
-						{
-							for (int j = 0; j < room.getHeight(); j++)
-							{
-								cout << room.getRoomElementRepresentation(i, j, 0).getCharSymbol();
-							}
-							cout << endl;
-						}*/
-
 						break;
 					}
 				}
@@ -399,16 +300,7 @@ int Map :: createPath(Room& room, Room& room1, Room& room2, int possitionX, int 
 				visited[randWidthStart][randheightStart] = true;
 				list[end] = A(randWidthStart, randheightStart);
 				end++;
-				room.setElementInRoom(randWidthStart, randheightStart, 0, floor2);
-			/*	cout << "----------------------------------------------------------" << endl;
-				for (size_t i = 0; i < room.getWidth(); i++)
-				{
-					for (int j = 0; j < room.getHeight(); j++)
-					{
-						cout << room.getRoomElementRepresentation(i, j, 0).getCharSymbol();
-					}
-					cout << endl;
-				}*/
+				room.setElementInRoom(randWidthStart, randheightStart, 0, *floor2);
 
 			}
 			else if (randheightStart + 1 < room.getHeight() && visited[randWidthStart][randheightStart + 1] == false)
@@ -418,16 +310,7 @@ int Map :: createPath(Room& room, Room& room1, Room& room2, int possitionX, int 
 				visited[randWidthStart][randheightStart] = true;
 				list[end] = A(randWidthStart, randheightStart);
 				end++;
-				room.setElementInRoom(randWidthStart, randheightStart, 0, floor2);
-			/*	cout << "----------------------------------------------------------" << endl;
-				for (size_t i = 0; i < room.getWidth(); i++)
-				{
-					for (int j = 0; j < room.getHeight(); j++)
-					{
-						cout << room.getRoomElementRepresentation(i, j, 0).getCharSymbol();
-					}
-					cout << endl;
-				}*/
+				room.setElementInRoom(randWidthStart, randheightStart, 0, *floor2);
 			}
 			else if (randheightStart - 1 <= 0 && visited[randWidthStart][randheightStart - 1] == false)
 			{
@@ -436,16 +319,7 @@ int Map :: createPath(Room& room, Room& room1, Room& room2, int possitionX, int 
 				visited[randWidthStart][randheightStart] = true;
 				list[end] = A(randWidthStart, randheightStart);
 				end++;
-				room.setElementInRoom(randWidthStart, randheightStart, 0, floor2);
-			/*	cout << "----------------------------------------------------------" << endl;
-				for (size_t i = 0; i < room.getWidth(); i++)
-				{
-					for (int j = 0; j < room.getHeight(); j++)
-					{
-						cout << room.getRoomElementRepresentation(i, j, 0).getCharSymbol();
-					}
-					cout << endl;
-				}*/
+				room.setElementInRoom(randWidthStart, randheightStart, 0, * floor2);
 			}
 			else
 			{
@@ -461,58 +335,22 @@ int Map :: createPath(Room& room, Room& room1, Room& room2, int possitionX, int 
 			{
 				if (randheightStart - 1>=0)
 				{
-
-					if (room.getRoomElementRepresentation(randWidthStart, randheightStart - 1, 0).getCharSymbol() == 'O')
+					if (room.getRoomElement(randWidthStart, randheightStart - 1, 0)->getRepresentation().getCharSymbol() == 'O')
 					{
-						//room.setElementInRoom(randWidthStart, randheightStart - 1, 0, floor2);
-					/*	cout << "----------------------------------------------------------" << endl;
-						for (size_t i = 0; i < room.getWidth(); i++)
-						{
-							for (int j = 0; j < room.getHeight(); j++)
-							{
-								cout << room.getRoomElementRepresentation(i, j, 0).getCharSymbol();
-							}
-							cout << endl;
-						}*/
-
 						break;
 					}
 				}
-				else if (randWidthStart + 1 < room.getWidth())
+				if (randWidthStart + 1 < room.getWidth())
 				{
-
-					if (room.getRoomElementRepresentation(randWidthStart + 1, randheightStart, 0).getCharSymbol() == 'O')
+					if (room.getRoomElement(randWidthStart + 1, randheightStart, 0)->getRepresentation().getCharSymbol() == 'O')
 					{
-						//room.setElementInRoom(randWidthStart + 1, randheightStart, 0, floor2);
-						/*cout << "----------------------------------------------------------" << endl;
-						for (size_t i = 0; i < room.getWidth(); i++)
-						{
-							for (int j = 0; j < room.getHeight(); j++)
-							{
-								cout << room.getRoomElementRepresentation(i, j, 0).getCharSymbol();
-							}
-							cout << endl;
-						}*/
-
 						break;
 					}
 				}
-				else if (randheightStart + 1 < room.getHeight())
+				if (randheightStart + 1 < room.getHeight())
 				{
-
-					if (room.getRoomElementRepresentation(randWidthStart, randheightStart + 1, 0).getCharSymbol() == 'O')
+					if (room.getRoomElement(randWidthStart, randheightStart + 1, 0)->getRepresentation().getCharSymbol() == 'O')
 					{
-						//room.setElementInRoom(randWidthStart, randheightStart + 1, 0, floor2);
-						/*cout << "----------------------------------------------------------" << endl;
-						for (size_t i = 0; i < room.getWidth(); i++)
-						{
-							for (int j = 0; j < room.getHeight(); j++)
-							{
-								cout << room.getRoomElementRepresentation(i, j, 0).getCharSymbol();
-							}
-							cout << endl;
-						}*/
-
 						break;
 					}
 				}
@@ -528,11 +366,11 @@ int Map :: createPath(Room& room, Room& room1, Room& room2, int possitionX, int 
 			{
 				if (j >= 10)
 				{
-					room2.setElementInRoom(i, j - 10, 0, room.getRoomElement2(i, j, 0));
+					room2.setElementInRoom(i, j - 10, 0, *room.getRoomElement(i, j, 0));
 				}
 				else
 				{
-					room1.setElementInRoom(i, j, 0, room.getRoomElement2(i, j, 0));
+					room1.setElementInRoom(i, j, 0, *room.getRoomElement(i, j, 0));
 				}
 			}
 		}
@@ -546,12 +384,12 @@ int Map :: createPath(Room& room, Room& room1, Room& room2, int possitionX, int 
 				if (i >= 10)
 				{
 
-					room2.setElementInRoom(i - 10,j, 0, room.getRoomElement2(i,j, 0));
+					room2.setElementInRoom(i - 10,j, 0, *room.getRoomElement(i,j, 0));
 				}
 				else
 				{
 
-					room1.setElementInRoom(i,j, 0, room.getRoomElement2(i,j ,0));
+					room1.setElementInRoom(i,j, 0, *room.getRoomElement(i,j ,0));
 				}
 			}
 		}
@@ -569,7 +407,7 @@ int Map::connect(Room& room1, Room& room2, int direction)
 		{
 			for (size_t i = 0; i < room1.getWidth(); i++)
 			{
-				if (room1.getRoomElementRepresentation(i, j, 0).getCharSymbol() == 'O')
+				if (room1.getRoomElement(i, j, 0)->getRepresentation().getCharSymbol() == 'O')
 				{
 					possitionX = i;
 					possitionY = j;
@@ -586,14 +424,14 @@ int Map::connect(Room& room1, Room& room2, int direction)
 		{
 			for (int j = 0; j < 10; j++)
 			{
-				room.setElementInRoom(i, j, 0, room1.getRoomElement2(i, j, 0));
+				room.setElementInRoom(i, j, 0, *room1.getRoomElement(i, j, 0));
 			}
 		}
 		for (int i = 0; i < 10; i++)
 		{
 			for (int j = 0; j < 10; j++)
 			{
-				room.setElementInRoom(i, j + 10, 0, room2.getRoomElement2(i, j, 0));
+				room.setElementInRoom(i, j + 10, 0, *room2.getRoomElement(i, j, 0));
 			}
 		}
 		if (createPath(room, room1, room2, possitionX, possitionY) == -1)
@@ -607,7 +445,7 @@ int Map::connect(Room& room1, Room& room2, int direction)
 		{
 			for (int j = 0; j < room1.getHeight(); j++)
 			{
-				if (room1.getRoomElementRepresentation(i, j, 0).getCharSymbol() == 'O')
+				if (room1.getRoomElement(i, j, 0)->getRepresentation().getCharSymbol() == 'O')
 				{
 					possitionX = i;//tu mo¿liwy b³¹d
 					possitionY = j;
@@ -624,14 +462,14 @@ int Map::connect(Room& room1, Room& room2, int direction)
 		{
 			for (size_t j = 0; j < 10; j++)
 			{
-				room.setElementInRoom(i, j, 0, room1.getRoomElement2(i, j, 0));
+				room.setElementInRoom(i, j, 0, *room1.getRoomElement(i, j, 0));
 			}
 		}
 		for (size_t i = 0; i < 10; i++)
 		{
 			for (size_t j = 0; j < 10; j++)
 			{
-				room.setElementInRoom(i + 10, j, 0, room2.getRoomElement2(i, j, 0));
+				room.setElementInRoom(i + 10, j, 0, *room2.getRoomElement(i, j, 0));
 			}
 		}
 		if (createPath(room, room1, room2, possitionX, possitionY) == -1)

@@ -152,7 +152,6 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="PlayerGameObject.cpp" />
     <ClCompile Include="Room.cpp" />
-    <ClCompile Include="Test.cpp" />
     <ClCompile Include="WallGameObject.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -171,7 +170,6 @@
     <ClInclude Include="Map.h" />
     <ClInclude Include="PlayerGameObject.h" />
     <ClInclude Include="Room.h" />
-    <ClInclude Include="Test.h" />
     <ClInclude Include="WallGameObject.h" />
   </ItemGroup>
   <ItemGroup>

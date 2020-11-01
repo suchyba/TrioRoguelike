@@ -12,7 +12,7 @@ void Test::roomCreation()
 	GraphicalSymbol g1('#', 1, 2);
 	GraphicalSymbol g2('|', 10, 12);
 
-	FloorGameObject floor("floor",g1);
+	FloorGameObject floor("floor", g1);
 	WallGameObject wall("wall", g2);
 	room1.setElementInRoom(0, 0, 0, wall);
 	room1.setElementInRoom(0, 1, 0, wall);
@@ -23,7 +23,7 @@ void Test::roomCreation()
 	room1.setElementInRoom(2, 0, 0, floor);
 	room1.setElementInRoom(2, 1, 0, wall);
 	room1.setElementInRoom(2, 2, 0, wall);
-	room1.showRoom();
+	//room1.showRoom();
 }
 
 void Test::getSetRoom()
@@ -31,7 +31,7 @@ void Test::getSetRoom()
 	Room room1(2, 4, 1);
 	cout << "Dlugosc: " << room1.getWidth() << endl;
 	cout << "Szerokosc: " << room1.getHeight() << endl;
-	cout<<"Glebokosc: "<<room1.getDepth()<<endl;
+	cout << "Glebokosc: " << room1.getDepth() << endl;
 }
 
 void Test::changeRoomElement()
@@ -44,26 +44,26 @@ void Test::changeRoomElement()
 
 void Test::getRoomElement()
 {
-	Room* room1 = new Room(2, 2, 2);
-	GraphicalSymbol g1('#', 1, 2);
-	FloorGameObject floor1("floor", g1);
-	room1->setElementInRoom(0, 0, 0, floor1);
-	cout<<	"Room element: " << room1->getRoomElement(0, 0, 0) << endl;
-	cout << "Room element: " << room1->getRoomElement(0, 1, 0) << endl;
-	cout << "Room element: " << room1->getRoomElement(1, 1, 0) << endl;
-	cout << "Room element: " << room1->getRoomElement(1, 0, 0) << endl;
-	cout << "Room element: " << room1->getRoomElement(0, 0, 1) << endl;
-	cout << "Room element: " << room1->getRoomElement(0, 1, 1) << endl;
-	cout << "Room element: " << room1->getRoomElement(1, 1, 1) << endl;
-	cout << "Room element: " << room1->getRoomElement(1, 0, 1) << endl;
-	cout << "Char of room element: " << room1->getRoomElementRepresentation(0, 0, 0).getCharSymbol() << endl;
-	cout << "Char of room element: " << room1->getRoomElementRepresentation(0, 1, 0).getCharSymbol() << endl;
-	cout << "Char of room element: " << room1->getRoomElementRepresentation(1, 1, 0).getCharSymbol() << endl;
-	cout << "Char of room element: " << room1->getRoomElementRepresentation(1, 0, 0).getCharSymbol() << endl;
-	cout << "Char of room element: " << room1->getRoomElementRepresentation(0, 0, 1).getCharSymbol() << endl;
-	cout << "Char of room element: " << room1->getRoomElementRepresentation(0, 1, 1).getCharSymbol() << endl;
-	cout << "Char of room element: " << room1->getRoomElementRepresentation(1, 1, 1).getCharSymbol() << endl;
-	cout << "Char of room element: " << room1->getRoomElementRepresentation(1, 0, 1).getCharSymbol() << endl;
+	//Room* room1 = new Room(2, 2, 2);
+	//GraphicalSymbol g1('#', 1, 2);
+	//FloorGameObject floor1("floor", g1);
+	//room1->setElementInRoom(0, 0, 0, floor1);
+	//cout << "Room element: " << room1->getRoomElement(0, 0, 0) << endl;
+	//cout << "Room element: " << room1->getRoomElement(0, 1, 0) << endl;
+	//cout << "Room element: " << room1->getRoomElement(1, 1, 0) << endl;
+	//cout << "Room element: " << room1->getRoomElement(1, 0, 0) << endl;
+	//cout << "Room element: " << room1->getRoomElement(0, 0, 1) << endl;
+	//cout << "Room element: " << room1->getRoomElement(0, 1, 1) << endl;
+	//cout << "Room element: " << room1->getRoomElement(1, 1, 1) << endl;
+	//cout << "Room element: " << room1->getRoomElement(1, 0, 1) << endl;
+	//cout << "Char of room element: " << room1->getRoomElementRepresentation(0, 0, 0).getCharSymbol() << endl;
+	//cout << "Char of room element: " << room1->getRoomElementRepresentation(0, 1, 0).getCharSymbol() << endl;
+	//cout << "Char of room element: " << room1->getRoomElementRepresentation(1, 1, 0).getCharSymbol() << endl;
+	//cout << "Char of room element: " << room1->getRoomElementRepresentation(1, 0, 0).getCharSymbol() << endl;
+	//cout << "Char of room element: " << room1->getRoomElementRepresentation(0, 0, 1).getCharSymbol() << endl;
+	//cout << "Char of room element: " << room1->getRoomElementRepresentation(0, 1, 1).getCharSymbol() << endl;
+	//cout << "Char of room element: " << room1->getRoomElementRepresentation(1, 1, 1).getCharSymbol() << endl;
+	//cout << "Char of room element: " << room1->getRoomElementRepresentation(1, 0, 1).getCharSymbol() << endl;
 }
 
 void Test::showRoomTest()
@@ -81,7 +81,7 @@ void Test::roomCreationWithJsTool()
 	WallGameObject wall("wall", g2);
 
 	Room* room1 = new Room(10, 10, 1);
-	
+
 	room1->setElementInRoom(0, 0, 0, wall);
 	room1->setElementInRoom(0, 1, 0, wall);
 	room1->setElementInRoom(0, 2, 0, wall);
@@ -492,7 +492,7 @@ void Test::roomCreationWithJsTool()
 	room4->setElementInRoom(9, 8, 0, wall);
 	room4->setElementInRoom(9, 9, 0, wall);
 
-	Room* room5 =  new Room(10, 10, 1);
+	Room* room5 = new Room(10, 10, 1);
 	map1->addRoom(*room5);
 	room5->setElementInRoom(0, 0, 0, wall);
 	room5->setElementInRoom(0, 1, 0, wall);
@@ -1007,8 +1007,8 @@ void Test::roomCreationWithJsTool()
 	room9->setElementInRoom(9, 8, 0, wall);
 	room9->setElementInRoom(9, 9, 0, wall);
 
-	
 
+	cout << "Test1" << endl;
 	while (map1->generateMap() == -1) {}
 
 	map1->showMap();

@@ -12,11 +12,12 @@ protected:
 	/// <summary>
 	/// Wygl¹d obiektu.
 	/// </summary>
-	Room** mapDesign;
+	//Room** mapDesign;
+	vector<vector<Room*> > mapDesign;
 	/// <summary>
 	/// Tablica wszystkich pokoji.
 	/// </summary>
-	Room* rooms;
+	vector<Room*> rooms;
 	int size = 0;
 
 public:
@@ -37,10 +38,6 @@ public:
 	/// </summary>
 	/// <returns>height</returns>
 	int getHeight() const;
-	/// <summary>
-	/// Metoda umo¿liaj¹ca wyœwietlenie wygl¹du obiektu Map.
-	/// </summary>
-	void showMap();
 
 	/// <summary>
 	/// Metoda pozwalajaca zmieniaæ wybrane komórki w tablicy mapDesign.
@@ -48,14 +45,14 @@ public:
 	/// <param name="_width">D³ugoœæ obiektu</param>
 	/// <param name="_height">Wysokoœæ obiektu</param>
 	/// <param name="_object">Obiekt w komórce[_width][_height] tablicy mapDesign</param>
-	void setRoomInMap(int _width, int _height, Room _object);
+	void setRoomInMap(int _width, int _height, Room& _object);
 
 	/// <summary>
-	/// Metoda pozwalajaca zobaczyæ wygl¹d pokoju z tablicy mapDesign.
+	/// Metoda zwracaj¹ca pokoj z tablicy mapDesign.
 	/// </summary>
 	/// <param name="_width">D³ugoœæ obiektu</param>
 	/// <param name="_height">Wysokoœæ obiektu</param>
-	void getRoomFromMap(int _width, int _height);
+	Room* getRoomFromMap(int _width, int _height);
 	/// <summary>
 	/// Metoda dodajaca pokoje do tablicy pokoi
 	/// </summary>
@@ -83,5 +80,20 @@ public:
 	/// £¹czy dwa pokoje korytarzem
 	/// </summary>
 	int connect(Room& room1, Room& room2,int direction);
+
+	~Map()
+	{
+		for (int i = 0; i < mapDesign.size(); i++)
+		{
+			for (int j = 0; j < mapDesign[i].size(); j++)
+			{
+				delete mapDesign[i][j];
+			}
+		}
+		for (int i = 0; i < rooms.size(); i++)
+		{
+			delete rooms[i];
+		}
+	}
 };
 
