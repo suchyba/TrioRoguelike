@@ -80,4 +80,20 @@ public:
 	/// Metoda, uruchamiaj¹ca proces dzia³ania gry.
 	/// </summary>
 	static void start();
+	/// <summary>
+	/// Metoda, rysuj¹ca menu g³ówne.
+	/// </summary>
+	static int drawMenu();
+	/// <summary>
+	/// Metoda,obs³uguj¹ca w¹tek Menu .
+	/// </summary>
+	static void menuThread();
+	/// <summary>
+    /// Metoda,wyœwietlaj¹ca instrukcje Gry .
+    /// </summary>
+	static void showInstructions();
+	/// <summary>
+    /// Metoda,wyœwietalaj¹ca autorów gry .
+    /// </summary>
+	static void showAuthors();
 };

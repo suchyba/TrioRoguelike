@@ -16,7 +16,8 @@ void draw(const GameObject*);
 
 int main()
 {
-	/*GameObject* test = new PlayerGameObject(10, 1, 0, 1, 10, 5, 2, 5, "Gracz", GraphicalSymbol('@', 2, 3));
+	/*
+	GameObject* test = new PlayerGameObject(10, 1, 0, 1, 10, 5, 2, 5, "Gracz", GraphicalSymbol('@', 2, 3));
 	GameObject* testC = new CreatureGameObject(3, 10, 5, 0, "Ghul", GraphicalSymbol('&', 4, 0));
 	GameObject* sciana = new WallGameObject("sciana", GraphicalSymbol('#', 5, 3));
 	GameObject* sciana2 = new GameObject("sciana", GraphicalSymbol('$', 5, 3));
@@ -54,8 +55,8 @@ int main()
 			}
 		}
 	}*/
+	Game::menuThread();
 
-	Game::start();
 
 
 	return 0;
