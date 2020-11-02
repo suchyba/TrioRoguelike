@@ -2,6 +2,7 @@
 #include "Room.h"
 #include <vector>
 #include "FloorGameObject.h"
+#include "CreatureGameObject.h"
 class Map
 {
 protected:
@@ -11,7 +12,7 @@ protected:
 	int width;
 	int height;
 	/// <summary>
-	/// Wygl¹d obiektu.
+	/// Wygl¹d obiektu przechowywany zbudowany z Pokoi
 	/// </summary>
 	//Room** mapDesign;
 	vector<vector<Room*> > mapDesign;
@@ -26,6 +27,12 @@ protected:
 	/// </summary>
 	FloorGameObject* floor;
 
+	/// <summary>
+	/// Wygl¹d obiektu zbudowany z GameObject
+	/// </summary>
+	//Room** mapDesign;
+	vector<vector<vector<GameObject*>> > mapDesignObjects;
+
 public:
 	/// <summary>
 	/// Konstruktor tworz¹cy obiekt.
@@ -33,6 +40,28 @@ public:
 	/// <param name="_width">D³ugoœæ obiektu</param>
 	/// <param name="_height">Wysokoœæ obiektu</param>
 	Map(int _width, int _height);
+
+	/// <summary>
+	/// Metoda tworzaca tablice GameObject z tablicy pokoi
+	/// </summary>
+	void mergeRoomsIntoMap(int _depth,int M);
+
+	/// <summary>
+	/// Metoda pozwalajaca zmieniac GameObject w tablicy mapDesignObjects.
+	/// </summary>
+	/// <param name="_object">Obiekt do podmiany</param>
+	/// <param name="_width">D³ugoœæ obiektu</param>
+	/// <param name="_height">Wysokoœæ obiektu</param>
+	/// <param name="_depth">G³êbokoœæ obiektu</param>
+	void setObjectInMap(GameObject& _object, int _width, int _height, int _depth);
+
+	/// <summary>
+	/// Metoda zwracaj¹ca obiekt z tablicy mapDesignObjects.
+	/// </summary>
+	/// <param name="_width">D³ugoœæ obiektu</param>
+	/// <param name="_height">Wysokoœæ obiektu</param>
+	/// <param name="_depth">G³êbokoœæ obiektu</param>
+	GameObject* getObjectInMap(int _width, int _height, int _depth);
 
 	/// <summary>
 	/// Metoda zwracajaca pole floor.
@@ -98,6 +127,8 @@ public:
 	/// £¹czy dwa pokoje korytarzem
 	/// </summary>
 	int connect(Room& room1, Room& room2,int direction);
+	
+	void move(CreatureGameObject& _object, int x, int y);
 
 	~Map()
 	{
