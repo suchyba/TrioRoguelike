@@ -122,6 +122,11 @@ public:
 	/// </summary>
 	/// <returns>experience</returns>
 	int getExperience() const;
+	/// <summary>
+	/// Metoda dostêpowa do wielkoœci aktywnego ekwipunku
+	/// </summary>
+	/// <returns>Wielkoœæ aktywnego ekwipunku</returns>
+	int getActiveInventorySize() const;
 
 	/// <summary>
 	/// Metoda pozwalaj¹ca na na³ozenie na stworzenie efektu.

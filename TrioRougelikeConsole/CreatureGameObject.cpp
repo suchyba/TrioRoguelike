@@ -137,6 +137,11 @@ int CreatureGameObject::getExperience() const
 	return experience;
 }
 
+int CreatureGameObject::getActiveInventorySize() const
+{
+	return activeInventory.size();
+}
+
 void CreatureGameObject::addEffect(const EffectGameObject& effect)
 {
 	for (auto eff : activeEffects)
