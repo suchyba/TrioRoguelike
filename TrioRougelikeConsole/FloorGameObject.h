@@ -3,5 +3,6 @@
 
 class FloorGameObject : public GameObject
 {
-	
+public:
+	FloorGameObject(string Name, GraphicalSymbol Symbol);
 };

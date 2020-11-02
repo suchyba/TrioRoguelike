@@ -146,14 +146,17 @@
     <ClCompile Include="DynamicGameObject.cpp" />
     <ClCompile Include="EffectGameObject.cpp" />
     <ClCompile Include="EnemyGameObject.cpp" />
+    <ClCompile Include="FloorGameObject.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GraphicalSymbol.cpp" />
     <ClCompile Include="InteractionalbeGameObject.cpp" />
     <ClCompile Include="ItemGameObject.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="PlayerGameObject.cpp" />
     <ClCompile Include="RegenerationEffectGameObject.cpp" />
+    <ClCompile Include="Room.cpp" />
     <ClCompile Include="WallGameObject.cpp" />
     <ClCompile Include="WeaponGameObject.cpp" />
   </ItemGroup>
@@ -172,8 +175,10 @@
     <ClInclude Include="GraphicalSymbol.h" />
     <ClInclude Include="InteractionalbeGameObject.h" />
     <ClInclude Include="ItemGameObject.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="PlayerGameObject.h" />
     <ClInclude Include="RegenerationEffectGameObject.h" />
+    <ClInclude Include="Room.h" />
     <ClInclude Include="WallGameObject.h" />
     <ClInclude Include="WeaponGameObject.h" />
   </ItemGroup>
