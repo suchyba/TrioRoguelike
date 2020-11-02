@@ -11,7 +11,7 @@ public:
 	/// <param name="Symbol">Reprezentacja graficzna obiektu</param>
 	FloorGameObject(string Name, GraphicalSymbol Symbol);
 	/// <summary>
-	/// Metoda tworz¹ca kopiê obiektu.
+	/// Metoda tworzï¿½ca kopiï¿½ obiektu.
 	/// </summary>
 	/// <returns>Kopia obiektu</returns>
 	virtual GameObject* clone() const override;
@@ -20,4 +20,5 @@ public:
 	/// Wirtualny destruktor
 	/// </summary>
 	virtual ~FloorGameObject();
+	FloorGameObject(string Name, GraphicalSymbol Symbol);
 };

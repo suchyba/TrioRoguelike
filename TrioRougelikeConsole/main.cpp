@@ -8,6 +8,7 @@
 #include "ItemGameObject.h"
 #include "EffectGameObject.h"
 #include "Game.h"
+#include "Test.h"
 
 using namespace std;
 

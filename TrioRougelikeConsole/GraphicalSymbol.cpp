@@ -1,5 +1,7 @@
 #include "GraphicalSymbol.h"
 
+GraphicalSymbol::GraphicalSymbol() {}
+
 GraphicalSymbol::GraphicalSymbol(char symbol, int foreground, int background) : charSymbol(symbol), foregroundColor(foreground), backgroundColor(background)
 {
 }

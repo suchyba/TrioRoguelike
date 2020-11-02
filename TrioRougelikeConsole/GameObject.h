@@ -20,6 +20,11 @@ protected:
 	GraphicalSymbol representation;
 public:
 	/// <summary>
+	/// Domyœlny konstruktor tworz¹cy obiekt.
+	/// </summary>
+	GameObject();
+
+	/// <summary>
 	/// Konstruktor tworz¹cy obiekt.
 	/// </summary>
 	/// <param name="Name">Nazwa obiektu</param>
