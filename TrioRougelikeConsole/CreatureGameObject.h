@@ -122,6 +122,22 @@ public:
 	/// </summary>
 	/// <returns>experience</returns>
 	int getExperience() const;
+	/// <summary>
+	/// Metoda dostêpowa do wielkoœci aktywnego ekwipunku
+	/// </summary>
+	/// <returns>Wielkoœæ aktywnego ekwipunku</returns>
+	int getActiveInventorySize() const;
+	/// <summary>
+	/// Metoda dostêpowa do wielkoœci listy aktywnych efektów
+	/// </summary>
+	/// <returns>Iloœæ aktywnych efektów</returns>
+	int getActiveEffectsSize() const;
+	/// <summary>
+	/// Metoda dostêpowa do efektu w danym slocie
+	/// </summary>
+	/// <param name="slot">Numer slotu w kórym znajduje siê efekt</param>
+	/// <returns>WskaŸnik na efekt</returns>
+	const EffectGameObject* getEffectFromSlot(int slot) const;
 
 	/// <summary>
 	/// Metoda pozwalaj¹ca na na³ozenie na stworzenie efektu.
