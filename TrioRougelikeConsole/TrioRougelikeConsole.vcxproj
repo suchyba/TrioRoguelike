@@ -143,6 +143,7 @@
     <ClCompile Include="BleedingEffectGameObject.cpp" />
     <ClCompile Include="Colliding.cpp" />
     <ClCompile Include="CreatureGameObject.cpp" />
+    <ClCompile Include="DrawMenu.cpp" />
     <ClCompile Include="DynamicGameObject.cpp" />
     <ClCompile Include="EffectGameObject.cpp" />
     <ClCompile Include="EnemyGameObject.cpp" />
@@ -156,13 +157,16 @@
     <ClCompile Include="RegenerationEffectGameObject.cpp" />
     <ClCompile Include="WallGameObject.cpp" />
     <ClCompile Include="WeaponGameObject.cpp" />
+    <ClCompile Include="Bars.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArmorGameObject.h" />
+    <ClInclude Include="Bars.h" />
     <ClInclude Include="BleedingEffectGameObject.h" />
     <ClInclude Include="BossGameObject.h" />
     <ClInclude Include="Colliding.h" />
     <ClInclude Include="CreatureGameObject.h" />
+    <ClInclude Include="DrawMenu.h" />
     <ClInclude Include="DynamicGameObject.h" />
     <ClInclude Include="EffectGameObject.h" />
     <ClInclude Include="EnemyGameObject.h" />

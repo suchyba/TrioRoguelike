@@ -1,5 +1,7 @@
 #include "CreatureGameObject.h"
 #include "ItemGameObject.h"
+#include "Bars.h"
+#include <Windows.h>
 
 CreatureGameObject::CreatureGameObject(int hp, int armor, int exp, int activeItemsCount, string Name, GraphicalSymbol Symbol) :
 	healthPoints(hp), baseArmor(armor), baseHealthPoints(hp), experience(exp),
@@ -52,6 +54,10 @@ void CreatureGameObject::onHit(int dmg)
 		healthPoints -= damage;
 	}
 	cout << getTag() << healthPoints << "/" << baseHealthPoints << endl;
+
+	showHealthBar(healthPoints, baseHealthPoints);
+
+	
 
 	if (healthPoints <= 0)
 	{
@@ -181,6 +187,11 @@ void CreatureGameObject::directDmg(int dmg)
 		healthPoints = baseHealthPoints;
 	cout << getTag() << "Taking direct damage: " << dmg << endl;
 	cout << getTag() << healthPoints << "/" << baseHealthPoints << endl;
+
+	showHealthBar(healthPoints, baseHealthPoints);
+
+	
+
 	if (healthPoints <= 0)
 	{
 		onDeath();

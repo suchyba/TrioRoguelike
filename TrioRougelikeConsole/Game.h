@@ -6,6 +6,7 @@
 #include "GameObject.h"
 #include "EffectGameObject.h"
 
+
 using namespace std;
 
 class Game final
@@ -82,10 +83,6 @@ public:
 	static void start();
 	/// <summary>
 	/// Metoda, rysuj¹ca menu g³ówne.
-	/// </summary>
-	static int drawMenu();
-	/// <summary>
-	/// Metoda,obs³uguj¹ca w¹tek Menu .
 	/// </summary>
 	static void menuThread();
 	/// <summary>
