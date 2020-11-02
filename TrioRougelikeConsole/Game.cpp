@@ -10,7 +10,7 @@
 #include "ArmorGameObject.h"
 #include <conio.h>
 #include <cstdio>
-#include "DrawMenu.h"
+#include "Draw.h"
 
 map<string, const GameObject*> Game::templateOtherObjectsList;
 map<string, const CreatureGameObject*> Game::templateCreatureList;
@@ -62,6 +62,7 @@ void Game::registerObjects()
 	templateOtherObjectsList.insert({ "FL", new GameObject("Floor", GraphicalSymbol((char)176, 2, 0)) });
 	templateOtherObjectsList.insert({ "DR", new GameObject("Door", GraphicalSymbol((char)219, 6, 0)) });
 
+
 	templateEffectObjectList.insert({ "BLEFF", new BleedingEffectGameObject(3, 3, 1, 15, "Bleeding", GraphicalSymbol('!', 4, 0)) });
 	templateEffectObjectList.insert({ "HEAL", new RegenerationEffectGameObject(1, 10, 2, "Regeneration", GraphicalSymbol('+', 10, 0)) });
 
@@ -69,6 +70,7 @@ void Game::registerObjects()
 	templateItemList.insert({ "HLARM", new ArmorGameObject(10, (EffectGameObject*)templateEffectObjectList["HEAL"]->clone(), "Heal Chain Armor", GraphicalSymbol((char)177, 10, 0), 4)});
 	
 	templateCreatureList.insert({ "GH", new EnemyGameObject(20, 10, 5, 2, "Ghul", GraphicalSymbol('&', 4, 0), {(ItemGameObject*) templateItemList.at("GHHD")->clone(), (ItemGameObject*)templateItemList.at("HLARM")->clone()}) });
+
 }
 
 void Game::logMessage(string message)
@@ -123,6 +125,8 @@ void Game::menuThread()
 			{
 				system("cls");
 				showInstructions();
+				PlayerGameObject* player = new PlayerGameObject(0, 0, 10, 0, 0, 10, 10, 10, "Gracz", GraphicalSymbol('@',2,3));
+				drawStats(player);
 				cout << "Wcisnij dowolny klawisz by kontynuowac";
 				int g = _getch();
 				continue;
@@ -142,18 +146,4 @@ void Game::menuThread()
 		}
 	}
 }
-void Game:: showAuthors()
-{
-	cout << "Autorzy Gry: " << endl;
-	cout << "Suchecki Bartlomiej" <<endl;
-	cout << "Tomkiel Sebastian" <<endl;
-	cout << "Zywalewski Daniel" <<endl;
-}
-void Game::  showInstructions()
-{
-	cout<< "Instrukcja Gry:"<<endl;
-	cout<< ""<<endl;
-	cout<< ""<<endl;
-	cout<< ""<<endl;
-	cout<< ""<<endl;
-}
+

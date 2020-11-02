@@ -85,12 +85,6 @@ public:
 	/// Metoda, rysuj¹ca menu g³ówne.
 	/// </summary>
 	static void menuThread();
-	/// <summary>
-    /// Metoda,wyœwietlaj¹ca instrukcje Gry .
-    /// </summary>
-	static void showInstructions();
-	/// <summary>
-    /// Metoda,wyœwietalaj¹ca autorów gry .
-    /// </summary>
-	static void showAuthors();
+
+
 };

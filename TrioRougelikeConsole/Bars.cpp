@@ -13,7 +13,7 @@ void showHealthBar(int healthPoints,int baseHealthPoints){
 	{
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
 	}
-	std::cout << "HP : |";
+	std::cout << " |";
 
 
 	for (int i = 0; i < (int)ratio; i++)

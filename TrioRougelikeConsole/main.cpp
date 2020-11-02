@@ -16,11 +16,7 @@ void draw(const GameObject*);
 
 int main()
 {
-
 	Game::menuThread();
-
-
-
 	return 0;
 }
 

@@ -1,8 +1,10 @@
-#include "DrawMenu.h"
+#include "Draw.h"
 #include <Windows.h>
 #include <iostream>
 #include <conio.h>
 #include <cstdio>
+#include "Bars.h"
+#include "PlayerGameObject.h"
 
 
 int  drawMenu()
@@ -117,6 +119,33 @@ int  drawMenu()
 		}
 	}
 	return -1;
+
+}
+
+void showAuthors()
+{
+	std::cout << "Autorzy Gry: " << std::endl;
+	std::cout << "Suchecki Bartlomiej" << std::endl;
+	std::cout << "Tomkiel Sebastian" << std:: endl;
+	std::cout << "Zywalewski Daniel" <<  std::endl;
+}
+
+void showInstructions()
+{
+	std::cout << "Instrukcja Gry:" << std::endl;
+	std::cout << "" << std::endl;
+	std::cout << "" << std::endl;
+	std::cout << "" <<  std::endl;
+	std::cout << "" << std::endl;
+}
+void drawStats(PlayerGameObject* player )
+{
+	std::cout<<"-----------------------------------------------------------------------------------------------"<<std::endl;
+	std::cout << "Imie: "<<player->getName()<<"                                                             XP: "<<player->getExperience()<<std::endl;
+	std::cout << "Pancerz: " << player->getBaseArmor() <<   std::endl;
+	std::cout << "HP: [" << player->getHealthPoints() << "/" << player->getBaseHealthPoints() << "]"; 
+	showHealthBar(player->getHealthPoints(), player->getBaseHealthPoints());
+	std::cout<<"-----------------------------------------------------------------------------------------------"<<std::endl;
 
 }
 
