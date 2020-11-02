@@ -553,16 +553,15 @@ void Map::move(CreatureGameObject& _object, int x, int y)
 	{
 		for (int j = 0; j < mapDesignObjects[i].size(); j++)
 		{
-			if (mapDesignObjects[i][j][3]->getName() == _object.getName())
+			if (mapDesignObjects[i][j][3] == &_object)
 			{
 				auto colObj = dynamic_cast<Colliding*>(mapDesignObjects[i+x][j+y][0]);
-				if (colObj == NULL)
+				if (colObj != NULL)
 				{
 					_object.onCollide(_object);
-					return;
 				}
 				auto inrObj = dynamic_cast<InteractionableGameObject*>(colObj);
-				if (inrObj == NULL)
+				if (inrObj != NULL)
 				{
 					_object.onInteraction();
 				}
