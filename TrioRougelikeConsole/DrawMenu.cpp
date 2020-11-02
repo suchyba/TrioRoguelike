@@ -1,4 +1,5 @@
 #include "DrawMenu.h"
+#include <Windows.h>
 #include <iostream>
 #include <conio.h>
 #include <cstdio>
@@ -23,11 +24,51 @@ int  drawMenu()
 		std::cout << "//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////" << std::endl;
 		std::cout << "" << std::endl;
 
+		switch (chosenOption)
+		{
+		case 1:
+		{
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),9);
+			printf("			     [%c]		  Rozpocznij Gre \n ", chosenOption == 1 ? c : ' ');
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+			printf("			     [%c]		  Instrukcja gry \n ", chosenOption == 2 ? c : ' ');
+			printf("			     [%c]		     Autorzy\n ", chosenOption == 3 ? c : ' ');
+			printf("			     [%c]		      Wyjdz \n ", chosenOption == 4 ? c : ' ');
+			break;
 
-		printf("			     [%c]		  Rozpocznij Gre \n ", chosenOption == 1 ? c : ' ');
-		printf("			     [%c]		  Instrukcja gry \n ", chosenOption == 2 ? c : ' ');
-		printf("			     [%c]		     Autorzy\n ", chosenOption == 3 ? c : ' ');
-		printf("			     [%c]		      Wyjdz \n ", chosenOption == 4 ? c : ' ');
+		}
+		case 2:
+		{
+			printf("			     [%c]		  Rozpocznij Gre \n ", chosenOption == 1 ? c : ' ');
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 9);
+			printf("			     [%c]		  Instrukcja gry \n ", chosenOption == 2 ? c : ' ');
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+			printf("			     [%c]		     Autorzy\n ", chosenOption == 3 ? c : ' ');
+			printf("			     [%c]		      Wyjdz \n ", chosenOption == 4 ? c : ' ');
+			break;
+		}
+		case 3:
+		{
+			printf("			     [%c]		  Rozpocznij Gre \n ", chosenOption == 1 ? c : ' ');
+			printf("			     [%c]		  Instrukcja gry \n ", chosenOption == 2 ? c : ' ');
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 9);
+			printf("			     [%c]		     Autorzy\n ", chosenOption == 3 ? c : ' ');
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+			printf("			     [%c]		      Wyjdz \n ", chosenOption == 4 ? c : ' ');
+			break;
+		}
+		case 4:
+		{
+			printf("			     [%c]		  Rozpocznij Gre \n ", chosenOption == 1 ? c : ' ');
+			printf("			     [%c]		  Instrukcja gry \n ", chosenOption == 2 ? c : ' ');
+			printf("			     [%c]		     Autorzy\n ", chosenOption == 3 ? c : ' ');
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 9);
+			printf("			     [%c]		      Wyjdz \n ", chosenOption == 4 ? c : ' ');
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+			break;
+		}
+		}
+
 
 
 		std::cout << std::endl << std::endl << "					    .                                         " << std::endl;
