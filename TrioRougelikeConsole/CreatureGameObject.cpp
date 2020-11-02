@@ -66,6 +66,8 @@ void CreatureGameObject::onDeath()
 	activeEffects.clear();
 
 	cout << getTag() << "Died" << endl;
+
+	// dodaæ usuwanie z mapy po œmierci
 }
 
 void CreatureGameObject::onAttack(CreatureGameObject& opponent)
@@ -101,7 +103,11 @@ void CreatureGameObject::onInteraction()
 
 void CreatureGameObject::onCollide(GameObject& sender)
 {
-
+	auto creature = dynamic_cast<CreatureGameObject*>(&sender);
+	if (creature)
+	{
+		creature->onAttack(*this);
+	}
 }
 
 int CreatureGameObject::getHealthPoints() const

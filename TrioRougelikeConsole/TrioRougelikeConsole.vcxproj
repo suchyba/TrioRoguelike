@@ -146,6 +146,7 @@
     <ClCompile Include="DynamicGameObject.cpp" />
     <ClCompile Include="EffectGameObject.cpp" />
     <ClCompile Include="EnemyGameObject.cpp" />
+    <ClCompile Include="FloorGameObject.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GraphicalSymbol.cpp" />
