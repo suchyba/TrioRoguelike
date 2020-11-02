@@ -9,3 +9,12 @@ WallGameObject::WallGameObject(string Name, GraphicalSymbol Symbol) : GameObject
 {
 
 }
+
+GameObject* WallGameObject::clone() const
+{
+	return new WallGameObject(*this);
+}
+
+WallGameObject::~WallGameObject()
+{
+}

@@ -44,5 +44,10 @@ public:
 	/// <param name="Symbol">Graficzna reprezentacja gracza</param>
 	PlayerGameObject(int inventoryHeight, int inventoryWidth, int startHp, int activeInventorySize, int experienceToSecondLvl, int startStrength, int startArmor, 
 		int startMagicPow, string Name, GraphicalSymbol Symbol);
+	
+	/// <summary>
+	/// Destruktor
+	/// </summary>
+	~PlayerGameObject();
 
 };

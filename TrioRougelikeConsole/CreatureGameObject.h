@@ -41,18 +41,28 @@ protected:
 	/// <summary>
 	/// Aktywne efekty na³o¿one na stworzenie.
 	/// </summary>
-	vector<EffectGameObject> activeEffects;
+	vector<EffectGameObject*> activeEffects;
 public:
 	/// <summary>
 	/// Podstawowy konstruktor
 	/// </summary>
 	/// <param name="hp">Bazowa iloœæ punktów zdrowia</param>
 	/// <param name="armor">Bazowa iloœæ pancerza</param>
-	/// <param name="activeItemsCount">Iloœæ mo¿liwego do za³o¿enia ekwipunku</param>
 	/// <param name="exp">Iloœæ punktów doœwiadczenia</param>
+	/// <param name="activeItemsCount">Wielkoœæ aktywnego ekwipunku</param>
 	/// <param name="Name">Nazwa stworzenia</param>
 	/// <param name="Symbol">Graficzna reprezentacja stworzenia</param>
 	CreatureGameObject(int hp, int armor, int exp, int activeItemsCount, string Name, GraphicalSymbol Symbol);
+	/// <summary>
+	/// Konstruktor pozwalaj¹cy na automatyczne za³o¿enie ekwipunku
+	/// </summary>
+	/// <param name="hp">Bazowa iloœæ punktów zdrowia</param>
+	/// <param name="armor">Bazowa iloœæ pancerza</param>
+	/// <param name="exp">Iloœæ punktów doœwiadczenia</param> 
+	/// <param name="activeItemsCount">Wielkoœæ aktywnego ekwipunku</param>
+	/// <param name="Name">Nazwa stworzenia</param>
+	/// <param name="Symbol">Graficzna reprezentacja stworzenia</param>
+	CreatureGameObject(int hp, int armor, int exp, int activeItemsCount, string Name, GraphicalSymbol Symbol, const vector<ItemGameObject*>& itemList);
 	/// <summary>
 	/// Metoda wywo³ywana podczas ataku.
 	/// </summary>
@@ -112,6 +122,22 @@ public:
 	/// </summary>
 	/// <returns>experience</returns>
 	int getExperience() const;
+	/// <summary>
+	/// Metoda dostêpowa do wielkoœci aktywnego ekwipunku
+	/// </summary>
+	/// <returns>Wielkoœæ aktywnego ekwipunku</returns>
+	int getActiveInventorySize() const;
+	/// <summary>
+	/// Metoda dostêpowa do wielkoœci listy aktywnych efektów
+	/// </summary>
+	/// <returns>Iloœæ aktywnych efektów</returns>
+	int getActiveEffectsSize() const;
+	/// <summary>
+	/// Metoda dostêpowa do efektu w danym slocie
+	/// </summary>
+	/// <param name="slot">Numer slotu w kórym znajduje siê efekt</param>
+	/// <returns>WskaŸnik na efekt</returns>
+	const EffectGameObject* getEffectFromSlot(int slot) const;
 
 	/// <summary>
 	/// Metoda pozwalaj¹ca na na³ozenie na stworzenie efektu.
@@ -119,13 +145,31 @@ public:
 	/// <param name="effect">Efekt, który chcemy za³o¿yæ</param>
 	void addEffect(const EffectGameObject& effect);
 	/// <summary>
+	/// Metoda pozwalaj¹ca na usuniêcie efektu na³o¿onego na stworzenie.
+	/// </summary>
+	/// <param name="Name">Nazwa efektu, który ma byæ usuniêty</param>
+	void removeEffect(string Name);
+	/// <summary>
 	/// Metoda próbujaca za³o¿yæ ekwipunek do odpowiedniego slotu.
 	/// </summary>
 	/// <param name="item">Przedmiot, który ma byæ za³o¿ony.</param>
 	/// <param name="slot">Miejsce w ekwipunku, w które ma zostaæ za³o¿ony obiekt.</param>
 	/// <returns>true - jeœli operacja siê powiod³a, w przeciwnym wypadku false</returns>
-	bool equipItem(ItemGameObject item, int slot);
+	bool equipItem(ItemGameObject* item, int slot);
+	/// <summary>
+	/// Metoda pozwalaj¹ca na zadawanie obra¿eñ stworzeniu z ominiêciem pancerza
+	/// </summary>
+	/// <param name="dmg">Obra¿enia, które maj¹ zostaæ zadane</param>
 	void directDmg(int dmg);
 
-	~CreatureGameObject();
+	/// <summary>
+	/// Metoda czysto abstrakcyjna tworz¹ca kopiê obiektu.
+	/// </summary>
+	/// <returns>Kopia obiektu</returns>
+	virtual GameObject* clone() const override = 0;
+
+	/// <summary>
+	/// Wirtualny destruktor
+	/// </summary>
+	virtual ~CreatureGameObject();
 };

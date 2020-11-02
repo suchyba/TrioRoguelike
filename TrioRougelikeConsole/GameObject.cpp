@@ -9,13 +9,12 @@ GameObject::GameObject(string Name, GraphicalSymbol GSymbol) : name(Name), repre
 {
     //  DEBUG
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    cout << "[" << name << "] Created GameObject (" << name << ", ";
+    cout << getTag() << "Created GameObject (" << name << ", ";
     SetConsoleTextAttribute(hConsole, representation.getColor());
     cout << representation.getCharSymbol();
     SetConsoleTextAttribute(hConsole, 7);
-    // END DEBUG
-
     cout << ")" << endl;
+    // END DEBUG
 }
 
 string GameObject::getName() const
@@ -36,4 +35,14 @@ void GameObject::setGraphicalRepresentation(const GraphicalSymbol& newRepresenta
 string GameObject::getTag() const
 {
     return "[" + name + "] ";
+}
+
+GameObject* GameObject::clone() const
+{
+    return new GameObject(*this);
+}
+
+GameObject::~GameObject()
+{
+
 }

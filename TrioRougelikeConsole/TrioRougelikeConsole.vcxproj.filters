@@ -22,6 +22,9 @@
     <Filter Include="Pliki nagłówkowe\Main game controls">
       <UniqueIdentifier>{1476a915-1516-47a9-913f-1cc477801e6b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\PersonalizedGameObject">
+      <UniqueIdentifier>{36da8ddd-037d-4b2c-9ab6-29cfa80068b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -57,6 +60,22 @@
     <ClCompile Include="Game.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="BleedingEffectGameObject.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyGameObject.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponGameObject.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="ArmorGameObject.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="RegenerationEffectGameObject.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="Colliding.cpp">
     <ClCompile Include="Room.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
@@ -83,9 +102,6 @@
     <ClInclude Include="Game.h">
       <Filter>Pliki nagłówkowe\Main game controls</Filter>
     </ClInclude>
-    <ClInclude Include="WallGameObject.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
     <ClInclude Include="ItemGameObject.h">
       <Filter>Pliki nagłówkowe\GameObjects</Filter>
     </ClInclude>
@@ -93,12 +109,6 @@
       <Filter>Pliki nagłówkowe\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="BossGameObject.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemieGameObject.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="FloorGameObject.h">
       <Filter>Pliki nagłówkowe\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="CreatureGameObject.h">
@@ -110,6 +120,26 @@
     <ClInclude Include="EffectGameObject.h">
       <Filter>Pliki nagłówkowe\GameObjects</Filter>
     </ClInclude>
+    <ClInclude Include="BleedingEffectGameObject.h">
+      <Filter>Pliki nagłówkowe\PersonalizedGameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyGameObject.h">
+      <Filter>Pliki nagłówkowe\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponGameObject.h">
+      <Filter>Pliki nagłówkowe\PersonalizedGameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ArmorGameObject.h">
+      <Filter>Pliki nagłówkowe\PersonalizedGameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="RegenerationEffectGameObject.h">
+      <Filter>Pliki nagłówkowe\PersonalizedGameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="WallGameObject.h">
+      <Filter>Pliki nagłówkowe\PersonalizedGameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="FloorGameObject.h">
+      <Filter>Pliki nagłówkowe\PersonalizedGameObject</Filter>
     <ClInclude Include="Room.h">
       <Filter>Pliki nagłówkowe\GameObjects</Filter>
     </ClInclude>
@@ -119,7 +149,5 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
-    <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
   </ItemGroup>
 </Project>

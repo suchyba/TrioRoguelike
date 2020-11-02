@@ -139,9 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ArmorGameObject.cpp" />
+    <ClCompile Include="BleedingEffectGameObject.cpp" />
+    <ClCompile Include="Colliding.cpp" />
     <ClCompile Include="CreatureGameObject.cpp" />
     <ClCompile Include="DynamicGameObject.cpp" />
     <ClCompile Include="EffectGameObject.cpp" />
+    <ClCompile Include="EnemyGameObject.cpp" />
     <ClCompile Include="FloorGameObject.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -151,16 +155,20 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="PlayerGameObject.cpp" />
+    <ClCompile Include="RegenerationEffectGameObject.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="WallGameObject.cpp" />
+    <ClCompile Include="WeaponGameObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArmorGameObject.h" />
+    <ClInclude Include="BleedingEffectGameObject.h" />
     <ClInclude Include="BossGameObject.h" />
     <ClInclude Include="Colliding.h" />
     <ClInclude Include="CreatureGameObject.h" />
     <ClInclude Include="DynamicGameObject.h" />
     <ClInclude Include="EffectGameObject.h" />
-    <ClInclude Include="EnemieGameObject.h" />
+    <ClInclude Include="EnemyGameObject.h" />
     <ClInclude Include="FloorGameObject.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
@@ -169,13 +177,13 @@
     <ClInclude Include="ItemGameObject.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="PlayerGameObject.h" />
+    <ClInclude Include="RegenerationEffectGameObject.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="WallGameObject.h" />
+    <ClInclude Include="WeaponGameObject.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
-    <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
