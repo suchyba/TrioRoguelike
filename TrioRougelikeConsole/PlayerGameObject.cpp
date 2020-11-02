@@ -20,6 +20,11 @@ PlayerGameObject::PlayerGameObject(int inventoryHeight, int inventoryWidth, int 
 	}
 }
 
+GameObject* PlayerGameObject::clone() const
+{
+	return new PlayerGameObject(*this);
+}
+
 PlayerGameObject::~PlayerGameObject()
 {
 	for (vector<ItemGameObject*>* row : inventory)
