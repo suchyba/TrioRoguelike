@@ -92,7 +92,7 @@ int Map::generateMap()
 	{
 		return -1;
 	}
-	mergeRoomsIntoMap(1, 3); // 1 == depth 
+	mergeRoomsIntoMap();
 	delete chosArr;
 }
 struct A {
@@ -504,7 +504,7 @@ int Map::connect(Room& room1, Room& room2, int direction)
 //	auto interactObject = dynamic_cast<Colliding*>(_object.)
 //	if()
 //}
-void Map :: mergeRoomsIntoMap(int M,int N)
+void Map :: mergeRoomsIntoMap()
 {
 	vector < vector<GameObject* >>  tmp;
 	for (int i = 0; i < mapDesign.size() * 10; i++)
@@ -513,7 +513,7 @@ void Map :: mergeRoomsIntoMap(int M,int N)
 		for (int j = 0; j < mapDesign[0].size() * 10; j++)
 		{
 			vector<GameObject*> tmp;
-			for (int k = 0; k < N; k++)
+			for (int k = 0; k < mapDesign[0][0]->getDepth(); k++)
 			{
 				tmp.push_back(nullptr);
 			}
@@ -529,7 +529,7 @@ void Map :: mergeRoomsIntoMap(int M,int N)
 			{
 				for (int y = 0; y < 10; y++)
 				{
-					for (int z = 0; z < M; z++)
+					for (int z = 0; z < mapDesign[0][0]->getDepth(); z++)
 					{
 						mapDesignObjects[x + (10 * i)][y + (10 * j)][z] = mapDesign[i][j]->getRoomElement(x, y, z);
 					}
@@ -545,4 +545,31 @@ void Map :: setObjectInMap(GameObject& _object, int _width, int _height, int _de
 GameObject* Map :: getObjectInMap(int _width, int _height, int _depth)
 {
 	return mapDesignObjects[_width][_height][_depth];
+}
+
+void Map::move(CreatureGameObject& _object, int x, int y)
+{
+	for (int i = 0; i < mapDesignObjects.size(); i++)
+	{
+		for (int j = 0; j < mapDesignObjects[i].size(); j++)
+		{
+			if (mapDesignObjects[i][j][3]->getName() == _object.getName())
+			{
+				auto colObj = dynamic_cast<Colliding*>(mapDesignObjects[i+x][j+y][0]);
+				if (colObj == NULL)
+				{
+					_object.onCollide(_object);
+					return;
+				}
+				auto inrObj = dynamic_cast<InteractionableGameObject*>(colObj);
+				if (inrObj == NULL)
+				{
+					_object.onInteraction();
+				}
+				mapDesignObjects[i + x][j + y][3] = mapDesignObjects[i][j][3];
+				mapDesignObjects[i][j][3] = nullptr;
+				return;
+			}
+		}
+	}
 }

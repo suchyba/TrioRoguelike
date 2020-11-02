@@ -44,7 +44,7 @@ public:
 	/// <summary>
 	/// Metoda tworzaca tablice GameObject z tablicy pokoi
 	/// </summary>
-	void mergeRoomsIntoMap(int _depth,int M);
+	void mergeRoomsIntoMap();
 
 	/// <summary>
 	/// Metoda pozwalajaca zmieniac GameObject w tablicy mapDesignObjects.
@@ -128,6 +128,9 @@ public:
 	/// </summary>
 	int connect(Room& room1, Room& room2,int direction);
 	
+	/// <summary>
+	/// Zmieniajaca pozycje grasza lub stworków
+	/// </summary>
 	void move(CreatureGameObject& _object, int x, int y);
 
 	~Map()
