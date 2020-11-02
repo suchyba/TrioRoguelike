@@ -142,6 +142,19 @@ int CreatureGameObject::getActiveInventorySize() const
 	return activeInventory.size();
 }
 
+int CreatureGameObject::getActiveEffectsSize() const
+{
+	return activeEffects.size();
+}
+
+const EffectGameObject* CreatureGameObject::getEffectFromSlot(int slot) const
+{
+	EffectGameObject* effect = NULL;
+	if (slot < activeEffects.size())
+		effect = activeEffects[slot];
+	return effect;
+}
+
 void CreatureGameObject::addEffect(const EffectGameObject& effect)
 {
 	for (auto eff : activeEffects)
