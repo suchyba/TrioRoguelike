@@ -140,12 +140,12 @@ void showInstructions()
 }
 void drawStats(PlayerGameObject* player )
 {
-	std::cout<<"-----------------------------------------------------------------------------------------------"<<std::endl;
-	std::cout << "Imie: "<<player->getName()<<"                                                             XP: "<<player->getExperience()<<std::endl;
+	std::cout<<"------------------------------------------------------------------------------------------------------------------------"<<std::endl;
+	std::cout << "Imie: "<<player->getName()<<"												  XP: "<<player->getExperience()<<std::endl;
 	std::cout << "Pancerz: " << player->getBaseArmor() <<   std::endl;
 	std::cout << "HP: [" << player->getHealthPoints() << "/" << player->getBaseHealthPoints() << "]"; 
 	showHealthBar(player->getHealthPoints(), player->getBaseHealthPoints());
-	std::cout<<"-----------------------------------------------------------------------------------------------"<<std::endl;
+	std::cout<<"------------------------------------------------------------------------------------------------------------------------"<<std::endl;
 
 }
 
