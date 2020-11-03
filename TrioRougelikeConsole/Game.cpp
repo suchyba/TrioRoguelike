@@ -32,18 +32,18 @@ void Game::mainLoop()
 	while (true)
 	{
 		logMessage("Iteration");
-		
-		
-		// odœwierzanie obiektów dynamicznych
+
+
+		// odÅ“wierzanie obiektÃ³w dynamicznych
 		for (auto obj : dynamicList)
 		{
-			if(obj)
+			if (obj)
 				obj->onRefresh();
 		}
 
 
 
-		if(!c1->isAlive() || !c2->isAlive() || i > 20)
+		if (!c1->isAlive() || !c2->isAlive() || i > 20)
 			return;
 		++i;
 	}
@@ -53,15 +53,15 @@ void Game::init()
 {
 	logMessage("Entering init");
 	registerObjects();
-	dynamicList.push_back((CreatureGameObject*) templateCreatureList.at("GH")->clone());
-	dynamicList.push_back((CreatureGameObject*) templateCreatureList.at("GH")->clone());
+	dynamicList.push_back((CreatureGameObject*)templateCreatureList.at("GH")->clone());
+	dynamicList.push_back((CreatureGameObject*)templateCreatureList.at("GH")->clone());
 }
 
 void Game::registerObjects()
 {
 	logMessage("Registering objects");
 	templateOtherObjectsList.insert({ "WA", new WallGameObject("Wall", GraphicalSymbol((char)219, 1, 0)) });
-	templateOtherObjectsList.insert({ "FL", new GameObject("Floor", GraphicalSymbol((char)176, 2, 0)) });
+	templateOtherObjectsList.insert({ "FL", new FloorGameObject("Floor", GraphicalSymbol((char)176, 2, 0)) });
 	templateOtherObjectsList.insert({ "DR", new GameObject("Door", GraphicalSymbol((char)219, 6, 0)) });
 
 	templateEffectObjectList.insert({ "BLEFF", new BleedingEffectGameObject(3, 3, 1, 15, "Bleeding", GraphicalSymbol('!', 4, 0)) });
@@ -92,6 +92,11 @@ void Game::registerObjects()
 	createMap(map1, ghul,floor,wall,GreatSword,Helmet,Yasuo,Axe,IT);
 	drawMap(map1);
 	drawStats(player);
+
+	templateItemList.insert({ "HLARM", new ArmorGameObject(10, (EffectGameObject*)templateEffectObjectList["HEAL"]->clone(), "Heal Chain Armor", GraphicalSymbol((char)177, 10, 0), 4) });
+
+	templateCreatureList.insert({ "GH", new EnemyGameObject(20, 10, 5, 2, "Ghul", GraphicalSymbol('&', 4, 0), {(ItemGameObject*)templateItemList.at("GHHD")->clone(), (ItemGameObject*)templateItemList.at("HLARM")->clone()}) });
+
 }
 
 void Game::logMessage(string message)
@@ -112,6 +117,13 @@ void Game::logError(string message)
 void Game::quit()
 {
 	logMessage("Game is shutting down");
+
+	templateEffectObjectList.clear();
+	templateCreatureList.clear();
+	templateItemList.clear();
+	templateOtherObjectsList.clear();
+
+	dynamicList.clear();
 }
 
 void Game::start()
