@@ -23,3 +23,11 @@ void drawStats(PlayerGameObject* player);
 /// </summary>
 
 void drawMap(Map* map1);
+
+/// <summary>
+/// Funkcja odpowiedzialna za ekran Game Over
+/// </summary>
+
+void drawOver();
+
+

@@ -134,10 +134,10 @@ void showAuthors()
 void showInstructions()
 {
 	std::cout << "Instrukcja Gry:" << std::endl;
-	std::cout << "" << std::endl;
-	std::cout << "" << std::endl;
-	std::cout << "" <<  std::endl;
-	std::cout << "" << std::endl;
+	std::cout << "Jestes oznaczony symbolem @ " << std::endl;
+	std::cout << "Poruszasz sie za pomoca klawiszy WASD" << std::endl;
+	std::cout << "Zbieraj przedmioty, pokonuj wrogów, zdobywaj nowe poziomy " <<  std::endl;
+	std::cout << "Nie trac HP bo zginiesz!" << std::endl;
 }
 void drawStats(PlayerGameObject* player )
 {
@@ -161,5 +161,25 @@ void drawMap(Map* map1)
 		}
 		cout << endl;
 	}
+}
+
+void drawOver()
+{
+	int i = 0;
+	system("cls");
+	std::cout << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl;
+	std::cout << "------------------------------------------------------------------------------------------------------------------------" << std::endl;
+	std::cout<<"				 _____   ___  ___  ___ _____   _____  _   _ ___________ "<<std::endl;
+	std::cout<<"				|  __ \\ / _ \\ |  \\/  ||  ___| |  _  || | | |  ___| ___ \\"<<std::endl;
+	std::cout<<"				| |  \\// /_\\ \\| .  . || |__   | | | || | | | |__ | |_/ /"<<std::endl;
+	std::cout<<"				| | __ |  _  || |\\/| ||  __|  | | | || | | |  __||    / "<<std::endl;
+	std::cout<<"				| |_\\ \\| | | || |  | || |___  \\ \\_/ /\\ \\_/ / |___| |\\ \\ "<<std::endl;
+	std::cout<<"				 \\____/\\_| |_/\\_|  |_/\\____/   \\___/  \\___/\\____/\\_| \\_|"<<std::endl<<std::endl;
+
+
+	std::cout << "------------------------------------------------------------------------------------------------------------------------" << std::endl;
+	std::cout << "                                               Press any key to continue                                                    " << std::endl;
+	i= _getch();
+	system("cls");
 }
 
