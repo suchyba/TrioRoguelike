@@ -1,4 +1,6 @@
 #include "Game.h"
+#include "Bars.h"
+#include "Draw.h"
 #include "WallGameObject.h"
 #include <Windows.h>
 #include "GameObject.h"

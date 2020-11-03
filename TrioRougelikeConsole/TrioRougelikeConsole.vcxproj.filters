@@ -22,6 +22,10 @@
     <ClCompile Include="WallGameObject.cpp" />
     <ClCompile Include="WeaponGameObject.cpp" />
     <ClCompile Include="CreateMap.cpp" />
+    <ClCompile Include="..\..\..\..\Downloads\Bars.cpp" />
+    <ClCompile Include="..\..\..\..\Downloads\Draw.cpp" />
+    <ClCompile Include="Bars.cpp" />
+    <ClCompile Include="Draw.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArmorGameObject.h" />
@@ -45,6 +49,10 @@
     <ClInclude Include="WallGameObject.h" />
     <ClInclude Include="WeaponGameObject.h" />
     <ClInclude Include="CreateMap.h" />
+    <ClInclude Include="..\..\..\..\Downloads\Bars.h" />
+    <ClInclude Include="..\..\..\..\Downloads\Draw.h" />
+    <ClInclude Include="Bars.h" />
+    <ClInclude Include="Draw.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
