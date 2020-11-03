@@ -65,14 +65,26 @@ void Game::registerObjects()
 
 	templateItemList.insert({ "GHHD", new WeaponGameObject(3, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"Ghul Hand", GraphicalSymbol('L', 4, 0), 13, 20) });
 	templateItemList.insert({ "HLARM", new ArmorGameObject(10, (EffectGameObject*)templateEffectObjectList["HEAL"]->clone(), "Heal Chain Armor", GraphicalSymbol((char)177, 10, 0), 4)});
+	templateItemList.insert({ "HLMT", new ArmorGameObject(8, (EffectGameObject*)templateEffectObjectList["HEAL"], "Healing Helmer", GraphicalSymbol('n', 10, 0), 3) });
+	
 	templateItemList.insert({ "GRSW", new WeaponGameObject(7, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"Great Sword", GraphicalSymbol('t', 4, 0), 10, 16) });
+	templateItemList.insert({ "AXE", new WeaponGameObject(10, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"Axe", GraphicalSymbol('P', 4, 0), 12, 19) });
 	templateCreatureList.insert({ "GH", new EnemyGameObject(20, 10, 5, 2, "Ghul", GraphicalSymbol('&', 4, 0), {(ItemGameObject*) templateItemList.at("GHHD")->clone(), (ItemGameObject*)templateItemList.at("HLARM")->clone()}) });
+	templateCreatureList.insert({ "YA", new EnemyGameObject(30, 12, 7, 1, "Yasuo", GraphicalSymbol('Y', 4, 0), { (ItemGameObject*)templateItemList.at("HLMT")->clone()}) });
+	templateCreatureList.insert({ "IT", new EnemyGameObject(50, 15, 10, 0, "IT", GraphicalSymbol('I', 4, 0)) });
+
 	CreatureGameObject* ghul = (CreatureGameObject*)templateCreatureList.at("GH")->clone();
 	GameObject* floor = (GameObject*)templateOtherObjectsList.at("FL")->clone();
 	WallGameObject* wall = (WallGameObject*)templateOtherObjectsList.at("WA")->clone();
 	WeaponGameObject* GreatSword = (WeaponGameObject*)templateItemList.at("GRSW")->clone();
-	Map* map1 = new Map(2, 1);
-	createMap(map1, ghul,floor,wall,GreatSword);
+	WeaponGameObject* Axe = (WeaponGameObject*)templateItemList.at("AXE")->clone();
+
+	ArmorGameObject* Helmet = (ArmorGameObject*)templateItemList.at("HLMT")->clone();
+	CreatureGameObject* Yasuo = (CreatureGameObject*)templateCreatureList.at("YA")->clone();
+	CreatureGameObject* IT = (CreatureGameObject*)templateCreatureList.at("YA")->clone();
+	Map* map1 = new Map(2, 3);
+	map1->setFloor(*floor);
+	createMap(map1, ghul,floor,wall,GreatSword,Helmet,Yasuo,Axe,IT);
 }
 
 void Game::logMessage(string message)
