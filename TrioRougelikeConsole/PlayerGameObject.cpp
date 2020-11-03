@@ -32,3 +32,18 @@ PlayerGameObject::~PlayerGameObject()
 			if (cell)
 				delete cell;
 }
+
+void PlayerGameObject::addExp(int exp)
+{
+	experience += exp;
+	if (experience >= experienceToNextLevel)
+	{
+		++level;
+		experience -= experienceToNextLevel;
+		baseHealthPoints += 5;
+		++strength;
+		++magicPower;
+		++baseArmor;
+		experienceToNextLevel *= 2;
+	}
+}

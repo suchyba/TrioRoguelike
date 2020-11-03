@@ -1,5 +1,6 @@
 #include "CreatureGameObject.h"
 #include "ItemGameObject.h"
+#include "Game.h"
 
 CreatureGameObject::CreatureGameObject(int hp, int armor, int exp, int activeItemsCount, string Name, GraphicalSymbol Symbol) :
 	healthPoints(hp), baseArmor(armor), baseHealthPoints(hp), experience(exp),
@@ -67,7 +68,8 @@ void CreatureGameObject::onDeath()
 
 	cout << getTag() << "Died" << endl;
 
-	// dodaæ usuwanie z mapy po œmierci
+	Game::getMap()->getPlayer()->addExp(experience);
+	Game::getMap()->removeFromMap(*this);
 }
 
 void CreatureGameObject::onAttack(CreatureGameObject& opponent)
@@ -159,6 +161,16 @@ const EffectGameObject* CreatureGameObject::getEffectFromSlot(int slot) const
 	if (slot < activeEffects.size())
 		effect = activeEffects[slot];
 	return effect;
+}
+
+int CreatureGameObject::getFirstEmptySlot() const
+{
+	for (int i = 0; i < activeInventory.size(); ++i)
+	{
+		if (!activeInventory[i])
+			return i;
+	}
+	return -1;
 }
 
 void CreatureGameObject::addEffect(const EffectGameObject& effect)

@@ -138,6 +138,8 @@ public:
 	/// <param name="slot">Numer slotu w kórym znajduje siê efekt</param>
 	/// <returns>WskaŸnik na efekt</returns>
 	const EffectGameObject* getEffectFromSlot(int slot) const;
+	int getFirstEmptySlot() const;
+
 
 	/// <summary>
 	/// Metoda pozwalaj¹ca na na³ozenie na stworzenie efektu.

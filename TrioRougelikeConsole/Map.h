@@ -3,6 +3,7 @@
 #include <vector>
 #include "FloorGameObject.h"
 #include "CreatureGameObject.h"
+#include "PlayerGameObject.h"
 class Map
 {
 protected:
@@ -20,7 +21,6 @@ protected:
 	/// Tablica wszystkich pokoji.
 	/// </summary>
 	vector<Room*> rooms;
-	int size = 0;
 
 	/// <summary>
 	/// Obiekt floor wykorzystywany do laczenia pokoji.
@@ -31,15 +31,26 @@ protected:
 	/// Wygl¹d obiektu zbudowany z GameObject
 	/// </summary>
 	//Room** mapDesign;
-	vector<vector<vector<GameObject*>> > mapDesignObjects;
+	vector<vector<vector<GameObject*>>> mapDesignObjects;
+	/// <summary>
+	/// WskaŸnik na obiekt gracza.
+	/// </summary>
+	PlayerGameObject* player;
+
+	/// <summary>
+	/// Lista obeitków dynamicznych na mapie (do przeniesienia).
+	/// </summary>
+	vector<DynamicGameObject*> dynamicList;
+
 
 public:
+	void clearDesign();
 	/// <summary>
 	/// Konstruktor tworz¹cy obiekt.
 	/// </summary>
 	/// <param name="_width">D³ugoœæ obiektu</param>
 	/// <param name="_height">Wysokoœæ obiektu</param>
-	Map(int _width, int _height);
+	Map(int _width, int _height, const FloorGameObject& _floor);
 
 	/// <summary>
 	/// Metoda tworzaca tablice GameObject z tablicy pokoi
@@ -53,7 +64,7 @@ public:
 	/// <param name="_width">D³ugoœæ obiektu</param>
 	/// <param name="_height">Wysokoœæ obiektu</param>
 	/// <param name="_depth">G³êbokoœæ obiektu</param>
-	void setObjectInMap(GameObject& _object, int _width, int _height, int _depth);
+	void setObjectInMap(GameObject* _object, int _width, int _height, int _depth);
 
 	/// <summary>
 	/// Metoda zwracaj¹ca obiekt z tablicy mapDesignObjects.
@@ -61,7 +72,7 @@ public:
 	/// <param name="_width">D³ugoœæ obiektu</param>
 	/// <param name="_height">Wysokoœæ obiektu</param>
 	/// <param name="_depth">G³êbokoœæ obiektu</param>
-	GameObject* getObjectInMap(int _width, int _height, int _depth);
+	GameObject* getObjectInMap(int _width, int _height, int _depth) const;
 
 	/// <summary>
 	/// Metoda zwracajaca pole floor.
@@ -99,7 +110,7 @@ public:
 	/// </summary>
 	/// <param name="_width">D³ugoœæ obiektu</param>
 	/// <param name="_height">Wysokoœæ obiektu</param>
-	Room* getRoomFromMap(int _width, int _height);
+	Room* getRoomFromMap(int _width, int _height) const;
 	/// <summary>
 	/// Metoda dodajaca pokoje do tablicy pokoi
 	/// </summary>
@@ -132,6 +143,13 @@ public:
 	/// Zmieniajaca pozycje grasza lub stworków
 	/// </summary>
 	void move(CreatureGameObject& _object, int x, int y);
+
+	PlayerGameObject* getPlayer() const;
+	void setPlayer(PlayerGameObject* p);
+
+	void refreshDynamic();
+
+	void removeFromMap(GameObject& object);
 
 	~Map()
 	{

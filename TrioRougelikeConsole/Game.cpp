@@ -8,39 +8,127 @@
 #include "EnemyGameObject.h"
 #include "WeaponGameObject.h"
 #include "ArmorGameObject.h"
+#include <conio.h>
+#include "PlayerGameObject.h"
+#include "Map.h"
+#include "EndGameObject.h"
 
 map<string, const GameObject*> Game::templateOtherObjectsList;
 map<string, const CreatureGameObject*> Game::templateCreatureList;
 map<string, const ItemGameObject*> Game::templateItemList;
 map<string, const EffectGameObject*> Game::templateEffectObjectList;
-vector<DynamicGameObject*> Game::dynamicList;
+
+Map* Game::gameMap;
+bool Game::nextLevel;
+bool Game::gameOver;
 
 void Game::mainLoop()
 {
 	logMessage("Entering main loop");
-	auto c1 = dynamic_cast<CreatureGameObject*>(dynamicList[0]);
-	auto c2 = dynamic_cast<CreatureGameObject*>(dynamicList[1]);
-	c1->onAttack(*c2);
-
-	int i = 0;
-
 	while (true)
 	{
-		logMessage("Iteration");
-
-
-		// odœwierzanie obiektów dynamicznych
-		for (auto obj : dynamicList)
+		// ob³uga menu g³ównego
+		bool start = false;
+		while (!start)
 		{
-			if (obj)
-				obj->onRefresh();
+			// tutaj wyœwietlanie menu
+			int i = 0;
+			switch (i)
+			{
+			default:
+				break;
+			case 1:
+			{
+				start = true;
+				break;
+			}
+			case 2:
+			{
+				// instrukcja
+				break;
+			}
+			case 3:
+			{
+				// autorzy
+				break;
+			}
+			case 4:
+			{				
+				return;
+			}
+			}
+		}
+		start = false;
+
+		// tworzenie gracza
+		gameMap->setPlayer(new PlayerGameObject(0, 0, 20, 4, 10, 0, 2, 0, "Gracz", GraphicalSymbol('@', 1, 0)));
+
+		//przygotowanie mapy
+		gameMap = new Map(10, 10, *dynamic_cast<FloorGameObject*>(templateOtherObjectsList.at("FLOOR")->clone()));
+		gameMap->generateMap();
+
+		// rozpoczêcie samej rozgrywki
+		while (true)
+		{
+			logMessage("Iteration");
+			// wyœwietlanie interfejsu
+
+			int key = _getch();
+			int x = 0, y = 0;
+			switch (key)
+			{
+			case 'W':
+			{
+				//ruch playera w górê
+				y = -1;
+				break;
+			}
+			case 'S':
+			{
+				// w dó³
+				y = 1;
+				break;
+			}
+			case 'A':
+			{
+				// w lewo
+				x = -1;
+				break;
+			}
+			case 'D':
+			{
+				// w prawo
+				x = 1;
+				break;
+			}
+			default:
+				break;
+			}
+
+			// poruszenie graczem
+			gameMap->move(*gameMap->getPlayer(), x, y);
+
+			if (nextLevel)
+			{
+				nextLevel = false;
+				gameMap->generateMap();
+				// ustawianie pozycji pocz¹tkowej gracza
+
+			}
+			if (gameOver)
+			{
+				// tutaj rysowanie game over
+				break;
+			}
+
+			// odœwierzanie obiektów dynamicznych
+			gameMap->refreshDynamic();
 		}
 
-
-
-		if (!c1->isAlive() || !c2->isAlive() || i > 20)
-			return;
-		++i;
+		
+		// usuwanie martwego gracza
+		gameMap->clearDesign();
+		delete gameMap->getPlayer();
 	}
 }
 
@@ -48,8 +136,14 @@ void Game::init()
 {
 	logMessage("Entering init");
 	registerObjects();
-	dynamicList.push_back((CreatureGameObject*)templateCreatureList.at("GH")->clone());
-	dynamicList.push_back((CreatureGameObject*)templateCreatureList.at("GH")->clone());
+	nextLevel = false;
+	gameOver = false;
+	
+}
+
+void Game::mainMenu()
+{
+
 }
 
 void Game::registerObjects()
@@ -58,6 +152,7 @@ void Game::registerObjects()
 	templateOtherObjectsList.insert({ "WA", new WallGameObject("Wall", GraphicalSymbol((char)219, 1, 0)) });
 	templateOtherObjectsList.insert({ "FL", new FloorGameObject("Floor", GraphicalSymbol((char)176, 2, 0)) });
 	templateOtherObjectsList.insert({ "DR", new GameObject("Door", GraphicalSymbol((char)219, 6, 0)) });
+	templateOtherObjectsList.insert({ "END", new EndGameObject("End", GraphicalSymbol('%', 1, 0)) });
 
 	templateEffectObjectList.insert({ "BLEFF", new BleedingEffectGameObject(3, 3, 1, 15, "Bleeding", GraphicalSymbol('!', 4, 0)) });
 	templateEffectObjectList.insert({ "HEAL", new RegenerationEffectGameObject(1, 10, 2, "Regeneration", GraphicalSymbol('+', 10, 0)) });
@@ -92,13 +187,30 @@ void Game::quit()
 	templateItemList.clear();
 	templateOtherObjectsList.clear();
 
-	dynamicList.clear();
+	delete gameMap;
 }
 
 void Game::start()
 {
 	logMessage("Game started!");
 	init();
+
 	mainLoop();
+
 	quit();
+}
+
+Map* Game::getMap()
+{
+	return gameMap;
+}
+
+void Game::nextMap()
+{
+	nextLevel = true;
+}
+
+void Game::GameOver()
+{
+	gameOver = true;
 }

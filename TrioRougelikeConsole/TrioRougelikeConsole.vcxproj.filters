@@ -76,6 +76,8 @@
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="Colliding.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
     <ClCompile Include="Room.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
@@ -86,6 +88,9 @@
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="FloorGameObject.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="EndGameObject.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>
@@ -143,11 +148,15 @@
     </ClInclude>
     <ClInclude Include="FloorGameObject.h">
       <Filter>Pliki nagłówkowe\PersonalizedGameObject</Filter>
+    </ClInclude>
     <ClInclude Include="Room.h">
       <Filter>Pliki nagłówkowe\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="Map.h">
       <Filter>Pliki nagłówkowe\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="EndGameObject.h">
+      <Filter>Pliki nagłówkowe\PersonalizedGameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

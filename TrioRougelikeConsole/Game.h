@@ -5,12 +5,22 @@
 #include "PlayerGameObject.h"
 #include "GameObject.h"
 #include "EffectGameObject.h"
+#include "Map.h"
 
 using namespace std;
 
 class Game final
 {
 private:
+	/// <summary>
+	/// WskaŸnik na obecn¹ mapê
+	/// </summary>
+	static Map* gameMap;
+
+	static bool nextLevel;
+
+	static bool gameOver;
+
 	/// <summary>
 	/// Prywatny konstruktor by uniemo¿liwiæ tworzenie instancji obiektu.
 	/// </summary>
@@ -40,14 +50,14 @@ private:
 	/// </summary>
 	static map<string, const EffectGameObject*> templateEffectObjectList;
 	
-	/// <summary>
+	/*/// <summary>
 	/// Lista obeitków dynamicznych na mapie (do przeniesienia).
 	/// </summary>
 	static vector<DynamicGameObject*> dynamicList;
 	/// <summary>
-	/// WskaŸnik na obiekt gracza (do przeniesienia).
+	/// WskaŸnik na obiekt gracza.
 	/// </summary>
-	static PlayerGameObject* player;
+	static PlayerGameObject* player;*/
 
 	/// <summary>
 	/// G³ówna pêtla gry.
@@ -57,6 +67,7 @@ private:
 	/// Metoda przygotowuj¹ca grê do startu.
 	/// </summary>
 	static void init();
+	static void mainMenu();
 	/// <summary>
 	/// Metoda rejstruj¹ca obiekty wzorcowe.
 	/// </summary>
@@ -80,4 +91,7 @@ public:
 	/// Metoda, uruchamiaj¹ca proces dzia³ania gry.
 	/// </summary>
 	static void start();
+	static Map* getMap();
+	static void nextMap();
+	static void GameOver();
 };
