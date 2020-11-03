@@ -25,7 +25,7 @@ protected:
 	/// <summary>
 	/// Obiekt floor wykorzystywany do laczenia pokoji.
 	/// </summary>
-	FloorGameObject* floor;
+	GameObject* floor;
 
 	/// <summary>
 	/// Wygl¹d obiektu zbudowany z GameObject
@@ -57,6 +57,7 @@ public:
 	/// </summary>
 	void mergeRoomsIntoMap();
 
+	vector<vector<vector<GameObject*>> > getMapDesignObject();
 	/// <summary>
 	/// Metoda pozwalajaca zmieniac GameObject w tablicy mapDesignObjects.
 	/// </summary>
@@ -78,13 +79,13 @@ public:
 	/// Metoda zwracajaca pole floor.
 	/// </summary>
 	/// <returns>floor</returns>
-	FloorGameObject* getFloor() const;
+	GameObject* getFloor() const;
 
 	/// <summary>
 	/// Metoda zmieniajaca pole floor.
 	/// </summary>
 	/// <returns>floor</returns>
-	void setFloor(FloorGameObject& _object);
+	void setFloor(GameObject& _object);
 
 	/// <summary>
 	/// Metoda dostêpowa do pola width.
@@ -137,8 +138,8 @@ public:
 	/// <summary>
 	/// £¹czy dwa pokoje korytarzem
 	/// </summary>
-	int connect(Room& room1, Room& room2,int direction);
-	
+	int connect(Room& room1, Room& room2, int direction);
+
 	/// <summary>
 	/// Zmieniajaca pozycje grasza lub stworków
 	/// </summary>

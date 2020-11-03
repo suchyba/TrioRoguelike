@@ -40,11 +40,11 @@ Map::Map(int _width, int _height, const FloorGameObject& _floor) : width(_width)
 		mapDesign.push_back(tmp);
 	}
 }
-FloorGameObject* Map::getFloor() const
+GameObject* Map::getFloor() const
 {
 	return floor;
 }
-void Map::setFloor(FloorGameObject& _object)
+void Map::setFloor(GameObject& _object)
 {
 	floor = new FloorGameObject(_object);
 }
@@ -105,7 +105,6 @@ int Map::generateMap()
 			chosArr[end] = randRoom;
 			end++;
 			mapDesign[i][j] = rooms[randRoom];
-			cout << randRoom << endl;
 		}
 	}
 	if (generateMapConnections() == -1)
@@ -154,7 +153,9 @@ int Map::generateMapConnections()
 	int iterator = 0;
 
 	visited[randWidthStart][randheightStart] = true;
+  
 	++iterator;
+
 	while (iterator != width * height)
 	{
 		if (randheightStart - 1 >= 0 && visited[randWidthStart][randheightStart - 1] == false)
@@ -178,6 +179,7 @@ int Map::generateMapConnections()
 			iterator += 1;
 			if (connect(*mapDesign[randWidthStart][randheightStart], *mapDesign[randWidthStart + 1][randheightStart], 1) == -1)
 			{
+
 				return -1;
 			}
 		}
@@ -191,6 +193,7 @@ int Map::generateMapConnections()
 
 			if (connect(*mapDesign[randWidthStart][randheightStart - 1], *mapDesign[randWidthStart][randheightStart], 2) == -1)
 			{
+
 				return -1;
 			}
 		}
@@ -204,6 +207,7 @@ int Map::generateMapConnections()
 
 			if (connect(*mapDesign[randWidthStart - 1][randheightStart], *mapDesign[randWidthStart][randheightStart], 3) == -1)
 			{
+
 				return -1;
 			}
 		}
@@ -266,7 +270,6 @@ int Map::createPath(Room& room, Room& room1, Room& room2, int possitionX, int po
 			}
 			else if (randWidthStart - 1 >= 0 && visited[randWidthStart - 1][randheightStart] == false)
 			{
-
 				randWidthStart -= 1;
 				visited[randWidthStart][randheightStart] = true;
 				list[end] = A(randWidthStart, randheightStart);
@@ -276,6 +279,7 @@ int Map::createPath(Room& room, Room& room1, Room& room2, int possitionX, int po
 
 			else
 			{
+
 
 				if (end == 0)
 					return -1;
@@ -347,6 +351,7 @@ int Map::createPath(Room& room, Room& room1, Room& room2, int possitionX, int po
 					return -1;
 				else
 				{
+
 					end--;
 					randWidthStart = list[end].array[0];
 					randheightStart = list[end].array[1];
@@ -430,13 +435,15 @@ int Map::connect(Room& room1, Room& room2, int direction)
 {
 	int possitionX = -1;
 	int possitionY = -1;
-	bool flag = false;
+
 	if (direction == 0 || direction == 2)
 	{
+		bool flag = false;
 		for (size_t j = room1.getHeight() - 1; j >= 0; j--)
 		{
 			for (size_t i = 0; i < room1.getWidth(); i++)
 			{
+
 				if (room1.getRoomElement(i, j, 0)->getName() == "FLOOR")
 				{
 					possitionX = i;
@@ -448,7 +455,7 @@ int Map::connect(Room& room1, Room& room2, int direction)
 			if (flag)
 				break;
 		}
-		Room room(10, 20, 1);
+		Room room(10, 20, 4);
 		for (int i = 0; i < 10; i++)
 		{
 			for (int j = 0; j < 10; j++)
@@ -474,10 +481,12 @@ int Map::connect(Room& room1, Room& room2, int direction)
 	}
 	else if (direction == 1 || direction == 3)
 	{
+		bool flag = false;
 		for (int i = room1.getWidth() - 1; i >= 0; i--)
 		{
 			for (int j = 0; j < room1.getHeight(); j++)
 			{
+
 				if (room1.getRoomElement(i, j, 0)->getName() == "FLOOR")
 				{
 					possitionX = i;
@@ -489,7 +498,7 @@ int Map::connect(Room& room1, Room& room2, int direction)
 			if (flag)
 				break;
 		}
-		Room room(20, 10, 1);
+		Room room(20, 10, 4);
 		for (size_t i = 0; i < 10; i++)
 		{
 			for (size_t j = 0; j < 10; j++)
@@ -677,4 +686,8 @@ void Map::removeFromMap(GameObject& object)
 			}
 		}
 	}
+
+vector<vector<vector<GameObject*>> > Map::getMapDesignObject()
+{
+	return mapDesignObjects;
 }

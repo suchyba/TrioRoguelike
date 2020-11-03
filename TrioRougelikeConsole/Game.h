@@ -7,13 +7,14 @@
 #include "EffectGameObject.h"
 #include "Map.h"
 
+
 using namespace std;
 
 class Game final
 {
 private:
 	/// <summary>
-	/// WskaŸnik na obecn¹ mapê
+	/// WskaÅºnik na obecnÄ… mapÄ™
 	/// </summary>
 	static Map* gameMap;
 
@@ -22,11 +23,11 @@ private:
 	static bool gameOver;
 
 	/// <summary>
-	/// Prywatny konstruktor by uniemo¿liwiæ tworzenie instancji obiektu.
+	/// Prywatny konstruktor by uniemoÅ¼liwiÄ‡ tworzenie instancji obiektu.
 	/// </summary>
 	Game();
 	/// <summary>
-	/// Prywatny konstruktor kopiuj¹cy.
+	/// Prywatny konstruktor kopiujÄ…cy.
 	/// </summary>
 	Game(const Game&);
 	/// <summary>
@@ -34,64 +35,67 @@ private:
 	/// </summary>
 	const Game& operator=(const Game&);
 	/// <summary>
-	/// Wzorcowe stworzenia, które póŸniej mo¿na umieszczaæ na mapie.
+	/// Wzorcowe stworzenia, ktÃ³re pÃ³Åºniej moÅ¼na umieszczaÄ‡ na mapie.
 	/// </summary>
 	static map<string, const CreatureGameObject*> templateCreatureList;
 	/// <summary>
-	/// Wzorcowe przedmioty, które póŸniej mo¿na umieszczaæ na mapie.
+	/// Wzorcowe przedmioty, ktÃ³re pÃ³Åºniej moÅ¼na umieszczaÄ‡ na mapie.
 	/// </summary>
 	static map<string, const ItemGameObject*> templateItemList;
 	/// <summary>
-	/// Wzorcowe obiekty sta³e, z których zbudowana jest mapa.
+	/// Wzorcowe obiekty staÅ‚e, z ktÃ³rych zbudowana jest mapa.
 	/// </summary>
 	static map<string, const GameObject*> templateOtherObjectsList;
 	/// <summary>
-	/// Wzorcowe efekty, które mo¿na za³o¿yæ na stworzenie lub przedmiot.
+	/// Wzorcowe efekty, ktÃ³re moÅ¼na zaÅ‚oÅ¼yÄ‡ na stworzenie lub przedmiot.
 	/// </summary>
 	static map<string, const EffectGameObject*> templateEffectObjectList;
-	
-	/*/// <summary>
-	/// Lista obeitków dynamicznych na mapie (do przeniesienia).
+	/// <summary>
+	/// Lista obeitkÃ³w dynamicznych na mapie (do przeniesienia).
 	/// </summary>
 	static vector<DynamicGameObject*> dynamicList;
 	/// <summary>
-	/// WskaŸnik na obiekt gracza.
+	/// WskaÅºnik na obiekt gracza.
 	/// </summary>
 	static PlayerGameObject* player;*/
 
 	/// <summary>
-	/// G³ówna pêtla gry.
+	/// GÅ‚Ã³wna pÄ™tla gry.
 	/// </summary>
 	static void mainLoop();
 	/// <summary>
-	/// Metoda przygotowuj¹ca grê do startu.
+	/// Metoda przygotowujÄ…ca grÄ™ do startu.
 	/// </summary>
 	static void init();
 	static void mainMenu();
 	/// <summary>
-	/// Metoda rejstruj¹ca obiekty wzorcowe.
+	/// Metoda rejstrujÄ…ca obiekty wzorcowe.
 	/// </summary>
 	static void registerObjects();
 	/// <summary>
-	/// Metoda wyœwietlaj¹ca wiadomoœæ w konsoli.
+	/// Metoda wyÅ›wietlajÄ…ca wiadomoÅ›Ä‡ w konsoli.
 	/// </summary>
-	/// <param name="message">Wiadomoœæ do wyœwietlenia.</param>
+	/// <param name="message">WiadomoÅ›Ä‡ do wyÅ›wietlenia.</param>
 	static void logMessage(string message);
 	/// <summary>
-	/// Metoda wyœwietlaj¹ca komunikat b³edu w konsoli.
+	/// Metoda wyÅ›wietlajÄ…ca komunikat bÅ‚edu w konsoli.
 	/// </summary>
-	/// <param name="message">Treœæ b³edu.</param>
+	/// <param name="message">TreÅ›Ä‡ bÅ‚edu.</param>
 	static void logError(string message);
 	/// <summary>
-	/// Metoda koñcz¹ca dzia³anie gry.
+	/// Metoda koÅ„czÄ…ca dziaÅ‚anie gry.
 	/// </summary>
 	static void quit();
 public:
 	/// <summary>
-	/// Metoda, uruchamiaj¹ca proces dzia³ania gry.
+	/// Metoda, uruchamiajÄ…ca proces dziaÅ‚ania gry.
 	/// </summary>
 	static void start();
 	static Map* getMap();
 	static void nextMap();
 	static void GameOver();
+	/// <summary>
+	/// Metoda, rysujÄ…ca menu gÅ‚Ã³wne.
+	/// </summary>
+	static void menuThread();
 };
