@@ -1,151 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Pliki źródłowe">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Pliki nagłówkowe">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Pliki zasobów">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Pliki nagłówkowe\GameObjects">
-      <UniqueIdentifier>{c596cb09-88cc-4c30-a25b-0ab61f1957e9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki nagłówkowe\Graphics">
-      <UniqueIdentifier>{c299ccc0-3b08-4c98-9b03-9603d2c43595}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki nagłówkowe\Main game controls">
-      <UniqueIdentifier>{1476a915-1516-47a9-913f-1cc477801e6b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki nagłówkowe\PersonalizedGameObject">
-      <UniqueIdentifier>{36da8ddd-037d-4b2c-9ab6-29cfa80068b9}</UniqueIdentifier>
-    </Filter>
+    <ClCompile Include="ArmorGameObject.cpp" />
+    <ClCompile Include="BleedingEffectGameObject.cpp" />
+    <ClCompile Include="Colliding.cpp" />
+    <ClCompile Include="CreatureGameObject.cpp" />
+    <ClCompile Include="DynamicGameObject.cpp" />
+    <ClCompile Include="EffectGameObject.cpp" />
+    <ClCompile Include="EnemyGameObject.cpp" />
+    <ClCompile Include="FloorGameObject.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GraphicalSymbol.cpp" />
+    <ClCompile Include="InteractionalbeGameObject.cpp" />
+    <ClCompile Include="ItemGameObject.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="PlayerGameObject.cpp" />
+    <ClCompile Include="RegenerationEffectGameObject.cpp" />
+    <ClCompile Include="Room.cpp" />
+    <ClCompile Include="WallGameObject.cpp" />
+    <ClCompile Include="WeaponGameObject.cpp" />
+    <ClCompile Include="CreateMap.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicalSymbol.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="CreatureGameObject.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemGameObject.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="WallGameObject.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="EffectGameObject.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerGameObject.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="InteractionalbeGameObject.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="DynamicGameObject.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="BleedingEffectGameObject.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyGameObject.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="WeaponGameObject.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="ArmorGameObject.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="RegenerationEffectGameObject.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="Colliding.cpp">
-    <ClCompile Include="Room.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="FloorGameObject.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="Map.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="GameObject.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicalSymbol.h">
-      <Filter>Pliki nagłówkowe\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="InteractionalbeGameObject.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="DynamicGameObject.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Pliki nagłówkowe\Main game controls</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemGameObject.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerGameObject.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="BossGameObject.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="CreatureGameObject.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Colliding.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="EffectGameObject.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="BleedingEffectGameObject.h">
-      <Filter>Pliki nagłówkowe\PersonalizedGameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyGameObject.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="WeaponGameObject.h">
-      <Filter>Pliki nagłówkowe\PersonalizedGameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="ArmorGameObject.h">
-      <Filter>Pliki nagłówkowe\PersonalizedGameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="RegenerationEffectGameObject.h">
-      <Filter>Pliki nagłówkowe\PersonalizedGameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="WallGameObject.h">
-      <Filter>Pliki nagłówkowe\PersonalizedGameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="FloorGameObject.h">
-      <Filter>Pliki nagłówkowe\PersonalizedGameObject</Filter>
-    <ClInclude Include="Room.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
+    <ClInclude Include="ArmorGameObject.h" />
+    <ClInclude Include="BleedingEffectGameObject.h" />
+    <ClInclude Include="BossGameObject.h" />
+    <ClInclude Include="Colliding.h" />
+    <ClInclude Include="CreatureGameObject.h" />
+    <ClInclude Include="DynamicGameObject.h" />
+    <ClInclude Include="EffectGameObject.h" />
+    <ClInclude Include="EnemyGameObject.h" />
+    <ClInclude Include="FloorGameObject.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GraphicalSymbol.h" />
+    <ClInclude Include="InteractionalbeGameObject.h" />
+    <ClInclude Include="ItemGameObject.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="PlayerGameObject.h" />
+    <ClInclude Include="RegenerationEffectGameObject.h" />
+    <ClInclude Include="Room.h" />
+    <ClInclude Include="WallGameObject.h" />
+    <ClInclude Include="WeaponGameObject.h" />
+    <ClInclude Include="CreateMap.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

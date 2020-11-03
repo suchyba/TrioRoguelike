@@ -8,6 +8,7 @@
 #include "EnemyGameObject.h"
 #include "WeaponGameObject.h"
 #include "ArmorGameObject.h"
+#include "CreateMap.h"
 
 map<string, const GameObject*> Game::templateOtherObjectsList;
 map<string, const CreatureGameObject*> Game::templateCreatureList;
@@ -64,8 +65,14 @@ void Game::registerObjects()
 
 	templateItemList.insert({ "GHHD", new WeaponGameObject(3, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"Ghul Hand", GraphicalSymbol('L', 4, 0), 13, 20) });
 	templateItemList.insert({ "HLARM", new ArmorGameObject(10, (EffectGameObject*)templateEffectObjectList["HEAL"]->clone(), "Heal Chain Armor", GraphicalSymbol((char)177, 10, 0), 4)});
-	
+	templateItemList.insert({ "GRSW", new WeaponGameObject(7, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"Great Sword", GraphicalSymbol('t', 4, 0), 10, 16) });
 	templateCreatureList.insert({ "GH", new EnemyGameObject(20, 10, 5, 2, "Ghul", GraphicalSymbol('&', 4, 0), {(ItemGameObject*) templateItemList.at("GHHD")->clone(), (ItemGameObject*)templateItemList.at("HLARM")->clone()}) });
+	CreatureGameObject* ghul = (CreatureGameObject*)templateCreatureList.at("GH")->clone();
+	GameObject* floor = (GameObject*)templateOtherObjectsList.at("FL")->clone();
+	WallGameObject* wall = (WallGameObject*)templateOtherObjectsList.at("WA")->clone();
+	WeaponGameObject* GreatSword = (WeaponGameObject*)templateItemList.at("GRSW")->clone();
+	Map* map1 = new Map(2, 1);
+	createMap(map1, ghul,floor,wall,GreatSword);
 }
 
 void Game::logMessage(string message)
