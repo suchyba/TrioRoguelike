@@ -5,6 +5,7 @@
 #include <cstdio>
 #include "Bars.h"
 #include "PlayerGameObject.h"
+#include "Map.h"
 
 
 int  drawMenu()
@@ -147,5 +148,18 @@ void drawStats(PlayerGameObject* player )
 	showHealthBar(player->getHealthPoints(), player->getBaseHealthPoints());
 	std::cout<<"------------------------------------------------------------------------------------------------------------------------"<<std::endl;
 
+}
+
+void drawMap(Map* map1)
+{
+	cout << map1->getMapDesignObject().size() << endl;
+	for (int i = 0; i < map1->getMapDesignObject().size(); i++)
+	{
+		for (int j = 0; j < map1->getMapDesignObject()[i].size(); j++)
+		{
+			cout << map1->getObjectInMap(i, j, 0)->getRepresentation().getCharSymbol();
+		}
+		cout << endl;
+	}
 }
 

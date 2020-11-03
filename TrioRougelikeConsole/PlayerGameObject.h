@@ -45,6 +45,15 @@ public:
 	PlayerGameObject(int inventoryHeight, int inventoryWidth, int startHp, int activeInventorySize, int experienceToSecondLvl, int startStrength, int startArmor, 
 		int startMagicPow, string Name, GraphicalSymbol Symbol);
 	
+	
+	int getLevel() const;
+
+	/// <summary>
+	/// Metoda tworz¹ca kopiê obiektu.
+	/// </summary>
+	/// <returns>Kopia obiektu</returns>
+	virtual GameObject* clone() const override;
+	
 	/// <summary>
 	/// Destruktor
 	/// </summary>

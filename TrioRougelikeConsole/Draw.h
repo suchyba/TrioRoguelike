@@ -1,5 +1,6 @@
 #pragma once
 #include "PlayerGameObject.h"
+#include "Map.h"
 /// <summary>
 /// Funkcja odpowiedzialna za rysowanie menu
 /// </summary>
@@ -16,3 +17,9 @@ void showInstructions();
 /// Funkcja odpowiedzialna za statystyki gracza
 /// </summary>
 void drawStats(PlayerGameObject* player);
+
+/// <summary>
+/// Funkcja odpowiedzialna za rysowanie mapy
+/// </summary>
+
+void drawMap(Map* map1);

@@ -139,8 +139,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\Downloads\Bars.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\Draw.cpp" />
     <ClCompile Include="ArmorGameObject.cpp" />
     <ClCompile Include="Bars.cpp" />
     <ClCompile Include="BleedingEffectGameObject.cpp" />
@@ -166,8 +164,6 @@
     <ClCompile Include="WeaponGameObject.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Downloads\Bars.h" />
-    <ClInclude Include="..\..\..\..\Downloads\Draw.h" />
     <ClInclude Include="ArmorGameObject.h" />
     <ClInclude Include="Bars.h" />
     <ClInclude Include="BleedingEffectGameObject.h" />

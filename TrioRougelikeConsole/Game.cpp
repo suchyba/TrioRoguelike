@@ -11,6 +11,8 @@
 #include "WeaponGameObject.h"
 #include "ArmorGameObject.h"
 #include "CreateMap.h"
+#include <conio.h>
+#include <cstdio>
 
 map<string, const GameObject*> Game::templateOtherObjectsList;
 map<string, const CreatureGameObject*> Game::templateCreatureList;
@@ -84,9 +86,12 @@ void Game::registerObjects()
 	ArmorGameObject* Helmet = (ArmorGameObject*)templateItemList.at("HLMT")->clone();
 	CreatureGameObject* Yasuo = (CreatureGameObject*)templateCreatureList.at("YA")->clone();
 	CreatureGameObject* IT = (CreatureGameObject*)templateCreatureList.at("YA")->clone();
+	PlayerGameObject* player = new PlayerGameObject(0, 0, 10, 0, 0, 10, 10, 10, "Gracz", GraphicalSymbol('@', 2, 3));
 	Map* map1 = new Map(2, 3);
 	map1->setFloor(*floor);
 	createMap(map1, ghul,floor,wall,GreatSword,Helmet,Yasuo,Axe,IT);
+	drawMap(map1);
+	drawStats(player);
 }
 
 void Game::logMessage(string message)
@@ -115,4 +120,49 @@ void Game::start()
 	init();
 	mainLoop();
 	quit();
+}
+
+
+
+
+
+void Game::menuThread()
+{
+	int option = 0;
+
+	while (1)
+	{
+		option = drawMenu();
+		switch (option)
+		{
+		case 1:
+		{
+			start();
+			cout << "Wcisnij dowolny klawisz by kontynuowac";
+			int g = _getch();
+
+			break;
+		}
+		case 2:
+		{
+			system("cls");
+			showInstructions();
+			cout << "Wcisnij dowolny klawisz by kontynuowac";
+			int g = _getch();
+			continue;
+		}
+		case 3:
+		{
+			system("cls");
+			showAuthors();
+			cout << "Wcisnij dowolny klawisz by kontynuowac";
+			int g = _getch();
+			continue;
+		}
+		case 4:
+		{
+			exit(0);
+		}
+		}
+	}
 }

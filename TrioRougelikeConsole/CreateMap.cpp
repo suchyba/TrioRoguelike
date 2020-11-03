@@ -2479,15 +2479,7 @@ WeaponGameObject* Axe, CreatureGameObject* IT )
 	 map1->generateMap();
 
 
-	 cout << map1->getMapDesignObject().size() << endl;
-	 for (int i = 0; i < map1->getMapDesignObject().size(); i++)
-	 {
-		 for (int j = 0; j < map1->getMapDesignObject()[i].size(); j++)
-		 {
-			 cout << map1->getObjectInMap(i, j, 0)->getRepresentation().getCharSymbol();
-		 }
-		 cout << endl;
-	 }
+
 
 
 }
