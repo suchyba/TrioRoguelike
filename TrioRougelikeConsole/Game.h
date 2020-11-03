@@ -6,6 +6,7 @@
 #include "GameObject.h"
 #include "EffectGameObject.h"
 
+
 using namespace std;
 
 class Game final
@@ -39,7 +40,7 @@ private:
 	/// Wzorcowe efekty, które mo¿na za³o¿yæ na stworzenie lub przedmiot.
 	/// </summary>
 	static map<string, const EffectGameObject*> templateEffectObjectList;
-	
+
 	/// <summary>
 	/// Lista obeitków dynamicznych na mapie (do przeniesienia).
 	/// </summary>
@@ -80,4 +81,10 @@ public:
 	/// Metoda, uruchamiaj¹ca proces dzia³ania gry.
 	/// </summary>
 	static void start();
+	/// <summary>
+	/// Metoda, rysuj¹ca menu g³ówne.
+	/// </summary>
+	static void menuThread();
+
+
 };

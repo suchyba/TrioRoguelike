@@ -70,7 +70,7 @@ public:
 			{
 				for (int k = 0; k < roomDesign[i][j].size(); k++)
 				{
-					delete roomDesign[i][j][k];
+					//delete roomDesign[i][j][k];
 				}
 			}
 		}

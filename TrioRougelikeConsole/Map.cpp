@@ -21,11 +21,11 @@ Map::Map(int _width, int _height) : width(_width), height(_height)
 		mapDesign.push_back(tmp);
 	}
 }
-FloorGameObject* Map::getFloor() const
+GameObject* Map::getFloor() const
 {
 	return floor;
 }
-void Map::setFloor(FloorGameObject& _object)
+void Map::setFloor(GameObject& _object)
 {
 	floor = &_object;
 }
@@ -65,7 +65,7 @@ int Map::generateMap()
 	{
 		for (int j = 0; j < height; j++)
 		{
-			while (true) 
+			while (true)
 			{
 				randRoom = rand() % zakres;
 				for (int x = 0; x < end; x++)
@@ -85,7 +85,6 @@ int Map::generateMap()
 			chosArr[end] = randRoom;
 			end++;
 			mapDesign[i][j] = rooms[randRoom];
-			cout << randRoom << endl;
 		}
 	}
 	if (generateMapConnections() == -1)
@@ -139,7 +138,7 @@ int Map::generateMapConnections()
 
 	visited[randWidthStart][randheightStart] = true;
 	iterator += 1;
-	while (iterator != width * height )
+	while (iterator != width * height)
 	{
 		if (randheightStart - 1 >= 0 && visited[randWidthStart][randheightStart - 1] == false)
 		{
@@ -162,6 +161,7 @@ int Map::generateMapConnections()
 			iterator += 1;
 			if (connect(*mapDesign[randWidthStart][randheightStart], *mapDesign[randWidthStart + 1][randheightStart], 1) == -1)
 			{
+
 				return -1;
 			}
 		}
@@ -175,6 +175,7 @@ int Map::generateMapConnections()
 
 			if (connect(*mapDesign[randWidthStart][randheightStart - 1], *mapDesign[randWidthStart][randheightStart], 2) == -1)
 			{
+
 				return -1;
 			}
 		}
@@ -188,10 +189,11 @@ int Map::generateMapConnections()
 
 			if (connect(*mapDesign[randWidthStart - 1][randheightStart], *mapDesign[randWidthStart][randheightStart], 3) == -1)
 			{
+
 				return -1;
 			}
 		}
-		else 
+		else
 		{
 
 			end--;
@@ -208,7 +210,7 @@ int Map::generateMapConnections()
 	delete list;
 }
 
-int Map :: createPath(Room& room, Room& room1, Room& room2, int possitionX, int possitionY)
+int Map::createPath(Room& room, Room& room1, Room& room2, int possitionX, int possitionY)
 {
 	int randWidthStart = possitionX;
 	int randheightStart = possitionY;
@@ -251,11 +253,11 @@ int Map :: createPath(Room& room, Room& room1, Room& room2, int possitionX, int 
 				visited[randWidthStart][randheightStart] = true;
 				list[end] = A(randWidthStart, randheightStart);
 				end++;
+
 				room.setElementInRoom(randWidthStart, randheightStart, 0, *getFloor());
 			}
-			else if (randWidthStart - 1 >=0 && visited[randWidthStart - 1][randheightStart] == false)
+			else if (randWidthStart - 1 >= 0 && visited[randWidthStart - 1][randheightStart] == false)
 			{
-
 				randWidthStart -= 1;
 				visited[randWidthStart][randheightStart] = true;
 				list[end] = A(randWidthStart, randheightStart);
@@ -266,7 +268,9 @@ int Map :: createPath(Room& room, Room& room1, Room& room2, int possitionX, int 
 			else
 			{
 
-				if (end == 0) { return -1; }
+				if (end == 0) {
+					return -1;
+				}
 				else
 				{
 					end--;
@@ -274,26 +278,26 @@ int Map :: createPath(Room& room, Room& room1, Room& room2, int possitionX, int 
 					randheightStart = list[end].array[1];
 				}
 			}
-			if (randheightStart > room.getHeight() / 2 && room.getHeight() > 11) 
+			if (randheightStart > room.getHeight() / 2 && room.getHeight() > 11)
 			{
 				if (randheightStart + 1 < room.getHeight())
-				{	
-					if (room.getRoomElement(randWidthStart, randheightStart + 1, 0)->getRepresentation().getCharSymbol() == 'O')
+				{
+					if (room.getRoomElement(randWidthStart, randheightStart + 1, 0)->getRepresentation().getCharSymbol() == getFloor()->getRepresentation().getCharSymbol())
 					{
 						break;
 					}
 				}
 				if (randWidthStart + 1 < room.getWidth())
 				{
-					if (room.getRoomElement(randWidthStart + 1, randheightStart, 0)->getRepresentation().getCharSymbol() == 'O')
+					if (room.getRoomElement(randWidthStart + 1, randheightStart, 0)->getRepresentation().getCharSymbol() == getFloor()->getRepresentation().getCharSymbol())
 					{
 						break;
 					}
 				}
 
-				if (randWidthStart - 1>=0)
+				if (randWidthStart - 1 >= 0)
 				{
-					if (room.getRoomElement(randWidthStart - 1, randheightStart, 0)->getRepresentation().getCharSymbol() == 'O')
+					if (room.getRoomElement(randWidthStart - 1, randheightStart, 0)->getRepresentation().getCharSymbol() == getFloor()->getRepresentation().getCharSymbol())
 					{
 						break;
 					}
@@ -340,30 +344,31 @@ int Map :: createPath(Room& room, Room& room1, Room& room2, int possitionX, int 
 				if (end == 0) { return -1; }
 				else
 				{
+
 					end--;
 					randWidthStart = list[end].array[0];
 					randheightStart = list[end].array[1];
 				}
 			}
-			if (randWidthStart > room.getWidth() / 2 && room.getWidth() >11)
+			if (randWidthStart > room.getWidth() / 2 && room.getWidth() > 11)
 			{
-				if (randheightStart - 1>=0)
+				if (randheightStart - 1 >= 0)
 				{
-					if (room.getRoomElement(randWidthStart, randheightStart - 1, 0)->getRepresentation().getCharSymbol() == 'O')
+					if (room.getRoomElement(randWidthStart, randheightStart - 1, 0)->getRepresentation().getCharSymbol() == getFloor()->getRepresentation().getCharSymbol())
 					{
 						break;
 					}
 				}
 				if (randWidthStart + 1 < room.getWidth())
 				{
-					if (room.getRoomElement(randWidthStart + 1, randheightStart, 0)->getRepresentation().getCharSymbol() == 'O')
+					if (room.getRoomElement(randWidthStart + 1, randheightStart, 0)->getRepresentation().getCharSymbol() == getFloor()->getRepresentation().getCharSymbol())
 					{
 						break;
 					}
 				}
 				if (randheightStart + 1 < room.getHeight())
 				{
-					if (room.getRoomElement(randWidthStart, randheightStart + 1, 0)->getRepresentation().getCharSymbol() == 'O')
+					if (room.getRoomElement(randWidthStart, randheightStart + 1, 0)->getRepresentation().getCharSymbol() == getFloor()->getRepresentation().getCharSymbol())
 					{
 						break;
 					}
@@ -398,12 +403,12 @@ int Map :: createPath(Room& room, Room& room1, Room& room2, int possitionX, int 
 				if (i >= 10)
 				{
 
-					room2.setElementInRoom(i - 10,j, 0, *room.getRoomElement(i,j, 0));
+					room2.setElementInRoom(i - 10, j, 0, *room.getRoomElement(i, j, 0));
 				}
 				else
 				{
 
-					room1.setElementInRoom(i,j, 0, *room.getRoomElement(i,j ,0));
+					room1.setElementInRoom(i, j, 0, *room.getRoomElement(i, j, 0));
 				}
 			}
 		}
@@ -420,14 +425,15 @@ int Map::connect(Room& room1, Room& room2, int direction)
 
 	int possitionX = -1;
 	int possitionY = -1;
-	bool flag = false;
+
 	if (direction == 0 || direction == 2)
 	{
+		bool flag = false;
 		for (size_t j = room1.getHeight() - 1; j >= 0; j--)
 		{
 			for (size_t i = 0; i < room1.getWidth(); i++)
 			{
-				if (room1.getRoomElement(i, j, 0)->getRepresentation().getCharSymbol() == 'O')
+				if (room1.getRoomElement(i, j, 0)->getRepresentation().getCharSymbol() == getFloor()->getRepresentation().getCharSymbol())
 				{
 					possitionX = i;
 					possitionY = j;
@@ -439,7 +445,7 @@ int Map::connect(Room& room1, Room& room2, int direction)
 				break;
 			}
 		}
-		Room room(10, 20, 1);
+		Room room(10, 20, 4);
 		for (int i = 0; i < 10; i++)
 		{
 			for (int j = 0; j < 10; j++)
@@ -461,11 +467,12 @@ int Map::connect(Room& room1, Room& room2, int direction)
 	}
 	else if (direction == 1 || direction == 3)
 	{
+		bool flag = false;
 		for (int i = room1.getWidth() - 1; i >= 0; i--)
 		{
 			for (int j = 0; j < room1.getHeight(); j++)
 			{
-				if (room1.getRoomElement(i, j, 0)->getRepresentation().getCharSymbol() == 'O')
+				if (room1.getRoomElement(i, j, 0)->getRepresentation().getCharSymbol() == getFloor()->getRepresentation().getCharSymbol())
 				{
 					possitionX = i;
 					possitionY = j;
@@ -477,7 +484,7 @@ int Map::connect(Room& room1, Room& room2, int direction)
 				break;
 			}
 		}
-		Room room(20, 10, 1);
+		Room room(20, 10, 4);
 		for (size_t i = 0; i < 10; i++)
 		{
 			for (size_t j = 0; j < 10; j++)
@@ -496,7 +503,7 @@ int Map::connect(Room& room1, Room& room2, int direction)
 		{
 			return -1;
 		}
-		
+
 	}
 }
 //void Map::move(CreatureGameObject& _object, int x, int y) 
@@ -504,7 +511,7 @@ int Map::connect(Room& room1, Room& room2, int direction)
 //	auto interactObject = dynamic_cast<Colliding*>(_object.)
 //	if()
 //}
-void Map :: mergeRoomsIntoMap()
+void Map::mergeRoomsIntoMap()
 {
 	vector < vector<GameObject* >>  tmp;
 	for (int i = 0; i < mapDesign.size() * 10; i++)
@@ -538,11 +545,11 @@ void Map :: mergeRoomsIntoMap()
 		}
 	}
 }
-void Map :: setObjectInMap(GameObject& _object, int _width, int _height, int _depth)
+void Map::setObjectInMap(GameObject& _object, int _width, int _height, int _depth)
 {
 	mapDesignObjects[_width][_height][_depth] = &_object;
 }
-GameObject* Map :: getObjectInMap(int _width, int _height, int _depth)
+GameObject* Map::getObjectInMap(int _width, int _height, int _depth)
 {
 	return mapDesignObjects[_width][_height][_depth];
 }
@@ -555,7 +562,7 @@ void Map::move(CreatureGameObject& _object, int x, int y)
 		{
 			if (mapDesignObjects[i][j][3] == &_object)
 			{
-				auto colObj = dynamic_cast<Colliding*>(mapDesignObjects[i+x][j+y][0]);
+				auto colObj = dynamic_cast<Colliding*>(mapDesignObjects[i + x][j + y][0]);
 				if (colObj != NULL)
 				{
 					_object.onCollide(_object);
@@ -571,4 +578,9 @@ void Map::move(CreatureGameObject& _object, int x, int y)
 			}
 		}
 	}
+}
+
+vector<vector<vector<GameObject*>> > Map::getMapDesignObject()
+{
+	return mapDesignObjects;
 }

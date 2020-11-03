@@ -20,6 +20,11 @@ PlayerGameObject::PlayerGameObject(int inventoryHeight, int inventoryWidth, int 
 	}
 }
 
+int PlayerGameObject::getLevel() const
+{
+	return level;
+}
+
 GameObject* PlayerGameObject::clone() const
 {
 	return new PlayerGameObject(*this);
