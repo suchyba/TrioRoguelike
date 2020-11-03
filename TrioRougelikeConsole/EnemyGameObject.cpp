@@ -1,4 +1,6 @@
 #include "EnemyGameObject.h"
+#include "Game.h"
+#include <time.h>
 
 EnemyGameObject::EnemyGameObject(int hp, int armor, int exp, int activeItemsCount, string Name, GraphicalSymbol Symbol) : 
     CreatureGameObject(hp, armor, exp, activeItemsCount, Name, Symbol)
@@ -15,6 +17,9 @@ EnemyGameObject::EnemyGameObject(int hp, int armor, int exp, int activeItemsCoun
 void EnemyGameObject::onRefresh()
 {
     //tutaj trzeba zaimplementowaæ ruch
+    srand(time(NULL));
+    int x = rand() % 2, y = rand() % 2;
+    Game::getMap()->move(*this, x, y);
 
     CreatureGameObject::onRefresh();
 }

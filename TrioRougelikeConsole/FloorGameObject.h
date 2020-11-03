@@ -20,5 +20,4 @@ public:
 	/// Wirtualny destruktor
 	/// </summary>
 	virtual ~FloorGameObject();
-	FloorGameObject(string Name, GraphicalSymbol Symbol);
 };

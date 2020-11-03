@@ -65,4 +65,5 @@ public:
 	/// </summary>
 	~PlayerGameObject();
 
+	void addExp(int exp);
 };

@@ -15,8 +15,7 @@ protected:
 	/// <summary>
 	/// Wygl¹d obiektu.
 	/// </summary>
-	//GameObject*** roomDesign;
-	vector < vector<vector<GameObject*> >>roomDesign;
+	vector<vector<vector<GameObject*>>>roomDesign;
 
 public:
 
@@ -27,6 +26,8 @@ public:
 	/// <param name="_height">Wysokoœæ obiektu</param>
 	/// <param name="_depth">G³êbokoœæ obiektu</param>
 	Room(int _width, int _height, int _depth);
+	Room(vector<vector<vector<GameObject*>>> room);
+	Room(const Room& room);
 
 	/// <summary>
 	/// Metoda dostêpowa do pola width.

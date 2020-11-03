@@ -4,19 +4,38 @@
 #include <iostream>
 #include <Windows.h>
 #include <time.h>
+#include "ItemGameObject.h"
 
 using namespace std;
 
-Map::Map(int _width, int _height) : width(_width), height(_height)
+void Map::clearDesign()
 {
-	GraphicalSymbol g2('O', 1, 2);
-	floor = new FloorGameObject("floor", g2);
+	PlayerGameObject* ptemp = new PlayerGameObject(*player);
+
+	mapDesign.clear();
+	mapDesignObjects.clear();
+
+	for (int i = 0; i < width; i++)
+	{
+		vector<Room*> tmp;
+		for (int j = 0; j < height; j++)
+		{
+			tmp.push_back(NULL);
+		}
+		mapDesign.push_back(tmp);
+	}
+
+	player = ptemp;
+}
+
+Map::Map(int _width, int _height, const FloorGameObject& _floor) : width(_width), height(_height), floor(new FloorGameObject(_floor)), player(NULL)
+{
 	for (int i = 0; i < _width; i++)
 	{
 		vector<Room*> tmp;
 		for (int j = 0; j < _height; j++)
 		{
-			tmp.push_back(nullptr);
+			tmp.push_back(NULL);
 		}
 		mapDesign.push_back(tmp);
 	}
@@ -27,7 +46,7 @@ GameObject* Map::getFloor() const
 }
 void Map::setFloor(GameObject& _object)
 {
-	floor = &_object;
+	floor = new FloorGameObject(_object);
 }
 int Map::getWidth() const
 {
@@ -43,23 +62,24 @@ void Map::setRoomInMap(int _width, int _height, Room& _object)
 {
 	*mapDesign[_width][_height] = _object;
 }
-Room* Map::getRoomFromMap(int _width, int _height)
+Room* Map::getRoomFromMap(int _width, int _height) const
 {
 	return mapDesign[_width][_height];
 }
 void Map::addRoom(Room& _object)
 {
 	rooms.push_back(&_object);
-	size++;
 }
 int Map::generateMap()
 {
+	clearDesign();
+
 	int randRoom;
 	int roz = width * height;
 	int* chosArr = new int[roz];
 	int end = 0;
 	srand(time(NULL));
-	int zakres = size;
+	int zakres = rooms.size();
 	bool flag1 = false;
 	for (int i = 0; i < width; i++)
 	{
@@ -121,14 +141,10 @@ int Map::generateMapConnections()
 	for (int i = 0; i < width; i++)
 	{
 		visited[i] = new bool[height];
-	}
-	for (int i = 0; i < width; i++)
-	{
-		for (int j = 0; j < height; j++)
-		{
+		for (int j = 0; j < height; ++j)
 			visited[i][j] = false;
-		}
 	}
+
 	A* list = new A[100];
 	int end = 0;
 	list[end] = A(randWidthStart, randheightStart);
@@ -137,7 +153,9 @@ int Map::generateMapConnections()
 	int iterator = 0;
 
 	visited[randWidthStart][randheightStart] = true;
-	iterator += 1;
+  
+	++iterator;
+
 	while (iterator != width * height)
 	{
 		if (randheightStart - 1 >= 0 && visited[randWidthStart][randheightStart - 1] == false)
@@ -195,7 +213,6 @@ int Map::generateMapConnections()
 		}
 		else
 		{
-
 			end--;
 
 			randWidthStart = list[end].array[0];
@@ -217,16 +234,12 @@ int Map::createPath(Room& room, Room& room1, Room& room2, int possitionX, int po
 
 	bool** visited = new bool* [room.getWidth()];
 	for (int i = 0; i < room.getWidth(); i++)
-	{
 		visited[i] = new bool[room.getHeight()];
-	}
+
 	for (int i = 0; i < room.getWidth(); i++)
-	{
 		for (int j = 0; j < room.getHeight(); j++)
-		{
 			visited[i][j] = false;
-		}
-	}
+
 	A* list = new A[room.getWidth() * room.getHeight()];
 	int end = 0;
 	list[end] = A(randWidthStart, randheightStart);
@@ -244,7 +257,7 @@ int Map::createPath(Room& room, Room& room1, Room& room2, int possitionX, int po
 				visited[randWidthStart][randheightStart] = true;
 				list[end] = A(randWidthStart, randheightStart);
 				end++;
-				room.setElementInRoom(randWidthStart, randheightStart, 0, *getFloor());
+				room.setElementInRoom(randWidthStart, randheightStart, 0, *(getFloor()->clone()));
 			}
 			else if (randWidthStart + 1 < room.getWidth() && visited[randWidthStart + 1][randheightStart] == false)
 			{
@@ -253,8 +266,7 @@ int Map::createPath(Room& room, Room& room1, Room& room2, int possitionX, int po
 				visited[randWidthStart][randheightStart] = true;
 				list[end] = A(randWidthStart, randheightStart);
 				end++;
-
-				room.setElementInRoom(randWidthStart, randheightStart, 0, *getFloor());
+				room.setElementInRoom(randWidthStart, randheightStart, 0, *(getFloor()->clone()));
 			}
 			else if (randWidthStart - 1 >= 0 && visited[randWidthStart - 1][randheightStart] == false)
 			{
@@ -262,15 +274,15 @@ int Map::createPath(Room& room, Room& room1, Room& room2, int possitionX, int po
 				visited[randWidthStart][randheightStart] = true;
 				list[end] = A(randWidthStart, randheightStart);
 				end++;
-				room.setElementInRoom(randWidthStart, randheightStart, 0, *getFloor());
+				room.setElementInRoom(randWidthStart, randheightStart, 0, *(getFloor()->clone()));
 			}
 
 			else
 			{
 
-				if (end == 0) {
+
+				if (end == 0)
 					return -1;
-				}
 				else
 				{
 					end--;
@@ -282,25 +294,19 @@ int Map::createPath(Room& room, Room& room1, Room& room2, int possitionX, int po
 			{
 				if (randheightStart + 1 < room.getHeight())
 				{
-					if (room.getRoomElement(randWidthStart, randheightStart + 1, 0)->getRepresentation().getCharSymbol() == getFloor()->getRepresentation().getCharSymbol())
-					{
+					if (room.getRoomElement(randWidthStart, randheightStart + 1, 0)->getName() == "FLOOR")
 						break;
-					}
 				}
 				if (randWidthStart + 1 < room.getWidth())
 				{
-					if (room.getRoomElement(randWidthStart + 1, randheightStart, 0)->getRepresentation().getCharSymbol() == getFloor()->getRepresentation().getCharSymbol())
-					{
+					if (room.getRoomElement(randWidthStart + 1, randheightStart, 0)->getName() == "FLOOR")
 						break;
-					}
 				}
 
 				if (randWidthStart - 1 >= 0)
 				{
-					if (room.getRoomElement(randWidthStart - 1, randheightStart, 0)->getRepresentation().getCharSymbol() == getFloor()->getRepresentation().getCharSymbol())
-					{
+					if (room.getRoomElement(randWidthStart - 1, randheightStart, 0)->getName() == "FLOOR")
 						break;
-					}
 				}
 			}
 		}
@@ -318,7 +324,7 @@ int Map::createPath(Room& room, Room& room1, Room& room2, int possitionX, int po
 				visited[randWidthStart][randheightStart] = true;
 				list[end] = A(randWidthStart, randheightStart);
 				end++;
-				room.setElementInRoom(randWidthStart, randheightStart, 0, *getFloor());
+				room.setElementInRoom(randWidthStart, randheightStart, 0, *(getFloor()->clone()));
 
 			}
 			else if (randheightStart + 1 < room.getHeight() && visited[randWidthStart][randheightStart + 1] == false)
@@ -328,7 +334,7 @@ int Map::createPath(Room& room, Room& room1, Room& room2, int possitionX, int po
 				visited[randWidthStart][randheightStart] = true;
 				list[end] = A(randWidthStart, randheightStart);
 				end++;
-				room.setElementInRoom(randWidthStart, randheightStart, 0, *getFloor());
+				room.setElementInRoom(randWidthStart, randheightStart, 0, *(getFloor()->clone()));
 			}
 			else if (randheightStart - 1 <= 0 && visited[randWidthStart][randheightStart - 1] == false)
 			{
@@ -337,11 +343,12 @@ int Map::createPath(Room& room, Room& room1, Room& room2, int possitionX, int po
 				visited[randWidthStart][randheightStart] = true;
 				list[end] = A(randWidthStart, randheightStart);
 				end++;
-				room.setElementInRoom(randWidthStart, randheightStart, 0, *getFloor());
+				room.setElementInRoom(randWidthStart, randheightStart, 0, *(getFloor()->clone()));
 			}
 			else
 			{
-				if (end == 0) { return -1; }
+				if (end == 0)
+					return -1;
 				else
 				{
 
@@ -354,24 +361,18 @@ int Map::createPath(Room& room, Room& room1, Room& room2, int possitionX, int po
 			{
 				if (randheightStart - 1 >= 0)
 				{
-					if (room.getRoomElement(randWidthStart, randheightStart - 1, 0)->getRepresentation().getCharSymbol() == getFloor()->getRepresentation().getCharSymbol())
-					{
+					if (room.getRoomElement(randWidthStart, randheightStart - 1, 0)->getName() == "FLOOR")
 						break;
-					}
 				}
 				if (randWidthStart + 1 < room.getWidth())
 				{
-					if (room.getRoomElement(randWidthStart + 1, randheightStart, 0)->getRepresentation().getCharSymbol() == getFloor()->getRepresentation().getCharSymbol())
-					{
+					if (room.getRoomElement(randWidthStart + 1, randheightStart, 0)->getName() == "FLOOR")
 						break;
-					}
 				}
 				if (randheightStart + 1 < room.getHeight())
 				{
-					if (room.getRoomElement(randWidthStart, randheightStart + 1, 0)->getRepresentation().getCharSymbol() == getFloor()->getRepresentation().getCharSymbol())
-					{
+					if (room.getRoomElement(randWidthStart, randheightStart + 1, 0)->getName() == "FLOOR")
 						break;
-					}
 				}
 			}
 		}
@@ -385,11 +386,17 @@ int Map::createPath(Room& room, Room& room1, Room& room2, int possitionX, int po
 			{
 				if (j >= 10)
 				{
-					room2.setElementInRoom(i, j - 10, 0, *room.getRoomElement(i, j, 0));
+					GameObject* g = room.getRoomElement(i, j, 0);
+					if (g != NULL)
+						g = g->clone();
+					room2.setElementInRoom(i, j - 10, 0, *g);
 				}
 				else
 				{
-					room1.setElementInRoom(i, j, 0, *room.getRoomElement(i, j, 0));
+					GameObject* g = room.getRoomElement(i, j, 0);
+					if (g != NULL)
+						g = g->clone();
+					room1.setElementInRoom(i, j, 0, *g);
 				}
 			}
 		}
@@ -402,13 +409,17 @@ int Map::createPath(Room& room, Room& room1, Room& room2, int possitionX, int po
 			{
 				if (i >= 10)
 				{
-
-					room2.setElementInRoom(i - 10, j, 0, *room.getRoomElement(i, j, 0));
+					GameObject* g = room.getRoomElement(i, j, 0);
+					if (g != NULL)
+						g = g->clone();
+					room2.setElementInRoom(i - 10, j, 0, *g);
 				}
 				else
 				{
-
-					room1.setElementInRoom(i, j, 0, *room.getRoomElement(i, j, 0));
+					GameObject* g = room.getRoomElement(i, j, 0);
+					if (g != NULL)
+						g = g->clone();
+					room1.setElementInRoom(i, j, 0, *g);
 				}
 			}
 		}
@@ -422,7 +433,6 @@ int Map::createPath(Room& room, Room& room1, Room& room2, int possitionX, int po
 }
 int Map::connect(Room& room1, Room& room2, int direction)
 {
-
 	int possitionX = -1;
 	int possitionY = -1;
 
@@ -433,7 +443,8 @@ int Map::connect(Room& room1, Room& room2, int direction)
 		{
 			for (size_t i = 0; i < room1.getWidth(); i++)
 			{
-				if (room1.getRoomElement(i, j, 0)->getRepresentation().getCharSymbol() == getFloor()->getRepresentation().getCharSymbol())
+
+				if (room1.getRoomElement(i, j, 0)->getName() == "FLOOR")
 				{
 					possitionX = i;
 					possitionY = j;
@@ -441,29 +452,32 @@ int Map::connect(Room& room1, Room& room2, int direction)
 					break;
 				}
 			}
-			if (flag) {
+			if (flag)
 				break;
-			}
 		}
 		Room room(10, 20, 4);
 		for (int i = 0; i < 10; i++)
 		{
 			for (int j = 0; j < 10; j++)
 			{
-				room.setElementInRoom(i, j, 0, *room1.getRoomElement(i, j, 0));
+				GameObject* g = room1.getRoomElement(i, j, 0);
+				if (g != NULL)
+					g = g->clone();
+				room.setElementInRoom(i, j, 0, *g);
 			}
 		}
 		for (int i = 0; i < 10; i++)
 		{
 			for (int j = 0; j < 10; j++)
 			{
-				room.setElementInRoom(i, j + 10, 0, *room2.getRoomElement(i, j, 0));
+				GameObject* g = room2.getRoomElement(i, j, 0);
+				if (g != NULL)
+					g = g->clone();
+				room.setElementInRoom(i, j + 10, 0, *g);
 			}
 		}
 		if (createPath(room, room1, room2, possitionX, possitionY) == -1)
-		{
 			return -1;
-		}
 	}
 	else if (direction == 1 || direction == 3)
 	{
@@ -472,7 +486,8 @@ int Map::connect(Room& room1, Room& room2, int direction)
 		{
 			for (int j = 0; j < room1.getHeight(); j++)
 			{
-				if (room1.getRoomElement(i, j, 0)->getRepresentation().getCharSymbol() == getFloor()->getRepresentation().getCharSymbol())
+
+				if (room1.getRoomElement(i, j, 0)->getName() == "FLOOR")
 				{
 					possitionX = i;
 					possitionY = j;
@@ -480,37 +495,35 @@ int Map::connect(Room& room1, Room& room2, int direction)
 					break;
 				}
 			}
-			if (flag) {
+			if (flag)
 				break;
-			}
 		}
 		Room room(20, 10, 4);
 		for (size_t i = 0; i < 10; i++)
 		{
 			for (size_t j = 0; j < 10; j++)
 			{
-				room.setElementInRoom(i, j, 0, *room1.getRoomElement(i, j, 0));
+				GameObject* g = room1.getRoomElement(i, j, 0);
+				if (g != NULL)
+					g = g->clone();
+				room.setElementInRoom(i, j, 0, *g);
 			}
 		}
 		for (size_t i = 0; i < 10; i++)
 		{
 			for (size_t j = 0; j < 10; j++)
 			{
-				room.setElementInRoom(i + 10, j, 0, *room2.getRoomElement(i, j, 0));
+				GameObject* g = room2.getRoomElement(i, j, 0);
+				if (g != NULL)
+					g = g->clone();
+				room.setElementInRoom(i + 10, j, 0, *g);
 			}
 		}
 		if (createPath(room, room1, room2, possitionX, possitionY) == -1)
-		{
 			return -1;
-		}
-
 	}
 }
-//void Map::move(CreatureGameObject& _object, int x, int y) 
-//{
-//	auto interactObject = dynamic_cast<Colliding*>(_object.)
-//	if()
-//}
+
 void Map::mergeRoomsIntoMap()
 {
 	vector < vector<GameObject* >>  tmp;
@@ -522,7 +535,7 @@ void Map::mergeRoomsIntoMap()
 			vector<GameObject*> tmp;
 			for (int k = 0; k < mapDesign[0][0]->getDepth(); k++)
 			{
-				tmp.push_back(nullptr);
+				tmp.push_back(NULL);
 			}
 			tmp2.push_back(tmp);
 		}
@@ -538,47 +551,141 @@ void Map::mergeRoomsIntoMap()
 				{
 					for (int z = 0; z < mapDesign[0][0]->getDepth(); z++)
 					{
-						mapDesignObjects[x + (10 * i)][y + (10 * j)][z] = mapDesign[i][j]->getRoomElement(x, y, z);
+						GameObject* g = mapDesign[i][j]->getRoomElement(x, y, z);
+						if (g != NULL)
+						{
+							g = g->clone();
+							DynamicGameObject* d = dynamic_cast<DynamicGameObject*>(g);
+							if (d != NULL)
+								dynamicList.push_back(d);
+						}
+
+						mapDesignObjects[x + (10 * i)][y + (10 * j)][z] = g;
 					}
 				}
 			}
 		}
 	}
 }
-void Map::setObjectInMap(GameObject& _object, int _width, int _height, int _depth)
+void Map::setObjectInMap(GameObject* _object, int _width, int _height, int _depth)
 {
-	mapDesignObjects[_width][_height][_depth] = &_object;
+	if (_width >= mapDesignObjects.size() || _width < 0 || _height >= mapDesignObjects[_width].size() || _height < 0 || _depth < 0 || _depth >= mapDesignObjects[_width][_height].size()
+		|| (mapDesignObjects[_width][_height][_depth] != NULL && _object != NULL))
+		return;
+
+	if (_object == NULL)
+	{
+		DynamicGameObject* d = dynamic_cast<DynamicGameObject*>(mapDesignObjects[_width][_height][_depth]);
+		if (d)
+		{
+			for (int i = 0; i < dynamicList.size(); ++i)
+			{
+				if (dynamicList[i] == d)
+					dynamicList.erase(dynamicList.begin() + i);
+			}
+		}
+	}
+
+	mapDesignObjects[_width][_height][_depth] = _object;
 }
-GameObject* Map::getObjectInMap(int _width, int _height, int _depth)
+GameObject* Map::getObjectInMap(int _width, int _height, int _depth) const
 {
+	if (_width >= mapDesignObjects.size() || _width < 0 || _height >= mapDesignObjects[_width].size() || _height < 0 || _depth < 0 || _depth >= mapDesignObjects[_width][_height].size())
+		return NULL;
+
 	return mapDesignObjects[_width][_height][_depth];
 }
 
 void Map::move(CreatureGameObject& _object, int x, int y)
 {
+	if (x == 0 && y == 0)
+		return;
+
 	for (int i = 0; i < mapDesignObjects.size(); i++)
 	{
 		for (int j = 0; j < mapDesignObjects[i].size(); j++)
 		{
 			if (mapDesignObjects[i][j][3] == &_object)
 			{
-				auto colObj = dynamic_cast<Colliding*>(mapDesignObjects[i + x][j + y][0]);
-				if (colObj != NULL)
+				if (i + x > mapDesignObjects.size() || i + x < 0 || j + y > mapDesignObjects[i].size() || j + y < 0)
+					return;
+
+				auto p = dynamic_cast<PlayerGameObject*>(&_object);
+				for (int z = 0; z < 3; ++z)
 				{
-					_object.onCollide(_object);
-				}
-				auto inrObj = dynamic_cast<InteractionableGameObject*>(colObj);
-				if (inrObj != NULL)
-				{
-					_object.onInteraction();
+					if (p)
+					{
+						auto inrObj = dynamic_cast<InteractionableGameObject*>(mapDesignObjects[i + x][j + y][z]);
+						if (inrObj != NULL)
+						{
+							_object.onInteraction();
+						}
+						auto item = dynamic_cast<ItemGameObject*>(mapDesignObjects[i + x][j + y][z]);
+						if (item)
+						{
+							int slot = p->getFirstEmptySlot();
+							if (slot == -1)
+								slot = 0;
+							p->equipItem((ItemGameObject*)item->clone(), slot);
+							mapDesignObjects[i + x][j + y][z] = NULL;
+						}
+					}
+					auto colObj = dynamic_cast<Colliding*>(mapDesignObjects[i + x][j + y][z]);
+					if (colObj != NULL)
+					{
+						_object.onCollide(_object);
+						return;
+					}
 				}
 				mapDesignObjects[i + x][j + y][3] = mapDesignObjects[i][j][3];
-				mapDesignObjects[i][j][3] = nullptr;
+				mapDesignObjects[i][j][3] = NULL;
 				return;
 			}
 		}
 	}
 }
+
+PlayerGameObject* Map::getPlayer() const
+{
+	return player;
+}
+
+void Map::setPlayer(PlayerGameObject* p)
+{
+	player = (PlayerGameObject*)p->clone();
+}
+
+void Map::refreshDynamic()
+{
+	for (auto d : dynamicList)
+		d->onRefresh();
+}
+
+void Map::removeFromMap(GameObject& object)
+{
+	for (int i = 0; i < mapDesignObjects.size(); ++i)
+	{
+		for (int j = 0; j < mapDesignObjects[i].size(); ++j)
+		{
+			for (int k = 0; k < mapDesignObjects[i][j].size(); ++k)
+			{
+				if (mapDesignObjects[i][j][k] == &object)
+				{
+					DynamicGameObject* d = dynamic_cast<DynamicGameObject*>(mapDesignObjects[i][j][k]);
+					if (d)
+					{
+						for (int i = 0; i < dynamicList.size(); ++i)
+						{
+							if (dynamicList[i] == d)
+								dynamicList.erase(dynamicList.begin() + i);
+						}
+					}
+					delete mapDesignObjects[i][j][k];
+					mapDesignObjects[i][j][k] = NULL;
+				}
+			}
+		}
+	}
 
 vector<vector<vector<GameObject*>> > Map::getMapDesignObject()
 {
