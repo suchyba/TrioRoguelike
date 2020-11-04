@@ -11,6 +11,8 @@ void showHealthBar(int healthPoints,int baseHealthPoints)
 	char HP = 178;
 	if (ratio <= 2.5)
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 4);
+	else if(ratio>=7.5)
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
 	std::cout << " |";
 
 
