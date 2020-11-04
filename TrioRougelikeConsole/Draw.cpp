@@ -18,12 +18,14 @@ int  drawMenu()
 	{
 		system("cls");
 		std::cout << "////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////" <<std:: endl;
-		std::cout << "                             ______ _____ _   _ _____  _____   _     _____ _   __ _____ " << std::endl;
-		std::cout << "                             | ___ \\  _  | | | |  __ \\|  ___| | |   |_   _| | / /|  ___|" << std::endl;
-		std::cout << "                             | |_/ / | | | | | | |  \\/| |__   | |     | | | |/ / | |__  " << std::endl;
-		std::cout << "                             |    /| | | | | | | | __ |  __|  | |     | | |    \\ |  __| " << std::endl;
-		std::cout << "                             | |\\ \\\\ \\_/ / |_| | |_\\ \\| |___  | |_____| |_| |\\  \\| |___ " << std::endl;
-		std::cout << "                             \\_| \\_|\\___/ \\___/ \\____/\\____/  \\_____/\\___/\\_| \\_/\\____/" << std::endl << std::endl;
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
+std::cout<<"			    ______ _____ _____ _   _ _____    _     _____ _   __ _____ "<<std::endl;
+std::cout<<"			    | ___ \\  _  |  __ \\ | | |  ___|  | |   |_   _| | / /|  ___|"<<std::endl;
+std::cout<<"			    | |_/ / | | | |  \\/ | | | |__    | |     | | | |/ / | |__  "<<std::endl;
+std::cout<<"			    |    /| | | | | __| | | |  __|   | |     | | |    \\ |  __| "<<std::endl;
+std::cout<<"			    | |\\ \\\\ \\_/ / |_\\ \\ |_| | |___   | |_____| |_| |\\  \\| |___ "<<std::endl;
+std::cout<<"			    \\_| \\_|\\___/ \\____/\\___/\\____/   \\_____/\\___/\\_| \\_/\\____/ "<<std::endl << std::endl;
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 		std::cout << "////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////" << std::endl;
 		std::cout << "" << std::endl;
 
@@ -82,7 +84,7 @@ int  drawMenu()
 		std::cout << "		     ,-.           | |---) V.'-------.. `-. )-/.-' ..------ `--) \\._        " << std::endl;
 		std::cout << "		     | /===========| |  (   |      ) ( ``-.`\\/'.-''           (   ) ``-._   " << std::endl;
 		std::cout << "		     | | / / / / / | |--------------------->  <-------------------------_>=-" << std::endl;
-		std::cout << "		     | \===========| |                 ..-'./\\.`-..                _,,-'    " << std::endl;
+		std::cout << "		     | \\===========| |                 ..-'./\\.`-..                _,,-'    " << std::endl;
 		std::cout << "		     `-'           | |-------._------''_.-'----`-._``------_.-----'         " << std::endl;
 		std::cout << "		                   | |         ``----''            ``----''                 " << std::endl;
 		std::cout << "		                   | |                                                      " << std::endl;
@@ -126,25 +128,48 @@ int  drawMenu()
 void showAuthors()
 {
 	system("cls");
-	std::cout << "Autorzy Gry: " << std::endl;
-	std::cout << "Suchecki Bartlomiej" << std::endl;
-	std::cout << "Tomkiel Sebastian" << std:: endl;
-	std::cout << "Zywalewski Daniel" <<  std::endl;
+	
+	std::cout << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl <<  std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+	std::cout << "////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////" << std::endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 5);
+	std::cout << "				    	  >	    Autorzy Gry:	<" << std::endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+	std::cout << "				    	  >	Suchecki Bartlomiej	<" << std::endl;
+	std::cout << "				    	  >	 Tomkiel Sebastian	<" << std:: endl;
+	std::cout << "				    	  >	 Zywalewski Daniel	<" <<  std::endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+	std::cout << "////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////" << std::endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 	cout << endl;
-	cout << "Wcisnij dowolny klawisz by kontynuowac";
+	cout << "				       Wcisnij dowolny klawisz by kontynuowac";
 	int g = _getch();
 }
 
 void showInstructions()
 {
 	system("cls");
-	std::cout << "Instrukcja Gry:" << std::endl;
-	std::cout << "Jestes oznaczony symbolem @ " << std::endl;
-	std::cout << "Poruszasz sie za pomoca klawiszy WASD" << std::endl;
-	std::cout << "Zbieraj przedmioty, pokonuj wrogów, zdobywaj nowe poziomy " <<  std::endl;
-	std::cout << "Nie trac HP bo zginiesz!" << std::endl;
+	std::cout << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+
+	std::cout << "////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////" << std::endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 5);
+
+	std::cout << "			>	                   Instrukcja Gry:				<" << std::endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+
+	std::cout << "			>	               Jestes oznaczony symbolem @			< " << std::endl;
+	std::cout << "			>	          Poruszasz sie za pomoca klawiszy WASD			<" << std::endl;
+	std::cout << "			>	 Zbieraj przedmioty, pokonuj wrogow, zdobywaj nowe poziomy	< " <<  std::endl;
+	std::cout << "			>	           Znak % to przejscie na inny poziom			< " << std::endl;
+	std::cout << "			>	             Pamietaj o wylaczeniu CapsLock			< " << std::endl;
+	std::cout << "			>	                Nie trac HP bo zginiesz!			<" << std::endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+
+	std::cout << "////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////" << std::endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 	cout << endl;
-	cout << "Wcisnij dowolny klawisz by kontynuowac";
+	cout << "				       Wcisnij dowolny klawisz by kontynuowac";
 	int g = _getch();
 }
 void drawStats(PlayerGameObject* player )
