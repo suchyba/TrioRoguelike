@@ -67,7 +67,7 @@ void Game::mainLoop()
 		start = false;
 
 		// tworzenie gracza
-		PlayerGameObject* p = new PlayerGameObject(0, 0, 20, 4, 10, 0, 2, 0, "Gracz", GraphicalSymbol('@', 1, 0));
+		PlayerGameObject* p = new PlayerGameObject(0, 0, 20, 4, 10, 0, 2, 0, "Gracz", GraphicalSymbol('@', 7, 0));
 		gameMap->setPlayer(p);
 
 		//przygotowanie mapy
@@ -81,6 +81,8 @@ void Game::mainLoop()
 			// wy�wietlanie interfejsu
 			drawMap(gameMap);
 			drawStats(gameMap->getPlayer());
+
+			bool quit = false;
 
 			int key = _getch();
 			int x = 0, y = 0;
@@ -110,9 +112,9 @@ void Game::mainLoop()
 				y = 1;
 				break;
 			}
-			case 't':
+			case 27:
 			{
-				gameMap->getPlayer()->addExp(12);
+				quit = true;
 				break;
 			}
 			default:
@@ -137,6 +139,10 @@ void Game::mainLoop()
 				// tutaj rysowanie game over
 				gameOver = false;
 				drawOver();
+				break;
+			}
+			if (quit)
+			{
 				break;
 			}
 
@@ -171,17 +177,17 @@ void Game::registerObjects()
 	templateOtherObjectsList.insert({ "DR", new GameObject("Door", GraphicalSymbol((char)219, 6, 0)) });
 	templateOtherObjectsList.insert({ "EN", new EndGameObject("End", GraphicalSymbol('%', 1, 0)) });
 
-	templateEffectObjectList.insert({ "BLEFF", new BleedingEffectGameObject(3, 3, 1, 15, "Bleeding", GraphicalSymbol('!', 4, 0)) });
+	templateEffectObjectList.insert({ "BLEFF", new BleedingEffectGameObject(2, 3, 1, 5, "Bleeding", GraphicalSymbol('!', 4, 0)) });
 	templateEffectObjectList.insert({ "HEAL", new RegenerationEffectGameObject(1, 10, 2, "Regeneration", GraphicalSymbol('+', 10, 0)) });
 
-	templateItemList.insert({ "GHHD", new WeaponGameObject(3, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"Ghul Hand", GraphicalSymbol('L', 4, 0), 13, 20) });
+	templateItemList.insert({ "GHHD", new WeaponGameObject(3, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"Ghul Hand", GraphicalSymbol('L', 4, 0), 2, 5) });
 	templateItemList.insert({ "HLARM", new ArmorGameObject(10, (EffectGameObject*)templateEffectObjectList["HEAL"]->clone(), "Heal Chain Armor", GraphicalSymbol((char)177, 10, 0), 4) });
 	templateItemList.insert({ "HLMT", new ArmorGameObject(8, (EffectGameObject*)templateEffectObjectList["HEAL"], "Healing Helmer", GraphicalSymbol('n', 10, 0), 3) });
 
 	templateItemList.insert({ "GRSW", new WeaponGameObject(7, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"Great Sword", GraphicalSymbol('t', 4, 0), 10, 16) });
 	templateItemList.insert({ "AXE", new WeaponGameObject(10, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"Axe", GraphicalSymbol('P', 4, 0), 12, 19) });
-	templateCreatureList.insert({ "GH", new EnemyGameObject(20, 10, 5, 2, "Ghul", GraphicalSymbol('&', 4, 0), {(ItemGameObject*)templateItemList.at("GHHD")->clone(), (ItemGameObject*)templateItemList.at("HLARM")->clone()}) });
-	templateCreatureList.insert({ "YA", new EnemyGameObject(30, 12, 7, 1, "Yasuo", GraphicalSymbol('Y', 4, 0), { (ItemGameObject*)templateItemList.at("HLMT")->clone()}) });
+	templateCreatureList.insert({ "GH", new EnemyGameObject(20, 10, 5, 1, "Ghul", GraphicalSymbol('&', 4, 0), {(ItemGameObject*)templateItemList.at("GHHD")->clone()}) });
+	templateCreatureList.insert({ "YA", new EnemyGameObject(30, 12, 7, 2, "Yasuo", GraphicalSymbol('Y', 4, 0), { (ItemGameObject*)templateItemList.at("HLMT")->clone(), (ItemGameObject*)templateItemList.at("HLARM")->clone()}) });
 	templateCreatureList.insert({ "IT", new EnemyGameObject(50, 15, 10, 0, "IT", GraphicalSymbol('I', 4, 0)) });
 
 

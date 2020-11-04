@@ -6,6 +6,7 @@
 #include "Bars.h"
 #include "PlayerGameObject.h"
 #include "Map.h"
+#include "ItemGameObject.h"
 
 
 int  drawMenu()
@@ -17,7 +18,7 @@ int  drawMenu()
 	while (1)
 	{
 		system("cls");
-		std::cout << "//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////" <<std:: endl;
+		std::cout << "//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////" << std::endl;
 		std::cout << "                             ______ _____ _   _ _____  _____   _     _____ _   __ _____ " << std::endl;
 		std::cout << "                             | ___ \\  _  | | | |  __ \\|  ___| | |   |_   _| | / /|  ___|" << std::endl;
 		std::cout << "                             | |_/ / | | | | | | |  \\/| |__   | |     | | | |/ / | |__  " << std::endl;
@@ -31,7 +32,7 @@ int  drawMenu()
 		{
 		case 1:
 		{
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),9);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 9);
 			printf("			     [%c]		  Rozpocznij Gre \n ", chosenOption == 1 ? c : ' ');
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 			printf("			     [%c]		  Instrukcja gry \n ", chosenOption == 2 ? c : ' ');
@@ -128,8 +129,8 @@ void showAuthors()
 	system("cls");
 	std::cout << "Autorzy Gry: " << std::endl;
 	std::cout << "Suchecki Bartlomiej" << std::endl;
-	std::cout << "Tomkiel Sebastian" << std:: endl;
-	std::cout << "Zywalewski Daniel" <<  std::endl;
+	std::cout << "Tomkiel Sebastian" << std::endl;
+	std::cout << "Zywalewski Daniel" << std::endl;
 	cout << endl;
 	cout << "Wcisnij dowolny klawisz by kontynuowac";
 	int g = _getch();
@@ -141,13 +142,13 @@ void showInstructions()
 	std::cout << "Instrukcja Gry:" << std::endl;
 	std::cout << "Jestes oznaczony symbolem @ " << std::endl;
 	std::cout << "Poruszasz sie za pomoca klawiszy WASD" << std::endl;
-	std::cout << "Zbieraj przedmioty, pokonuj wrogów, zdobywaj nowe poziomy " <<  std::endl;
+	std::cout << "Zbieraj przedmioty, pokonuj wrogów, zdobywaj nowe poziomy " << std::endl;
 	std::cout << "Nie trac HP bo zginiesz!" << std::endl;
 	cout << endl;
 	cout << "Wcisnij dowolny klawisz by kontynuowac";
 	int g = _getch();
 }
-void drawStats(PlayerGameObject* player )
+void drawStats(PlayerGameObject* player)
 {
 	std::cout << "------------------------------------------------------------------------------------------------------------------------" << std::endl;
 	std::cout << "Imie: " << player->getName() << std::endl;
@@ -157,6 +158,30 @@ void drawStats(PlayerGameObject* player )
 	showHealthBar(player->getHealthPoints(), player->getBaseHealthPoints());
 	std::cout << "XP: [" << player->getExperience() << "/" << player->getMaxXP() << "]";
 	showHealthBar(player->getExperience(), player->getMaxXP());
+	cout << "Effects: ";
+	for (int i = 0; i < player->getActiveEffectsSize(); ++i)
+	{
+		const EffectGameObject* e = player->getEffectFromSlot(i);
+		if (e)
+		{
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), e->getRepresentation().getColor());
+			cout << e->getRepresentation().getCharSymbol() << " ";
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+		}
+	}
+	cout << endl;
+	cout << "Equiped: ";
+	for (int i = 0; i < player->getActiveInventorySize(); ++i)
+	{
+		const ItemGameObject* item = player->getItemFromSlot(i);
+		if (item)
+		{
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), player->getItemFromSlot(i)->getRepresentation().getColor());
+			cout << player->getItemFromSlot(i)->getRepresentation().getCharSymbol() << " ";
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+		}
+	}
+	cout << endl;
 	std::cout << "------------------------------------------------------------------------------------------------------------------------" << std::endl;
 
 }
@@ -207,17 +232,17 @@ void drawOver()
 	system("cls");
 	std::cout << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl;
 	std::cout << "------------------------------------------------------------------------------------------------------------------------" << std::endl;
-	std::cout<<"				 _____   ___  ___  ___ _____   _____  _   _ ___________ "<<std::endl;
-	std::cout<<"				|  __ \\ / _ \\ |  \\/  ||  ___| |  _  || | | |  ___| ___ \\"<<std::endl;
-	std::cout<<"				| |  \\// /_\\ \\| .  . || |__   | | | || | | | |__ | |_/ /"<<std::endl;
-	std::cout<<"				| | __ |  _  || |\\/| ||  __|  | | | || | | |  __||    / "<<std::endl;
-	std::cout<<"				| |_\\ \\| | | || |  | || |___  \\ \\_/ /\\ \\_/ / |___| |\\ \\ "<<std::endl;
-	std::cout<<"				 \\____/\\_| |_/\\_|  |_/\\____/   \\___/  \\___/\\____/\\_| \\_|"<<std::endl<<std::endl;
+	std::cout << "				 _____   ___  ___  ___ _____   _____  _   _ ___________ " << std::endl;
+	std::cout << "				|  __ \\ / _ \\ |  \\/  ||  ___| |  _  || | | |  ___| ___ \\" << std::endl;
+	std::cout << "				| |  \\// /_\\ \\| .  . || |__   | | | || | | | |__ | |_/ /" << std::endl;
+	std::cout << "				| | __ |  _  || |\\/| ||  __|  | | | || | | |  __||    / " << std::endl;
+	std::cout << "				| |_\\ \\| | | || |  | || |___  \\ \\_/ /\\ \\_/ / |___| |\\ \\ " << std::endl;
+	std::cout << "				 \\____/\\_| |_/\\_|  |_/\\____/   \\___/  \\___/\\____/\\_| \\_|" << std::endl << std::endl;
 
 
 	std::cout << "------------------------------------------------------------------------------------------------------------------------" << std::endl;
 	std::cout << "                                               Press any key to continue                                                    " << std::endl;
-	i= _getch();
+	i = _getch();
 	system("cls");
 }
 

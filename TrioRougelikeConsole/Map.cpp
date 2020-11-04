@@ -609,7 +609,7 @@ void Map::move(CreatureGameObject& _object, int x, int y)
 		{
 			if (mapDesignObjects[i][j][2] == &_object)
 			{
-				if (i + x > mapDesignObjects.size() || i + x < 0 || j + y > mapDesignObjects[i].size() || j + y < 0)
+				if (i + x >= mapDesignObjects.size() || i + x < 0 || j + y >= mapDesignObjects[0].size() || j + y < 0)
 					return;
 				//cout << "[MAP] Moving " << _object.getName() << "(" << x << ", " << y << ")[" << i + x << ", " << j + y << "]" << endl;
 
@@ -703,15 +703,7 @@ void Map::randomizePlayerPos()
 
 		if (mapDesignObjects[x][y][0] && mapDesignObjects[x][y][0]->getName() == "FLOOR")
 		{
-			DynamicGameObject* d = dynamic_cast<DynamicGameObject*>(mapDesignObjects[x][y][2]);
-			if (d)
-			{
-				for (int i = 0; i < dynamicList.size(); ++i)
-				{
-					if (dynamicList[i] == d)
-						dynamicList.erase(dynamicList.begin() + i);
-				}
-			}
+			dynamicList.push_back(player);
 
 			mapDesignObjects[x][y][2] = player;
 			break;
