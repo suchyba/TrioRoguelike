@@ -16,7 +16,7 @@ bool BleedingEffectGameObject::onRefresh(GameObject& object)
 	
 	if (frameFromStart % offset == 0)
 	{
-		cout << getTag() << "Dealing damage to creature: " << c->getName() << endl;
+		//cout << getTag() << "Dealing damage to creature: " << c->getName() << endl;
 		c->directDmg(minDamage + rand() % (maxDamage - minDamage + 1));
 		++frameFromStart;
 		--duration;

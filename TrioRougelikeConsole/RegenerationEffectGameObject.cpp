@@ -16,7 +16,7 @@ bool RegenerationEffectGameObject::onRefresh(GameObject& object)
 
 	if (frameFromStart % offset == 0)
 	{
-		cout << getTag() << "Healing creature: " << c->getName() << endl;
+		//cout << getTag() << "Healing creature: " << c->getName() << endl;
 		c->directDmg(-regeneratedHP);
 		++frameFromStart;
 		--duration;
