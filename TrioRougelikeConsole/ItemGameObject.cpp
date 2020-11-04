@@ -4,7 +4,10 @@
 ItemGameObject::ItemGameObject(int Value, const EffectGameObject* Effect, string Name, GraphicalSymbol Symbol, int Armor, int MinDamage, int MaxDamage) :
     bonusArmor(Armor), value(Value), minDamage(MinDamage), maxDamage(MaxDamage), GameObject(Name, Symbol)
 {
-    effect = dynamic_cast<EffectGameObject*>(Effect->clone());
+    if (Effect)
+        effect = dynamic_cast<EffectGameObject*>(Effect->clone());
+    else
+        effect = NULL;
     cout << getTag() << "Created ItemGameObject (armor=" << bonusArmor << ", minDamage=" << minDamage << ", maxDamage=" << maxDamage<< ", value=" << value << ", effect=" << (effect == NULL ? "NULL" : effect->getName()) << ")" << endl;
 }
 

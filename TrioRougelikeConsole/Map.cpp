@@ -661,7 +661,8 @@ void Map::setPlayer(PlayerGameObject* p)
 void Map::refreshDynamic()
 {
 	for (auto d : dynamicList)
-	d->onRefresh();
+		if(d)
+			d->onRefresh();
 }
 
 void Map::removeFromMap(GameObject& object)
