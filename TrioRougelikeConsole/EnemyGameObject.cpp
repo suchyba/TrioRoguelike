@@ -16,7 +16,6 @@ EnemyGameObject::EnemyGameObject(int hp, int armor, int exp, int activeItemsCoun
 
 void EnemyGameObject::onRefresh()
 {
-    //tutaj trzeba zaimplementowaæ ruch
     srand(time(NULL));
     int x = -1 + rand() % 3, y = -1 + rand() % 3;
     Game::getMap()->move(*this, x, y);
