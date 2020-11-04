@@ -16,6 +16,8 @@
 #include "CreateMap.h"
 #include <conio.h>
 #include <cstdio>
+#include <fstream>
+#include <string>
 
 map<string, const GameObject*> Game::templateOtherObjectsList;
 map<string, const CreatureGameObject*> Game::templateCreatureList;
@@ -37,7 +39,7 @@ void Game::mainLoop()
 		{
 			// tutaj wy�wietlanie menu
 			int i = 0;
-			switch (i)
+			switch (drawMenu())
 			{
 			default:
 				break;
@@ -48,16 +50,16 @@ void Game::mainLoop()
 			}
 			case 2:
 			{
-				// instrukcja
+				showInstructions();
 				break;
 			}
 			case 3:
 			{
-				// autorzy
+				showAuthors();
 				break;
 			}
 			case 4:
-			{				
+			{
 				return;
 			}
 			}
@@ -65,44 +67,52 @@ void Game::mainLoop()
 		start = false;
 
 		// tworzenie gracza
-		gameMap->setPlayer(new PlayerGameObject(0, 0, 20, 4, 10, 0, 2, 0, "Gracz", GraphicalSymbol('@', 1, 0)));
+		PlayerGameObject* p = new PlayerGameObject(0, 0, 20, 4, 10, 0, 2, 0, "Gracz", GraphicalSymbol('@', 1, 0));
+		gameMap->setPlayer(p);
 
 		//przygotowanie mapy
-		gameMap = new Map(10, 10, *dynamic_cast<FloorGameObject*>(templateOtherObjectsList.at("FLOOR")->clone()));
 		gameMap->generateMap();
+		gameMap->randomizePlayerPos();
 
 		// rozpocz�cie samej rozgrywki
 		while (true)
 		{
-			logMessage("Iteration");
+			//logMessage("Iteration");
 			// wy�wietlanie interfejsu
+			drawMap(gameMap);
+			drawStats(gameMap->getPlayer());
 
 			int key = _getch();
 			int x = 0, y = 0;
 			switch (key)
 			{
-			case 'W':
+			case 'w':
 			{
 				//ruch playera w g�r�
-				y = -1;
-				break;
-			}
-			case 'S':
-			{
-				// w d�
-				y = 1;
-				break;
-			}
-			case 'A':
-			{
-				// w lewo
 				x = -1;
 				break;
 			}
-			case 'D':
+			case 's':
+			{
+				// w d�
+				x = 1;
+				break;
+			}
+			case 'a':
+			{
+				// w lewo
+				y = -1;
+				break;
+			}
+			case 'd':
 			{
 				// w prawo
-				x = 1;
+				y = 1;
+				break;
+			}
+			case 't':
+			{
+				gameMap->getPlayer()->addExp(12);
 				break;
 			}
 			default:
@@ -117,11 +127,12 @@ void Game::mainLoop()
 				nextLevel = false;
 				gameMap->generateMap();
 				// ustawianie pozycji pocz�tkowej gracza
-
+				gameMap->randomizePlayerPos();
 			}
 			if (gameOver)
 			{
 				// tutaj rysowanie game over
+				drawOver();
 				break;
 			}
 
@@ -129,7 +140,7 @@ void Game::mainLoop()
 			gameMap->refreshDynamic();
 		}
 
-		
+
 		// usuwanie martwego gracza
 		gameMap->clearDesign();
 		delete gameMap->getPlayer();
@@ -140,57 +151,52 @@ void Game::init()
 {
 	logMessage("Entering init");
 	registerObjects();
+
+	logMessage("Creating Map object");
+	FloorGameObject* f = dynamic_cast<FloorGameObject*>(templateOtherObjectsList.at("FL")->clone());
+	gameMap = new Map(2, 1, *f);
+
+	registerRooms();
+
 	nextLevel = false;
 	gameOver = false;
-	
-}
-
-void Game::mainMenu()
-{
-
 }
 
 void Game::registerObjects()
 {
 	logMessage("Registering objects");
-	templateOtherObjectsList.insert({ "WA", new WallGameObject("Wall", GraphicalSymbol((char)219, 1, 0)) });
-	templateOtherObjectsList.insert({ "FL", new FloorGameObject("Floor", GraphicalSymbol((char)176, 2, 0)) });
+	templateOtherObjectsList.insert({ "WL", new WallGameObject("Wall", GraphicalSymbol((char)219, 1, 0)) });
+	templateOtherObjectsList.insert({ "FL", new FloorGameObject("FLOOR", GraphicalSymbol((char)176, 2, 0)) });
 	templateOtherObjectsList.insert({ "DR", new GameObject("Door", GraphicalSymbol((char)219, 6, 0)) });
-	templateOtherObjectsList.insert({ "END", new EndGameObject("End", GraphicalSymbol('%', 1, 0)) });
+	templateOtherObjectsList.insert({ "EN", new EndGameObject("End", GraphicalSymbol('%', 1, 0)) });
 
 	templateEffectObjectList.insert({ "BLEFF", new BleedingEffectGameObject(3, 3, 1, 15, "Bleeding", GraphicalSymbol('!', 4, 0)) });
 	templateEffectObjectList.insert({ "HEAL", new RegenerationEffectGameObject(1, 10, 2, "Regeneration", GraphicalSymbol('+', 10, 0)) });
 
 	templateItemList.insert({ "GHHD", new WeaponGameObject(3, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"Ghul Hand", GraphicalSymbol('L', 4, 0), 13, 20) });
-	templateItemList.insert({ "HLARM", new ArmorGameObject(10, (EffectGameObject*)templateEffectObjectList["HEAL"]->clone(), "Heal Chain Armor", GraphicalSymbol((char)177, 10, 0), 4)});
+	templateItemList.insert({ "HLARM", new ArmorGameObject(10, (EffectGameObject*)templateEffectObjectList["HEAL"]->clone(), "Heal Chain Armor", GraphicalSymbol((char)177, 10, 0), 4) });
 	templateItemList.insert({ "HLMT", new ArmorGameObject(8, (EffectGameObject*)templateEffectObjectList["HEAL"], "Healing Helmer", GraphicalSymbol('n', 10, 0), 3) });
-	
+
 	templateItemList.insert({ "GRSW", new WeaponGameObject(7, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"Great Sword", GraphicalSymbol('t', 4, 0), 10, 16) });
 	templateItemList.insert({ "AXE", new WeaponGameObject(10, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"Axe", GraphicalSymbol('P', 4, 0), 12, 19) });
-	templateCreatureList.insert({ "GH", new EnemyGameObject(20, 10, 5, 2, "Ghul", GraphicalSymbol('&', 4, 0), {(ItemGameObject*) templateItemList.at("GHHD")->clone(), (ItemGameObject*)templateItemList.at("HLARM")->clone()}) });
+	templateCreatureList.insert({ "GH", new EnemyGameObject(20, 10, 5, 2, "Ghul", GraphicalSymbol('&', 4, 0), {(ItemGameObject*)templateItemList.at("GHHD")->clone(), (ItemGameObject*)templateItemList.at("HLARM")->clone()}) });
 	templateCreatureList.insert({ "YA", new EnemyGameObject(30, 12, 7, 1, "Yasuo", GraphicalSymbol('Y', 4, 0), { (ItemGameObject*)templateItemList.at("HLMT")->clone()}) });
 	templateCreatureList.insert({ "IT", new EnemyGameObject(50, 15, 10, 0, "IT", GraphicalSymbol('I', 4, 0)) });
 
-	CreatureGameObject* ghul = (CreatureGameObject*)templateCreatureList.at("GH")->clone();
-	GameObject* floor = (GameObject*)templateOtherObjectsList.at("FL")->clone();
+
+	templateItemList.insert({ "HLARM", new ArmorGameObject(10, (EffectGameObject*)templateEffectObjectList["HEAL"]->clone(), "Heal Chain Armor", GraphicalSymbol((char)177, 10, 0), 4) });
+
+	templateCreatureList.insert({ "GH", new EnemyGameObject(20, 10, 5, 2, "Ghul", GraphicalSymbol('&', 4, 0), {(ItemGameObject*)templateItemList.at("GHHD")->clone(), (ItemGameObject*)templateItemList.at("HLARM")->clone()}) });
+
+	/*CreatureGameObject* ghul = (CreatureGameObject*)templateCreatureList.at("GH")->clone();
+	FloorGameObject* floor = (FloorGameObject*)templateOtherObjectsList.at("FL")->clone();
 	WallGameObject* wall = (WallGameObject*)templateOtherObjectsList.at("WA")->clone();
 	WeaponGameObject* GreatSword = (WeaponGameObject*)templateItemList.at("GRSW")->clone();
 	WeaponGameObject* Axe = (WeaponGameObject*)templateItemList.at("AXE")->clone();
 
 	ArmorGameObject* Helmet = (ArmorGameObject*)templateItemList.at("HLMT")->clone();
 	CreatureGameObject* Yasuo = (CreatureGameObject*)templateCreatureList.at("YA")->clone();
-	CreatureGameObject* IT = (CreatureGameObject*)templateCreatureList.at("YA")->clone();
-	PlayerGameObject* player = new PlayerGameObject(0, 0, 10, 0, 0, 10, 10, 10, "Gracz", GraphicalSymbol('@', 2, 3));
-	Map* map1 = new Map(2, 3);
-	map1->setFloor(*floor);
-	createMap(map1, ghul,floor,wall,GreatSword,Helmet,Yasuo,Axe,IT);
-	drawMap(map1);
-	drawStats(player);
-
-	templateItemList.insert({ "HLARM", new ArmorGameObject(10, (EffectGameObject*)templateEffectObjectList["HEAL"]->clone(), "Heal Chain Armor", GraphicalSymbol((char)177, 10, 0), 4) });
-
-	templateCreatureList.insert({ "GH", new EnemyGameObject(20, 10, 5, 2, "Ghul", GraphicalSymbol('&', 4, 0), {(ItemGameObject*)templateItemList.at("GHHD")->clone(), (ItemGameObject*)templateItemList.at("HLARM")->clone()}) });
-
+	CreatureGameObject* IT = (CreatureGameObject*)templateCreatureList.at("YA")->clone();*/
 }
 
 void Game::logMessage(string message)
@@ -220,6 +226,104 @@ void Game::quit()
 	delete gameMap;
 }
 
+void Game::registerRooms()
+{
+	logMessage("Registering Rooms");
+	ifstream rooms;
+	rooms.open("Rooms.rm", ios_base::in);
+	if (!rooms.is_open())
+	{
+		logError("Can't open Rooms.rm file.");
+		exit(-1);
+	}
+	string r;
+	rooms >> r;
+	int rooms_count = stoi(r);
+	for (int i = 0; i < rooms_count; ++i)
+	{
+		// wchodzę do pokoju
+		rooms >> r;
+		logMessage("Reading room: " + r);
+
+		vector<vector<vector<GameObject*>>> temp;
+		for (int x = 0; x < 10; ++x)
+		{
+			vector<vector<GameObject*>> tmp;
+			for (int y = 0; y < 10; ++y)
+			{
+				vector<GameObject*> tmp2;
+				for (int z = 0; z < 3; ++z)
+				{
+					tmp2.push_back(NULL);
+				}
+				tmp.push_back(tmp2);
+			}
+			temp.push_back(tmp);
+		}
+
+		for (int z = 0; z < 3; ++z)
+		{
+			// wchodzę do kolejnych warstw
+			rooms >> r;
+			logMessage("Reading layer: " + r);
+
+			for (int x = 0; x < 10; ++x)
+			{
+				for (int y = 0; y < 10; ++y)
+				{
+					rooms >> r;
+
+					if (r == "NL")
+						continue;
+
+					GameObject* g = NULL;
+
+					switch (z)
+					{
+					case 0:
+					{
+						// podłoga
+						auto itr = templateOtherObjectsList.find(r);
+						if (itr != templateOtherObjectsList.end())
+							g = templateOtherObjectsList.at(r)->clone();
+						break;
+					}
+					case 1:
+					{
+						// itemki
+						auto itr = templateItemList.find(r);
+						if (itr != templateItemList.end())
+							g = templateItemList.at(r)->clone();
+						break;
+					}
+					case 2:
+					{
+						// stworki
+						auto itr = templateCreatureList.find(r);
+						if (itr != templateCreatureList.end())
+							g = templateCreatureList.at(r)->clone();
+						break;
+					}
+					}
+					if (!g)
+					{
+						logError("Can't find object: " + r);
+						rooms.close();
+						exit(-1);
+					}
+					else
+					{
+						temp[x][y][z] = g->clone();
+					}
+				}
+			}
+		}
+		Room room(temp);
+		gameMap->addRoom(room);
+	}
+	rooms.close();
+}
+
 void Game::start()
 {
 	logMessage("Game started!");
@@ -243,45 +347,4 @@ void Game::nextMap()
 void Game::GameOver()
 {
 	gameOver = true;
-}
-
-void Game::menuThread()
-{
-	int option = 0;
-
-	while (1)
-	{
-		option = drawMenu();
-		switch (option)
-		{
-		case 1:
-		{
-			start();
-			cout << "Wcisnij dowolny klawisz by kontynuowac";
-			int g = _getch();
-
-			break;
-		}
-		case 2:
-		{
-			system("cls");
-			showInstructions();
-			cout << "Wcisnij dowolny klawisz by kontynuowac";
-			int g = _getch();
-			continue;
-		}
-		case 3:
-		{
-			system("cls");
-			showAuthors();
-			cout << "Wcisnij dowolny klawisz by kontynuowac";
-			int g = _getch();
-			continue;
-		}
-		case 4:
-		{
-			exit(0);
-		}
-		}
-	}
 }

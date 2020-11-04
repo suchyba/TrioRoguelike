@@ -125,42 +125,80 @@ int  drawMenu()
 
 void showAuthors()
 {
+	system("cls");
 	std::cout << "Autorzy Gry: " << std::endl;
 	std::cout << "Suchecki Bartlomiej" << std::endl;
 	std::cout << "Tomkiel Sebastian" << std:: endl;
 	std::cout << "Zywalewski Daniel" <<  std::endl;
+	cout << endl;
+	cout << "Wcisnij dowolny klawisz by kontynuowac";
+	int g = _getch();
 }
 
 void showInstructions()
 {
+	system("cls");
 	std::cout << "Instrukcja Gry:" << std::endl;
 	std::cout << "Jestes oznaczony symbolem @ " << std::endl;
 	std::cout << "Poruszasz sie za pomoca klawiszy WASD" << std::endl;
 	std::cout << "Zbieraj przedmioty, pokonuj wrogów, zdobywaj nowe poziomy " <<  std::endl;
 	std::cout << "Nie trac HP bo zginiesz!" << std::endl;
+	cout << endl;
+	cout << "Wcisnij dowolny klawisz by kontynuowac";
+	int g = _getch();
 }
 void drawStats(PlayerGameObject* player )
 {
-	std::cout<<"------------------------------------------------------------------------------------------------------------------------"<<std::endl;
-	std::cout << "Imie: "<<player->getName()<<"												  XP: "<<player->getExperience()<<std::endl;
-	std::cout << "Pancerz: " << player->getBaseArmor() <<"                                                                                    "  << "Poziom Gracza: " <<player->getLevel()<< std::endl;
-	std::cout << "HP: [" << player->getHealthPoints() << "/" << player->getBaseHealthPoints() << "]"; 
+	std::cout << "------------------------------------------------------------------------------------------------------------------------" << std::endl;
+	std::cout << "Imie: " << player->getName() << std::endl;
+	std::cout << "Pancerz: " << player->getBaseArmor() << std::endl;
+	std::cout << "Poziom Gracza: " << player->getLevel() << std::endl;
+	std::cout << "HP: [" << player->getHealthPoints() << "/" << player->getBaseHealthPoints() << "]";
 	showHealthBar(player->getHealthPoints(), player->getBaseHealthPoints());
-	std::cout<<"------------------------------------------------------------------------------------------------------------------------"<<std::endl;
+	std::cout << "XP: [" << player->getExperience() << "/" << player->getMaxXP() << "]";
+	showHealthBar(player->getExperience(), player->getMaxXP());
+	std::cout << "------------------------------------------------------------------------------------------------------------------------" << std::endl;
 
 }
 
 void drawMap(Map* map1)
 {
-	cout << map1->getMapDesignObject().size() << endl;
-	for (int i = 0; i < map1->getMapDesignObject().size(); i++)
+	system("cls");
+	//cout << map1->getMapDesignObject()->size() << endl;
+	int x_size = map1->getMapDesignObject()->size();
+	int y_size = map1->getMapDesignObject()[0].size();
+
+	cout << (char)201;
+	for (int i = 0; i < y_size; ++i)
+		cout << (char)205;
+	cout << (char)187 << endl;
+
+	for (int i = 0; i < x_size; i++)
 	{
-		for (int j = 0; j < map1->getMapDesignObject()[i].size(); j++)
+		cout << (char)186;
+		for (int j = 0; j < y_size; j++)
 		{
-			cout << map1->getObjectInMap(i, j, 0)->getRepresentation().getCharSymbol();
+			for (int k = 2; k >= 0; --k)
+			{
+				GameObject* g = map1->getObjectInMap(i, j, k);
+				if (g)
+				{
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), g->getRepresentation().getColor());
+					cout << g->getRepresentation().getCharSymbol();
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+					break;
+				}
+				else if (k == 0)
+					cout << " ";
+			}
 		}
-		cout << endl;
+		cout << (char)186 << endl;
 	}
+
+	cout << (char)200;
+	for (int i = 0; i < y_size; ++i)
+		cout << (char)205;
+	cout << (char)188 << endl;
 }
 
 void drawOver()

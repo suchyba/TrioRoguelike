@@ -57,6 +57,7 @@ void CreatureGameObject::onHit(int dmg)
 	if (healthPoints <= 0)
 	{
 		onDeath();
+		Game::getMap()->removeFromMap(*this);
 		return;
 	}
 }
@@ -69,7 +70,6 @@ void CreatureGameObject::onDeath()
 	cout << getTag() << "Died" << endl;
 
 	Game::getMap()->getPlayer()->addExp(experience);
-	Game::getMap()->removeFromMap(*this);
 }
 
 void CreatureGameObject::onAttack(CreatureGameObject& opponent)
@@ -86,17 +86,26 @@ void CreatureGameObject::onAttack(CreatureGameObject& opponent)
 	for (int i = 0; i < activeInventory.size(); ++i)
 		if (activeInventory[i])
 			activeInventory[i]->onAttack(opponent);
+	try
+	{
+		opponent.onHit(damage);
+	}
+	catch (const std::exception&)
+	{
 
-	opponent.onHit(damage);
+	}
+	
 }
 
 void CreatureGameObject::onRefresh()
 {
 	for (auto effect : activeEffects)
 	{
-		if (alive)
+		if (effect && alive)
 			effect->onRefresh(*this);
 	}
+	if(!alive)
+		Game::getMap()->removeFromMap(*this);
 }
 
 void CreatureGameObject::onInteraction()

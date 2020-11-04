@@ -57,7 +57,7 @@ public:
 	/// </summary>
 	void mergeRoomsIntoMap();
 
-	vector<vector<vector<GameObject*>> > getMapDesignObject();
+	vector<vector<vector<GameObject*>>>* getMapDesignObject();
 	/// <summary>
 	/// Metoda pozwalajaca zmieniac GameObject w tablicy mapDesignObjects.
 	/// </summary>
@@ -65,7 +65,7 @@ public:
 	/// <param name="_width">D³ugoœæ obiektu</param>
 	/// <param name="_height">Wysokoœæ obiektu</param>
 	/// <param name="_depth">G³êbokoœæ obiektu</param>
-	void setObjectInMap(GameObject* _object, int _width, int _height, int _depth);
+	bool setObjectInMap(GameObject* _object, int _width, int _height, int _depth);
 
 	/// <summary>
 	/// Metoda zwracaj¹ca obiekt z tablicy mapDesignObjects.
@@ -85,7 +85,7 @@ public:
 	/// Metoda zmieniajaca pole floor.
 	/// </summary>
 	/// <returns>floor</returns>
-	void setFloor(GameObject& _object);
+	void setFloor(FloorGameObject& _object);
 
 	/// <summary>
 	/// Metoda dostêpowa do pola width.
@@ -151,6 +151,8 @@ public:
 	void refreshDynamic();
 
 	void removeFromMap(GameObject& object);
+
+	void randomizePlayerPos();
 
 	~Map()
 	{

@@ -44,7 +44,7 @@ GameObject* Map::getFloor() const
 {
 	return floor;
 }
-void Map::setFloor(GameObject& _object)
+void Map::setFloor(FloorGameObject& _object)
 {
 	floor = new FloorGameObject(_object);
 }
@@ -68,10 +68,11 @@ Room* Map::getRoomFromMap(int _width, int _height) const
 }
 void Map::addRoom(Room& _object)
 {
-	rooms.push_back(&_object);
+	rooms.push_back(new Room(_object));
 }
 int Map::generateMap()
 {
+	cout << "[MAP] Generating Map" << endl;
 	clearDesign();
 
 	int randRoom;
@@ -128,6 +129,7 @@ public:
 
 int Map::generateMapConnections()
 {
+	cout << "[MAP] Generating map connections." << endl;
 	int randWidthStart = rand() % (width);
 	int randheightStart = rand() % (height);
 	int randWidthEnd = rand() % (width);
@@ -153,7 +155,7 @@ int Map::generateMapConnections()
 	int iterator = 0;
 
 	visited[randWidthStart][randheightStart] = true;
-  
+
 	++iterator;
 
 	while (iterator != width * height)
@@ -207,7 +209,6 @@ int Map::generateMapConnections()
 
 			if (connect(*mapDesign[randWidthStart - 1][randheightStart], *mapDesign[randWidthStart][randheightStart], 3) == -1)
 			{
-
 				return -1;
 			}
 		}
@@ -229,6 +230,7 @@ int Map::generateMapConnections()
 
 int Map::createPath(Room& room, Room& room1, Room& room2, int possitionX, int possitionY)
 {
+	cout << "[MAP] Creating path" << endl;
 	int randWidthStart = possitionX;
 	int randheightStart = possitionY;
 
@@ -433,6 +435,7 @@ int Map::createPath(Room& room, Room& room1, Room& room2, int possitionX, int po
 }
 int Map::connect(Room& room1, Room& room2, int direction)
 {
+	cout << "[MAP] Connecting rooms" << endl;
 	int possitionX = -1;
 	int possitionY = -1;
 
@@ -526,6 +529,7 @@ int Map::connect(Room& room1, Room& room2, int direction)
 
 void Map::mergeRoomsIntoMap()
 {
+	cout << "[MAP] Marging into array" << endl;
 	vector < vector<GameObject* >>  tmp;
 	for (int i = 0; i < mapDesign.size() * 10; i++)
 	{
@@ -567,11 +571,11 @@ void Map::mergeRoomsIntoMap()
 		}
 	}
 }
-void Map::setObjectInMap(GameObject* _object, int _width, int _height, int _depth)
+bool Map::setObjectInMap(GameObject* _object, int _width, int _height, int _depth)
 {
 	if (_width >= mapDesignObjects.size() || _width < 0 || _height >= mapDesignObjects[_width].size() || _height < 0 || _depth < 0 || _depth >= mapDesignObjects[_width][_height].size()
 		|| (mapDesignObjects[_width][_height][_depth] != NULL && _object != NULL))
-		return;
+		return false;
 
 	if (_object == NULL)
 	{
@@ -587,6 +591,7 @@ void Map::setObjectInMap(GameObject* _object, int _width, int _height, int _dept
 	}
 
 	mapDesignObjects[_width][_height][_depth] = _object;
+	return true;
 }
 GameObject* Map::getObjectInMap(int _width, int _height, int _depth) const
 {
@@ -601,14 +606,16 @@ void Map::move(CreatureGameObject& _object, int x, int y)
 	if (x == 0 && y == 0)
 		return;
 
+
 	for (int i = 0; i < mapDesignObjects.size(); i++)
 	{
 		for (int j = 0; j < mapDesignObjects[i].size(); j++)
 		{
-			if (mapDesignObjects[i][j][3] == &_object)
+			if (mapDesignObjects[i][j][2] == &_object)
 			{
 				if (i + x > mapDesignObjects.size() || i + x < 0 || j + y > mapDesignObjects[i].size() || j + y < 0)
 					return;
+				//cout << "[MAP] Moving " << _object.getName() << "(" << x << ", " << y << ")[" << i + x << ", " << j + y << "]" << endl;
 
 				auto p = dynamic_cast<PlayerGameObject*>(&_object);
 				for (int z = 0; z < 3; ++z)
@@ -633,12 +640,12 @@ void Map::move(CreatureGameObject& _object, int x, int y)
 					auto colObj = dynamic_cast<Colliding*>(mapDesignObjects[i + x][j + y][z]);
 					if (colObj != NULL)
 					{
-						_object.onCollide(_object);
+						colObj->onCollide(_object);
 						return;
 					}
 				}
-				mapDesignObjects[i + x][j + y][3] = mapDesignObjects[i][j][3];
-				mapDesignObjects[i][j][3] = NULL;
+				mapDesignObjects[i + x][j + y][2] = mapDesignObjects[i][j][2];
+				mapDesignObjects[i][j][2] = NULL;
 				return;
 			}
 		}
@@ -652,7 +659,7 @@ PlayerGameObject* Map::getPlayer() const
 
 void Map::setPlayer(PlayerGameObject* p)
 {
-	player = (PlayerGameObject*)p->clone();
+	player = p;
 }
 
 void Map::refreshDynamic()
@@ -686,8 +693,37 @@ void Map::removeFromMap(GameObject& object)
 			}
 		}
 	}
+}
 
-vector<vector<vector<GameObject*>> > Map::getMapDesignObject()
+void Map::randomizePlayerPos()
 {
-	return mapDesignObjects;
+	srand(time(NULL));
+	int y = rand() % (height + 1);
+	int x = rand() % (width + 1);
+	while (true)
+	{
+		x = rand() % (width + 1);
+		y = rand() % (height + 1);
+
+		if (mapDesignObjects[x][y][0] && mapDesignObjects[x][y][0]->getName() == "FLOOR")
+		{
+			DynamicGameObject* d = dynamic_cast<DynamicGameObject*>(mapDesignObjects[x][y][2]);
+			if (d)
+			{
+				for (int i = 0; i < dynamicList.size(); ++i)
+				{
+					if (dynamicList[i] == d)
+						dynamicList.erase(dynamicList.begin() + i);
+				}
+			}
+
+			mapDesignObjects[x][y][2] = player;
+			break;
+		}
+	}
+}
+
+vector<vector<vector<GameObject*>>>* Map::getMapDesignObject()
+{
+	return &mapDesignObjects;
 }

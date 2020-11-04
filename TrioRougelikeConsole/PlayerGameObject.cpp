@@ -1,4 +1,5 @@
 #include "PlayerGameObject.h"
+#include "Game.h"
 
 PlayerGameObject::PlayerGameObject(int inventoryHeight, int inventoryWidth, int hp, int activeInventorySize,
 	int experienceToSecondLvl, int startStrength, int startArmor, int startMagicPow, string Name, GraphicalSymbol Symbol) :
@@ -25,9 +26,19 @@ int PlayerGameObject::getLevel() const
 	return level;
 }
 
+void PlayerGameObject::onDeath()
+{
+	Game::GameOver();
+}
+
 GameObject* PlayerGameObject::clone() const
 {
 	return new PlayerGameObject(*this);
+}
+
+int PlayerGameObject::getMaxXP() const
+{
+	return experienceToNextLevel;
 }
 
 PlayerGameObject::~PlayerGameObject()

@@ -75,8 +75,7 @@ int Room::getDepth() const
 
 void Room::setElementInRoom(int _width, int _height, int _depth, GameObject& _object)
 {
-    if (_width < 0 || _width >= roomDesign.size() || _height < 0 || _height >= roomDesign[_width].size() || _depth < 0 || _depth >= roomDesign[_width][_height].size()
-        || roomDesign[_width][_height][_depth] != NULL)
+    if (_width < 0 || _width >= roomDesign.size() || _height < 0 || _height >= roomDesign[_width].size() || _depth < 0 || _depth >= roomDesign[_width][_height].size())
         return;
     roomDesign[_width][_height][_depth] = _object.clone();
 }
