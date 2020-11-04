@@ -5,7 +5,7 @@ BleedingEffectGameObject::BleedingEffectGameObject(int Offset, int Duration, int
 	offset(Offset), minDamage(MinDamage), maxDamage(MaxDamage),
 	EffectGameObject(Duration, Name, Symbol)
 {
-	cout << getTag() << "Created BleedingEffectGameObject (offset=" << offset << ", duration=" << duration << ", minDmg=" << minDamage << ", maxDmg=" << maxDamage << ")" << endl;
+//	cout << getTag() << "Created BleedingEffectGameObject (offset=" << offset << ", duration=" << duration << ", minDmg=" << minDamage << ", maxDmg=" << maxDamage << ")" << endl;
 }
 
 bool BleedingEffectGameObject::onRefresh(GameObject& object)
