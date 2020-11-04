@@ -188,6 +188,7 @@ void CreatureGameObject::addEffect(const EffectGameObject& effect)
 		if (eff->getName() == effect.getName())
 			return;
 
+
 	activeEffects.push_back((EffectGameObject*)effect.clone());
 	//cout << getTag() << "Effect applied on this creature: " << effect.getName() << endl;
 	activeEffects.back()->onRefresh(*this);
@@ -212,6 +213,12 @@ bool CreatureGameObject::equipItem(ItemGameObject* item, int slot)
 		if (activeInventory[slot] == NULL)
 		{
 			//cout << "[" << name << "] Equipping " << item->getName() << " in slot " << slot << endl;
+			activeInventory[slot] = (ItemGameObject*)item->clone();
+			item->onEquipping(*this);
+		}
+		else
+		{
+			//delete activeInventory[slot];
 			activeInventory[slot] = (ItemGameObject*)item->clone();
 			item->onEquipping(*this);
 		}
