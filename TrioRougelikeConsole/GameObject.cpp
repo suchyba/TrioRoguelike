@@ -9,7 +9,7 @@ GameObject::GameObject(string Name, GraphicalSymbol GSymbol) : name(Name), repre
 {
     //  DEBUG
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    cout << getTag() << "Created GameObject (" << name << ", ";
+   cout << getTag() << "Created GameObject (" << name << ", ";
     SetConsoleTextAttribute(hConsole, representation.getColor());
     cout << representation.getCharSymbol();
     SetConsoleTextAttribute(hConsole, 7);

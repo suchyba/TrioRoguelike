@@ -16,7 +16,7 @@ PlayerGameObject::PlayerGameObject(int inventoryHeight, int inventoryWidth, int 
 
 		//	DEBUG
 		cout << "[" << name << "] Created PlayerGameObject (hp=" << hp << ", armor=" << startArmor << ", actItems=" << activeInventorySize << ", expToNxt=" << experienceToNextLevel
-			<< ", magicPow=" << magicPower << ", strength=" << strength << ", inventory=" << inventoryWidth << "x" << inventoryHeight << ")" << endl;
+<< ", magicPow=" << magicPower << ", strength=" << strength << ", inventory=" << inventoryWidth << "x" << inventoryHeight << ")" << endl;
 		//	END DEBUG
 	}
 }

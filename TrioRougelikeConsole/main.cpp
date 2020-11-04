@@ -17,6 +17,12 @@ void draw(const GameObject*);
 
 int main()
 {
+
+	HWND console = GetConsoleWindow();
+	RECT r;
+	GetWindowRect(console, &r); //stores the console's current dimensions
+
+	MoveWindow(console, 100, 50, 900, 700,FALSE);
 	Game::start();
 
 	return 0;

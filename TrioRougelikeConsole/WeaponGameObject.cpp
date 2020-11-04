@@ -15,7 +15,7 @@ GameObject* WeaponGameObject::clone() const
 void WeaponGameObject::onAttack(CreatureGameObject& opponent)
 {
     if (effect) {
-        cout << getTag() << "Applying weapon effect (" << effect->getName() << ") on opponent : " << opponent.getName() << endl;
+     cout << getTag() << "Applying weapon effect (" << effect->getName() << ") on opponent : " << opponent.getName() << endl;
         opponent.addEffect(*effect);
     }
 }

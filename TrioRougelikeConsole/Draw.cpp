@@ -17,14 +17,14 @@ int  drawMenu()
 	while (1)
 	{
 		system("cls");
-		std::cout << "//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////" <<std:: endl;
+		std::cout << "////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////" <<std:: endl;
 		std::cout << "                             ______ _____ _   _ _____  _____   _     _____ _   __ _____ " << std::endl;
 		std::cout << "                             | ___ \\  _  | | | |  __ \\|  ___| | |   |_   _| | / /|  ___|" << std::endl;
 		std::cout << "                             | |_/ / | | | | | | |  \\/| |__   | |     | | | |/ / | |__  " << std::endl;
 		std::cout << "                             |    /| | | | | | | | __ |  __|  | |     | | |    \\ |  __| " << std::endl;
 		std::cout << "                             | |\\ \\\\ \\_/ / |_| | |_\\ \\| |___  | |_____| |_| |\\  \\| |___ " << std::endl;
 		std::cout << "                             \\_| \\_|\\___/ \\___/ \\____/\\____/  \\_____/\\___/\\_| \\_/\\____/" << std::endl << std::endl;
-		std::cout << "//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////" << std::endl;
+		std::cout << "////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////" << std::endl;
 		std::cout << "" << std::endl;
 
 		switch (chosenOption)
@@ -155,7 +155,7 @@ void drawStats(PlayerGameObject* player )
 	std::cout << "Poziom Gracza: " << player->getLevel() << std::endl;
 	std::cout << "HP: [" << player->getHealthPoints() << "/" << player->getBaseHealthPoints() << "]";
 	showHealthBar(player->getHealthPoints(), player->getBaseHealthPoints());
-	std::cout << "XP: [" << player->getExperience() << "/" << player->getMaxXP() << "]";
+	std::cout << std::endl << "XP: [" << player->getExperience() << "/" << player->getMaxXP() << "]";
 	showHealthBar(player->getExperience(), player->getMaxXP());
 	std::cout << "------------------------------------------------------------------------------------------------------------------------" << std::endl;
 

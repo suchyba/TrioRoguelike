@@ -5,7 +5,7 @@ BleedingEffectGameObject::BleedingEffectGameObject(int Offset, int Duration, int
 	offset(Offset), minDamage(MinDamage), maxDamage(MaxDamage),
 	EffectGameObject(Duration, Name, Symbol)
 {
-	cout << getTag() << "Created BleedingEffectGameObject (offset=" << offset << ", duration=" << duration << ", minDmg=" << minDamage << ", maxDmg=" << maxDamage << ")" << endl;
+//	cout << getTag() << "Created BleedingEffectGameObject (offset=" << offset << ", duration=" << duration << ", minDmg=" << minDamage << ", maxDmg=" << maxDamage << ")" << endl;
 }
 
 bool BleedingEffectGameObject::onRefresh(GameObject& object)
@@ -16,7 +16,7 @@ bool BleedingEffectGameObject::onRefresh(GameObject& object)
 	
 	if (frameFromStart % offset == 0)
 	{
-		cout << getTag() << "Dealing damage to creature: " << c->getName() << endl;
+		//cout << getTag() << "Dealing damage to creature: " << c->getName() << endl;
 		c->directDmg(minDamage + rand() % (maxDamage - minDamage + 1));
 		++frameFromStart;
 		--duration;

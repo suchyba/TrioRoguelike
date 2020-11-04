@@ -15,12 +15,12 @@ EffectGameObject::EffectGameObject(int Duration, string Name, GraphicalSymbol Sy
 	duration(Duration),
 	DynamicGameObject(Name, Symbol)
 {
-	cout << getTag() << "Created EffectGameObject" << endl;
+//	cout << getTag() << "Created EffectGameObject" << endl;
 }
 
 bool EffectGameObject::onRefresh(GameObject& object)
 {
-	//cout << getTag() << "Effect is affecting: " << object.getName() << endl;
+//	cout << getTag() << "Effect is affecting: " << object.getName() << endl;
 	return false;
 }
 

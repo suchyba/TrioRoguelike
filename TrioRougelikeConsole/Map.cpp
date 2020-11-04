@@ -431,7 +431,7 @@ int Map::createPath(Room& room, Room& room1, Room& room2, int possitionX, int po
 }
 int Map::connect(Room& room1, Room& room2, int direction)
 {
-	cout << "[MAP] Connecting rooms" << endl;
+	//cout << "[MAP] Connecting rooms" << endl;
 	int possitionX = -1;
 	int possitionY = -1;
 
@@ -661,7 +661,7 @@ void Map::setPlayer(PlayerGameObject* p)
 void Map::refreshDynamic()
 {
 	for (auto d : dynamicList)
-		d->onRefresh();
+	d->onRefresh();
 }
 
 void Map::removeFromMap(GameObject& object)
