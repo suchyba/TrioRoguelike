@@ -695,12 +695,12 @@ void Map::removeFromMap(GameObject& object)
 void Map::randomizePlayerPos()
 {
 	srand(time(NULL));
-	int y = rand() % (height * 10 + 1);
-	int x = rand() % (width * 10 + 1);
+	int y = rand() % (height * 10);
+	int x = rand() % (width * 10);
 	while (true)
 	{
-		x = rand() % (width * 10 + 1);
-		y = rand() % (height * 10 + 1);
+		x = rand() % (width * 10);
+		y = rand() % (height * 10);
 
 		if (mapDesignObjects[x][y][0] && mapDesignObjects[x][y][0]->getName() == "FLOOR")
 		{
