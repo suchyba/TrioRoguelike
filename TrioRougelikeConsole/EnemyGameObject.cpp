@@ -18,7 +18,7 @@ void EnemyGameObject::onRefresh()
 {
     //tutaj trzeba zaimplementowaæ ruch
     srand(time(NULL));
-    int x = rand() % 2, y = rand() % 2;
+    int x = -1 + rand() % 3, y = -1 + rand() % 3;
     Game::getMap()->move(*this, x, y);
 
     CreatureGameObject::onRefresh();

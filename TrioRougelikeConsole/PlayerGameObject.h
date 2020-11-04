@@ -51,14 +51,11 @@ public:
 	/// <returns>Kopia obiektu</returns>
 	virtual GameObject* clone() const override;
 	
-	
+	int getMaxXP() const;
+
 	int getLevel() const;
 
-	/// <summary>
-	/// Metoda tworz¹ca kopiê obiektu.
-	/// </summary>
-	/// <returns>Kopia obiektu</returns>
-	virtual GameObject* clone() const override;
+	virtual void onDeath() override;
 	
 	/// <summary>
 	/// Destruktor

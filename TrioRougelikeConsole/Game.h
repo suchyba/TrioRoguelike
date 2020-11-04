@@ -51,15 +51,6 @@ private:
 	/// </summary>
 	static map<string, const EffectGameObject*> templateEffectObjectList;
 	/// <summary>
-	/// Lista obeitków dynamicznych na mapie (do przeniesienia).
-	/// </summary>
-	static vector<DynamicGameObject*> dynamicList;
-	/// <summary>
-	/// Wskaźnik na obiekt gracza.
-	/// </summary>
-	static PlayerGameObject* player;*/
-
-	/// <summary>
 	/// Główna pętla gry.
 	/// </summary>
 	static void mainLoop();
@@ -67,7 +58,6 @@ private:
 	/// Metoda przygotowująca grę do startu.
 	/// </summary>
 	static void init();
-	static void mainMenu();
 	/// <summary>
 	/// Metoda rejstrująca obiekty wzorcowe.
 	/// </summary>
@@ -86,6 +76,8 @@ private:
 	/// Metoda kończąca działanie gry.
 	/// </summary>
 	static void quit();
+
+	static void registerRooms();
 public:
 	/// <summary>
 	/// Metoda, uruchamiająca proces działania gry.
@@ -94,8 +86,4 @@ public:
 	static Map* getMap();
 	static void nextMap();
 	static void GameOver();
-	/// <summary>
-	/// Metoda, rysująca menu główne.
-	/// </summary>
-	static void menuThread();
 };

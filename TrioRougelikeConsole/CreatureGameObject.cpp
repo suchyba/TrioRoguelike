@@ -46,17 +46,18 @@ void CreatureGameObject::onHit(int dmg)
 		if (item)
 			damage = item->onDamege(damage, *this);
 	}
-	cout << getTag() << "Taking " << damage << " damage (tried: " << dmg << ")" << endl;
+	//cout << getTag() << "Taking " << damage << " damage (tried: " << dmg << ")" << endl;
 
 	if (damage > 0)
 	{
 		healthPoints -= damage;
 	}
-	cout << getTag() << healthPoints << "/" << baseHealthPoints << endl;
+	//cout << getTag() << healthPoints << "/" << baseHealthPoints << endl;
 
 	if (healthPoints <= 0)
 	{
 		onDeath();
+		Game::getMap()->removeFromMap(*this);
 		return;
 	}
 }
@@ -66,10 +67,9 @@ void CreatureGameObject::onDeath()
 	alive = false;
 	activeEffects.clear();
 
-	cout << getTag() << "Died" << endl;
+	//cout << getTag() << "Died" << endl;
 
 	Game::getMap()->getPlayer()->addExp(experience);
-	Game::getMap()->removeFromMap(*this);
 }
 
 void CreatureGameObject::onAttack(CreatureGameObject& opponent)
@@ -80,23 +80,32 @@ void CreatureGameObject::onAttack(CreatureGameObject& opponent)
 		if (item)
 			damage += item->getMinDamage() + (rand() % (item->getMaxDamage() - item->getMinDamage() + 1));
 
-	cout << getTag() << "Attacking " << opponent.getName() << " for " << damage << " damage" << endl;
+	//cout << getTag() << "Attacking " << opponent.getName() << " for " << damage << " damage" << endl;
 
 
 	for (int i = 0; i < activeInventory.size(); ++i)
 		if (activeInventory[i])
 			activeInventory[i]->onAttack(opponent);
+	try
+	{
+		opponent.onHit(damage);
+	}
+	catch (const std::exception&)
+	{
 
-	opponent.onHit(damage);
+	}
+	
 }
 
 void CreatureGameObject::onRefresh()
 {
 	for (auto effect : activeEffects)
 	{
-		if (alive)
+		if (effect && alive)
 			effect->onRefresh(*this);
 	}
+	if(!alive)
+		Game::getMap()->removeFromMap(*this);
 }
 
 void CreatureGameObject::onInteraction()
@@ -180,7 +189,7 @@ void CreatureGameObject::addEffect(const EffectGameObject& effect)
 			return;
 
 	activeEffects.push_back((EffectGameObject*)effect.clone());
-	cout << getTag() << "Effect applied on this creature: " << effect.getName() << endl;
+	//cout << getTag() << "Effect applied on this creature: " << effect.getName() << endl;
 	activeEffects.back()->onRefresh(*this);
 }
 
@@ -191,7 +200,7 @@ void CreatureGameObject::removeEffect(string Name)
 		if (activeEffects[i]->getName() == Name)
 		{
 			activeEffects.erase(activeEffects.begin() + i);
-			cout << getTag() << "Effect " << Name << " has been removed from creature." << endl;
+			//cout << getTag() << "Effect " << Name << " has been removed from creature." << endl;
 		}
 	}
 }
@@ -202,7 +211,7 @@ bool CreatureGameObject::equipItem(ItemGameObject* item, int slot)
 	{
 		if (activeInventory[slot] == NULL)
 		{
-			cout << "[" << name << "] Equipping " << item->getName() << " in slot " << slot << endl;
+			//cout << "[" << name << "] Equipping " << item->getName() << " in slot " << slot << endl;
 			activeInventory[slot] = (ItemGameObject*)item->clone();
 			item->onEquipping(*this);
 		}
@@ -215,8 +224,8 @@ void CreatureGameObject::directDmg(int dmg)
 	healthPoints -= dmg;
 	if (healthPoints > baseHealthPoints)
 		healthPoints = baseHealthPoints;
-	cout << getTag() << "Taking direct damage: " << dmg << endl;
-	cout << getTag() << healthPoints << "/" << baseHealthPoints << endl;
+	//cout << getTag() << "Taking direct damage: " << dmg << endl;
+	//cout << getTag() << healthPoints << "/" << baseHealthPoints << endl;
 	if (healthPoints <= 0)
 	{
 		onDeath();
@@ -225,10 +234,6 @@ void CreatureGameObject::directDmg(int dmg)
 
 CreatureGameObject::~CreatureGameObject()
 {
-	for (ItemGameObject* item : activeInventory)
-		if (item)
-			delete item;
-	for (EffectGameObject* effect : activeEffects)
-		if (effect)
-			delete effect;
+	activeInventory.clear();
+	activeEffects.clear();
 }
