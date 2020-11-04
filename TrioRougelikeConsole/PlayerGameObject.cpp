@@ -43,10 +43,7 @@ int PlayerGameObject::getMaxXP() const
 
 PlayerGameObject::~PlayerGameObject()
 {
-	for (vector<ItemGameObject*>* row : inventory)
-		for (auto cell : *row)
-			if (cell)
-				delete cell;
+	inventory.clear();
 }
 
 void PlayerGameObject::addExp(int exp)

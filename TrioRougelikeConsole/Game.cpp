@@ -116,11 +116,14 @@ void Game::mainLoop()
 				break;
 			}
 			default:
-				break;
+				continue;
 			}
 
 			// poruszenie graczem
 			gameMap->move(*gameMap->getPlayer(), x, y);
+
+			// od�wierzanie obiekt�w dynamicznych
+			gameMap->refreshDynamic();
 
 			if (nextLevel)
 			{
@@ -132,18 +135,16 @@ void Game::mainLoop()
 			if (gameOver)
 			{
 				// tutaj rysowanie game over
+				gameOver = false;
 				drawOver();
 				break;
 			}
 
-			// od�wierzanie obiekt�w dynamicznych
-			gameMap->refreshDynamic();
 		}
 
 
 		// usuwanie martwego gracza
 		gameMap->clearDesign();
-		delete gameMap->getPlayer();
 	}
 }
 
@@ -154,7 +155,7 @@ void Game::init()
 
 	logMessage("Creating Map object");
 	FloorGameObject* f = dynamic_cast<FloorGameObject*>(templateOtherObjectsList.at("FL")->clone());
-	gameMap = new Map(2, 1, *f);
+	gameMap = new Map(3, 3, *f);
 
 	registerRooms();
 

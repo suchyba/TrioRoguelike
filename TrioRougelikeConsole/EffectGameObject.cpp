@@ -20,7 +20,7 @@ EffectGameObject::EffectGameObject(int Duration, string Name, GraphicalSymbol Sy
 
 bool EffectGameObject::onRefresh(GameObject& object)
 {
-	cout << getTag() << "Effect is affecting: " << object.getName() << endl;
+	//cout << getTag() << "Effect is affecting: " << object.getName() << endl;
 	return false;
 }
 

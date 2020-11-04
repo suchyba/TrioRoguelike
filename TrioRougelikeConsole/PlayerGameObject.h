@@ -55,7 +55,7 @@ public:
 
 	int getLevel() const;
 
-	void onDeath() override;
+	virtual void onDeath() override;
 	
 	/// <summary>
 	/// Destruktor

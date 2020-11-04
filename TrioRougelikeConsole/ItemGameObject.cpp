@@ -28,7 +28,7 @@ int ItemGameObject::getValue() const
 
 void ItemGameObject::onAttack(CreatureGameObject& opponent)
 {
-    cout << getTag() << "No effect when attacking with this item." << endl;
+    //cout << getTag() << "No effect when attacking with this item." << endl;
 }
 
 int ItemGameObject::onDamege(int damage, CreatureGameObject& self)
@@ -43,7 +43,7 @@ void ItemGameObject::onActivation()
 
 void ItemGameObject::onEquipping(CreatureGameObject& creature)
 {
-    cout << getTag() << "Event when equipping!" << endl;
+    //cout << getTag() << "Event when equipping!" << endl;
 }
 
 ItemGameObject::~ItemGameObject()

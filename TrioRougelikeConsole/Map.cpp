@@ -10,8 +10,6 @@ using namespace std;
 
 void Map::clearDesign()
 {
-	PlayerGameObject* ptemp = new PlayerGameObject(*player);
-
 	mapDesign.clear();
 	mapDesignObjects.clear();
 
@@ -24,8 +22,6 @@ void Map::clearDesign()
 		}
 		mapDesign.push_back(tmp);
 	}
-
-	player = ptemp;
 }
 
 Map::Map(int _width, int _height, const FloorGameObject& _floor) : width(_width), height(_height), floor(new FloorGameObject(_floor)), player(NULL)
@@ -625,7 +621,7 @@ void Map::move(CreatureGameObject& _object, int x, int y)
 						auto inrObj = dynamic_cast<InteractionableGameObject*>(mapDesignObjects[i + x][j + y][z]);
 						if (inrObj != NULL)
 						{
-							_object.onInteraction();
+							inrObj->onInteraction();
 						}
 						auto item = dynamic_cast<ItemGameObject*>(mapDesignObjects[i + x][j + y][z]);
 						if (item)
