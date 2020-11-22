@@ -1,4 +1,5 @@
 #pragma once
+#include <allegro5/allegro.h>
 
 /// <summary>
 /// Klasa dla obiektów graficznej reprezentacji obiektów gry.
@@ -18,12 +19,11 @@ private:
 	/// Kolor t³a na którym znajduje siê symbol (-1 oznacza pobranie koloru t³a, przedmiotu na którym siê znajduje).
 	/// </summary>
 	int backgroundColor;
-public:
 	/// <summary>
-	/// Dmoyœlny konstruktor
+	/// Sprite prezentowany w interfejsie graficznym
 	/// </summary>
-	GraphicalSymbol();
-
+	ALLEGRO_BITMAP* sprite;
+public:
 	/// <summary>
 	/// Konstruktor
 	/// </summary>
@@ -31,6 +31,11 @@ public:
 	/// <param name="foreground">Kolor samego znaku.</param>
 	/// <param name="background">Kolor t³a, na którym znajduje siê przedmiot (-1 oznacza przezroczyste t³o)</param>
 	GraphicalSymbol(char charSymbol, int foreground, int background);
+	/// <summary>
+	/// Konstruktor tworzacy reprezentacjê w interfejsie graficznym
+	/// </summary>
+	/// <param name="image"></param>
+	GraphicalSymbol(ALLEGRO_BITMAP* image);
 	/// <summary>
 	/// Metoda dostêpowa do pola charSymbol
 	/// </summary>
@@ -47,4 +52,9 @@ public:
 	/// <param name="foreground">Nowa wartoœæ dla pola foregroundColor</param>
 	/// <param name="background">Nowa wartoœæ dla pola backgroundColor</param>
 	void setColors(int foreground, int background);
+	/// <summary>
+	/// Metoda dostêpowa do pola sprite
+	/// </summary>
+	/// <returns>WskaŸnik na sprite</returns>
+	const ALLEGRO_BITMAP* getSprite() const;
 };

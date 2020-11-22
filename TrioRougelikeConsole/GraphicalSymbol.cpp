@@ -1,9 +1,12 @@
 #include "GraphicalSymbol.h"
 
-GraphicalSymbol::GraphicalSymbol() {}
-
-GraphicalSymbol::GraphicalSymbol(char symbol, int foreground, int background) : charSymbol(symbol), foregroundColor(foreground), backgroundColor(background)
+GraphicalSymbol::GraphicalSymbol(char symbol, int foreground, int background) : charSymbol(symbol), foregroundColor(foreground), backgroundColor(background), sprite(NULL)
 {
+}
+
+GraphicalSymbol::GraphicalSymbol(ALLEGRO_BITMAP* image) : charSymbol((char)0), foregroundColor(-1), backgroundColor(-1), sprite(image)
+{
+
 }
 
 char GraphicalSymbol::getCharSymbol() const
@@ -20,4 +23,9 @@ void GraphicalSymbol::setColors(int foreground, int background)
 {
     foregroundColor = foreground;
     backgroundColor = background;
+}
+
+const ALLEGRO_BITMAP* GraphicalSymbol::getSprite() const
+{
+    return sprite;
 }
