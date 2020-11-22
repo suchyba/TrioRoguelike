@@ -1,8 +1,7 @@
 #include "Game.h"
 #include "Bars.h"
-#include "Draw.h"
+#include "DisplayConsole.h"
 #include "WallGameObject.h"
-#include <Windows.h>
 #include "GameObject.h"
 #include "FloorGameObject.h"
 #include "BleedingEffectGameObject.h"
@@ -13,7 +12,7 @@
 #include "PlayerGameObject.h"
 #include "Map.h"
 #include "EndGameObject.h"
-#include "CreateMap.h"
+#include <Windows.h>
 #include <conio.h>
 #include <cstdio>
 #include <fstream>
@@ -27,19 +26,20 @@ map<string, const EffectGameObject*> Game::templateEffectObjectList;
 Map* Game::gameMap;
 bool Game::nextLevel;
 bool Game::gameOver;
+Display* Game::displayControl;
 
 void Game::mainLoop()
 {
 	logMessage("Entering main loop");
 	while (true)
 	{
-		// ob�uga menu g��wnego
+		// obsługa menu głównego
 		bool start = false;
 		while (!start)
 		{
-			// tutaj wy�wietlanie menu
+			// wyświetlanie menu
 			int i = 0;
-			switch (drawMenu())
+			switch (displayControl->drawMenu())
 			{
 			default:
 				break;
@@ -50,12 +50,12 @@ void Game::mainLoop()
 			}
 			case 2:
 			{
-				showInstructions();
+				displayControl->showInstructions();
 				break;
 			}
 			case 3:
 			{
-				showAuthors();
+				displayControl->showAuthors();
 				break;
 			}
 			case 4:
@@ -79,8 +79,8 @@ void Game::mainLoop()
 		{
 			//logMessage("Iteration");
 			// wy�wietlanie interfejsu
-			drawMap(gameMap);
-			drawStats(gameMap->getPlayer());
+			displayControl->drawMap(gameMap);
+			displayControl->drawStats(gameMap->getPlayer());
 
 			bool quit = false;
 
@@ -138,7 +138,7 @@ void Game::mainLoop()
 			{
 				// tutaj rysowanie game over
 				gameOver = false;
-				drawOver();
+				displayControl->drawOver();
 				break;
 			}
 			if (quit)
@@ -167,6 +167,7 @@ void Game::init()
 
 	nextLevel = false;
 	gameOver = false;
+	displayControl = new DisplayConsole();
 }
 
 void Game::registerObjects()

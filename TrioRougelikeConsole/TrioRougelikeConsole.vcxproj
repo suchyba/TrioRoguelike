@@ -144,7 +144,8 @@
     <ClCompile Include="BleedingEffectGameObject.cpp" />
     <ClCompile Include="Colliding.cpp" />
     <ClCompile Include="CreatureGameObject.cpp" />
-    <ClCompile Include="Draw.cpp" />
+    <ClCompile Include="DisplayAllegro.cpp" />
+    <ClCompile Include="DisplayConsole.cpp" />
     <ClCompile Include="DynamicGameObject.cpp" />
     <ClCompile Include="EffectGameObject.cpp" />
     <ClCompile Include="EndGameObject.cpp" />
@@ -170,7 +171,9 @@
     <ClInclude Include="BossGameObject.h" />
     <ClInclude Include="Colliding.h" />
     <ClInclude Include="CreatureGameObject.h" />
-    <ClInclude Include="Draw.h" />
+    <ClInclude Include="Display.h" />
+    <ClInclude Include="DisplayAllegro.h" />
+    <ClInclude Include="DisplayConsole.h" />
     <ClInclude Include="DynamicGameObject.h" />
     <ClInclude Include="EffectGameObject.h" />
     <ClInclude Include="EndGameObject.h" />

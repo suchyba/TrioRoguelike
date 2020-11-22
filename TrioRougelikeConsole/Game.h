@@ -6,6 +6,7 @@
 #include "GameObject.h"
 #include "EffectGameObject.h"
 #include "Map.h"
+#include "Display.h"
 
 
 using namespace std;
@@ -21,6 +22,8 @@ private:
 	static bool nextLevel;
 
 	static bool gameOver;
+
+	static Display* displayControl;
 
 	/// <summary>
 	/// Prywatny konstruktor by uniemożliwić tworzenie instancji obiektu.

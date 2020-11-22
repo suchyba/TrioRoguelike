@@ -70,9 +70,10 @@
     <ClCompile Include="Bars.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="Draw.cpp">
+    <ClCompile Include="DisplayConsole.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="DisplayAllegro.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -141,9 +142,13 @@
     <ClInclude Include="Bars.h">
       <Filter>Pliki nagłówkowe\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Draw.h">
+    <ClInclude Include="Display.h">
       <Filter>Pliki nagłówkowe\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="DisplayConsole.h">
+      <Filter>Pliki nagłówkowe\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="DisplayAllegro.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
