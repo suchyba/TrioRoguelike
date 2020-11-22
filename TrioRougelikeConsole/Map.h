@@ -154,20 +154,8 @@ public:
 
 	void randomizePlayerPos();
 
-	~Map()
-	{
-		for (int i = 0; i < mapDesign.size(); i++)
-		{
-			for (int j = 0; j < mapDesign[i].size(); j++)
-			{
-				delete mapDesign[i][j];
-			}
-		}
-		for (int i = 0; i < rooms.size(); i++)
-		{
-			delete rooms[i];
-		}
-		delete floor;
-	}
+	vector<vector<vector<GameObject*>>>* getObjectSurr(const GameObject& object);
+
+	~Map();
 };
 

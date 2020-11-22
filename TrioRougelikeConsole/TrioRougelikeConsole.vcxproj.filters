@@ -24,6 +24,7 @@
     <ClCompile Include="CreateMap.cpp" />
     <ClCompile Include="Bars.cpp" />
     <ClCompile Include="Draw.cpp" />
+    <ClCompile Include="EndGameObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -89,76 +90,35 @@
     <ClCompile Include="FloorGameObject.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="EndGameObject.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameObject.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicalSymbol.h">
-      <Filter>Pliki nagłówkowe\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="InteractionalbeGameObject.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="DynamicGameObject.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Pliki nagłówkowe\Main game controls</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemGameObject.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerGameObject.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="BossGameObject.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="CreatureGameObject.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Colliding.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="EffectGameObject.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="BleedingEffectGameObject.h">
-      <Filter>Pliki nagłówkowe\PersonalizedGameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyGameObject.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="WeaponGameObject.h">
-      <Filter>Pliki nagłówkowe\PersonalizedGameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="ArmorGameObject.h">
-      <Filter>Pliki nagłówkowe\PersonalizedGameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="RegenerationEffectGameObject.h">
-      <Filter>Pliki nagłówkowe\PersonalizedGameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="WallGameObject.h">
-      <Filter>Pliki nagłówkowe\PersonalizedGameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="FloorGameObject.h">
-      <Filter>Pliki nagłówkowe\PersonalizedGameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Room.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>Pliki nagłówkowe\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="EndGameObject.h">
-      <Filter>Pliki nagłówkowe\PersonalizedGameObject</Filter>
-    </ClInclude>
+    <ClInclude Include="ArmorGameObject.h" />
+    <ClInclude Include="Bars.h" />
+    <ClInclude Include="BleedingEffectGameObject.h" />
+    <ClInclude Include="BossGameObject.h" />
+    <ClInclude Include="Colliding.h" />
+    <ClInclude Include="CreateMap.h" />
+    <ClInclude Include="CreatureGameObject.h" />
+    <ClInclude Include="Draw.h" />
+    <ClInclude Include="DynamicGameObject.h" />
+    <ClInclude Include="EffectGameObject.h" />
+    <ClInclude Include="EndGameObject.h" />
+    <ClInclude Include="EnemyGameObject.h" />
+    <ClInclude Include="FloorGameObject.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GraphicalSymbol.h" />
+    <ClInclude Include="InteractionalbeGameObject.h" />
+    <ClInclude Include="ItemGameObject.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="PlayerGameObject.h" />
+    <ClInclude Include="RegenerationEffectGameObject.h" />
+    <ClInclude Include="Room.h" />
+    <ClInclude Include="WallGameObject.h" />
+    <ClInclude Include="WeaponGameObject.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

@@ -526,7 +526,7 @@ int Map::connect(Room& room1, Room& room2, int direction)
 void Map::mergeRoomsIntoMap()
 {
 	cout << "[MAP] Marging into array" << endl;
-	vector < vector<GameObject* >>  tmp;
+	//vector < vector<GameObject* >>  tmp;
 	for (int i = 0; i < mapDesign.size() * 10; i++)
 	{
 		vector<vector<GameObject*>> tmp2;
@@ -616,13 +616,14 @@ void Map::move(CreatureGameObject& _object, int x, int y)
 				auto p = dynamic_cast<PlayerGameObject*>(&_object);
 				for (int z = 0; z < 3; ++z)
 				{
+					auto colObj = dynamic_cast<Colliding*>(mapDesignObjects[i + x][j + y][z]);
+					if (colObj != NULL)
+					{
+						colObj->onCollide(_object);
+						return;
+					}
 					if (p)
 					{
-						auto inrObj = dynamic_cast<InteractionableGameObject*>(mapDesignObjects[i + x][j + y][z]);
-						if (inrObj != NULL)
-						{
-							inrObj->onInteraction();
-						}
 						auto item = dynamic_cast<ItemGameObject*>(mapDesignObjects[i + x][j + y][z]);
 						if (item)
 						{
@@ -631,13 +632,13 @@ void Map::move(CreatureGameObject& _object, int x, int y)
 								slot = 0;
 							p->equipItem((ItemGameObject*)item->clone(), slot);
 							mapDesignObjects[i + x][j + y][z] = NULL;
+							return;
 						}
-					}
-					auto colObj = dynamic_cast<Colliding*>(mapDesignObjects[i + x][j + y][z]);
-					if (colObj != NULL)
-					{
-						colObj->onCollide(_object);
-						return;
+						auto inrObj = dynamic_cast<InteractionableGameObject*>(mapDesignObjects[i + x][j + y][z]);
+						if (inrObj != NULL)
+						{
+							inrObj->onInteraction();
+						}
 					}
 				}
 				mapDesignObjects[i + x][j + y][2] = mapDesignObjects[i][j][2];
@@ -660,9 +661,9 @@ void Map::setPlayer(PlayerGameObject* p)
 
 void Map::refreshDynamic()
 {
-	for (auto d : dynamicList)
-		if(d)
-			d->onRefresh();
+	for (int i = 0; i < dynamicList.size(); ++i)
+		if (dynamicList[i])
+			dynamicList[i]->onRefresh();
 }
 
 void Map::removeFromMap(GameObject& object)
@@ -710,6 +711,64 @@ void Map::randomizePlayerPos()
 			break;
 		}
 	}
+}
+
+vector<vector<vector<GameObject*>>>* Map::getObjectSurr(const GameObject& object)
+{
+	int x = -1, y = -1, z = -1;
+	for (int i = 0; i < mapDesignObjects.size(); i++)
+	{
+		for (int j = 0; j < mapDesignObjects[i].size(); j++)
+		{
+			for (int k = 0; k < mapDesignObjects[i][j].size(); ++k)
+			{
+				if (mapDesignObjects[i][j][k] == &object)
+				{
+					x = i;
+					y = j;
+					z = k;
+				}
+			}
+		}
+	}
+	if (x == -1 || y == -1 || z == -1)
+		return NULL;
+	else
+	{
+		vector<vector<vector<GameObject*>>> v;
+		for (int i = 0; i < 3; ++i)
+		{
+			vector<vector<GameObject*>> tmp;
+			for (int j = 0; j < 3; ++j)
+			{
+				vector<GameObject*> tmp2;
+				for (int k = 0; k < 3; ++k)
+					tmp2.push_back(NULL);
+				tmp.push_back(tmp2);
+			}
+			v.push_back(tmp);
+		}
+
+		// dodaæ skanowanie
+	}
+
+
+}
+
+inline Map::~Map()
+{
+	for (int i = 0; i < mapDesign.size(); i++)
+	{
+		for (int j = 0; j < mapDesign[i].size(); j++)
+		{
+			delete mapDesign[i][j];
+		}
+	}
+	for (int i = 0; i < rooms.size(); i++)
+	{
+		delete rooms[i];
+	}
+	delete floor;
 }
 
 vector<vector<vector<GameObject*>>>* Map::getMapDesignObject()
