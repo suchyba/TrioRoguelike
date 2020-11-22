@@ -755,7 +755,7 @@ vector<vector<vector<GameObject*>>>* Map::getObjectSurr(const GameObject& object
 
 }
 
-inline Map::~Map()
+Map::~Map()
 {
 	for (int i = 0; i < mapDesign.size(); i++)
 	{
