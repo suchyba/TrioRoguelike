@@ -56,5 +56,5 @@ public:
 	/// Metoda dostêpowa do pola sprite
 	/// </summary>
 	/// <returns>WskaŸnik na sprite</returns>
-	const ALLEGRO_BITMAP* getSprite() const;
+	ALLEGRO_BITMAP* getSprite() const;
 };

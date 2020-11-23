@@ -271,3 +271,11 @@ void DisplayConsole::drawOver()
 	i = _getch();
 	system("cls");
 }
+
+int DisplayConsole::drawInterface(Map* map, PlayerGameObject* player)
+{
+	drawMap(map);
+	drawStats(player);
+
+	return _getch();
+}

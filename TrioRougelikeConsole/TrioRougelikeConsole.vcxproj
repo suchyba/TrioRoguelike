@@ -72,6 +72,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <Allegro_AddonImage>true</Allegro_AddonImage>
+    <Allegro_AddonTTF>true</Allegro_AddonTTF>
+    <Allegro_AddonPrimitives>true</Allegro_AddonPrimitives>
+    <Allegro_AddonFont>true</Allegro_AddonFont>
+    <Allegro_AddonColor>true</Allegro_AddonColor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -144,6 +149,7 @@
     <ClCompile Include="BleedingEffectGameObject.cpp" />
     <ClCompile Include="Colliding.cpp" />
     <ClCompile Include="CreatureGameObject.cpp" />
+    <ClCompile Include="Display.cpp" />
     <ClCompile Include="DisplayAllegro.cpp" />
     <ClCompile Include="DisplayConsole.cpp" />
     <ClCompile Include="DynamicGameObject.cpp" />
@@ -187,6 +193,7 @@
     <ClInclude Include="Map.h" />
     <ClInclude Include="PlayerGameObject.h" />
     <ClInclude Include="RegenerationEffectGameObject.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="WallGameObject.h" />
     <ClInclude Include="WeaponGameObject.h" />
@@ -194,6 +201,12 @@
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TrioRougelikeConsole.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="C:\Users\suchy\Desktop\Sprite.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

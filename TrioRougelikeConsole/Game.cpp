@@ -1,6 +1,6 @@
 #include "Game.h"
-#include "Bars.h"
 #include "DisplayConsole.h"
+#include "DisplayAllegro.h"
 #include "WallGameObject.h"
 #include "GameObject.h"
 #include "FloorGameObject.h"
@@ -13,10 +13,9 @@
 #include "Map.h"
 #include "EndGameObject.h"
 #include <Windows.h>
-#include <conio.h>
-#include <cstdio>
 #include <fstream>
 #include <string>
+#include <conio.h>
 
 map<string, const GameObject*> Game::templateOtherObjectsList;
 map<string, const CreatureGameObject*> Game::templateCreatureList;
@@ -79,12 +78,10 @@ void Game::mainLoop()
 		{
 			//logMessage("Iteration");
 			// wy�wietlanie interfejsu
-			displayControl->drawMap(gameMap);
-			displayControl->drawStats(gameMap->getPlayer());
-
+			
 			bool quit = false;
 
-			int key = _getch();
+			int key = displayControl->drawInterface(gameMap, gameMap->getPlayer());
 			int x = 0, y = 0;
 			switch (key)
 			{
@@ -157,6 +154,8 @@ void Game::mainLoop()
 void Game::init()
 {
 	logMessage("Entering init");
+	displayControl = new DisplayAllegro();
+
 	registerObjects();
 
 	logMessage("Creating Map object");
@@ -167,7 +166,6 @@ void Game::init()
 
 	nextLevel = false;
 	gameOver = false;
-	displayControl = new DisplayConsole();
 }
 
 void Game::registerObjects()
@@ -196,6 +194,7 @@ void Game::registerObjects()
 	templateCreatureList.insert({ "IT", new EnemyGameObject(50, 15, 10, 0, "IT", GraphicalSymbol('I', 14, 0)) });
 	templateCreatureList.insert({ "GH", new EnemyGameObject(20, 10, 5, 2, "Ghul", GraphicalSymbol('&', 4, 0), {	(ItemGameObject*)templateItemList.at("GHHD")->clone(), 
 																												(ItemGameObject*)templateItemList.at("HLARM")->clone()}) });
+	templateCreatureList.insert({ "SPRITE", new EnemyGameObject(20, 10, 10, 1, "Sprite", GraphicalSymbol(al_load_bitmap("images/sprite.png")), {(ItemGameObject*)templateItemList.at("AXE")->clone()}) });	
 }
 
 void Game::logMessage(string message)
@@ -223,6 +222,7 @@ void Game::quit()
 	templateOtherObjectsList.clear();
 
 	delete gameMap;
+	delete displayControl;
 }
 
 void Game::registerRooms()

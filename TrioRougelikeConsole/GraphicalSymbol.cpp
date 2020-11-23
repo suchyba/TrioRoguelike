@@ -25,7 +25,7 @@ void GraphicalSymbol::setColors(int foreground, int background)
     backgroundColor = background;
 }
 
-const ALLEGRO_BITMAP* GraphicalSymbol::getSprite() const
+ALLEGRO_BITMAP* GraphicalSymbol::getSprite() const
 {
     return sprite;
 }

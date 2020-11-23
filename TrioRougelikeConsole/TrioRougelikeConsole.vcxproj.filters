@@ -74,6 +74,7 @@
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="DisplayAllegro.cpp" />
+    <ClCompile Include="Display.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -149,6 +150,7 @@
       <Filter>Pliki nagłówkowe\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="DisplayAllegro.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
@@ -161,5 +163,16 @@
     <Filter Include="Pliki nagłówkowe\PersonalizedGameObject" />
     <Filter Include="Pliki nagłówkowe\GameObjects" />
     <Filter Include="Pliki źródłowe" />
+    <Filter Include="Resources">
+      <UniqueIdentifier>{36409ebc-c274-446c-8bdb-897b5db0c9ed}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TrioRougelikeConsole.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="C:\Users\suchy\Desktop\Sprite.png">
+      <Filter>Resources</Filter>
+    </Image>
   </ItemGroup>
 </Project>

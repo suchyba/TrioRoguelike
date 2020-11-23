@@ -23,15 +23,16 @@ public:
 	/// </summary>
 	virtual void showInstructions() = 0;
 	/// <summary>
-	/// Funkcja odpowiedzialna za statystyki gracza
+	/// Funkcja rysuj¹ca interfejs graficzny podczas gry
 	/// </summary>
-	virtual void drawStats(PlayerGameObject* player) = 0;
-	/// <summary>
-	/// Funkcja odpowiedzialna za rysowanie mapy
-	/// </summary>
-	virtual void drawMap(Map* map) = 0;
+	/// <returns>Klawisz, który zosta³ naciœniêty</returns>
+	virtual int drawInterface(Map* map, PlayerGameObject* player) = 0;
 	/// <summary>
 	/// Funkcja odpowiedzialna za ekran Game Over
 	/// </summary>
 	virtual void drawOver() = 0;
+	/// <summary>
+	/// Wirtualny destruktor
+	/// </summary>
+	virtual ~Display();
 };
