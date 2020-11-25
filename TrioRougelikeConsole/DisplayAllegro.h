@@ -5,6 +5,7 @@ class DisplayAllegro : public Display
 {
 private:
     ALLEGRO_DISPLAY* display;
+    ALLEGRO_BITMAP* transparentBitmap;
 public:
     DisplayAllegro();
     // Odziedziczono za poœrednictwem elementu Display
