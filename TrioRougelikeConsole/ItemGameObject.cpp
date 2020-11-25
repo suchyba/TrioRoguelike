@@ -29,6 +29,11 @@ int ItemGameObject::getValue() const
     return value;
 }
 
+EffectGameObject* ItemGameObject::getEffect() const
+{
+    return effect;
+}
+
 void ItemGameObject::onAttack(CreatureGameObject& opponent)
 {
     //cout << getTag() << "No effect when attacking with this item." << endl;

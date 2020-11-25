@@ -195,27 +195,25 @@ void Game::registerObjects()
 																												(ItemGameObject*)templateItemList.at("HLARM")->clone()}) });*/
 	templateOtherObjectsList.insert({ "WL", new WallGameObject("Wall", GraphicalSymbol(al_load_bitmap("images/wall.png"))) });
 	templateOtherObjectsList.insert({ "FL", new FloorGameObject("FLOOR", GraphicalSymbol(al_load_bitmap("images/floor.png"))) });
-	templateOtherObjectsList.insert({ "EN", new EndGameObject("End", GraphicalSymbol(al_load_bitmap("images/sprite.png"))) });
+	templateOtherObjectsList.insert({ "EN", new EndGameObject("End", GraphicalSymbol(al_load_bitmap("images/schody.png"))) });
 
-	templateEffectObjectList.insert({ "BLEFF", new BleedingEffectGameObject(2, 3, 1, 5, "Bleeding", GraphicalSymbol(al_load_bitmap("images/sprite.png"))) });
-	templateEffectObjectList.insert({ "HEAL", new RegenerationEffectGameObject(1, 3, 2, "Regeneration", GraphicalSymbol(al_load_bitmap("images/sprite.png"))) });
-	templateEffectObjectList.insert({ "HEALPLUS", new RegenerationEffectGameObject(1, 4, 5, "Regeneration+", GraphicalSymbol(al_load_bitmap("images/sprite.png"))) });
+	templateEffectObjectList.insert({ "BLEFF", new BleedingEffectGameObject(2, 3, 1, 5, "Bleeding", GraphicalSymbol(al_load_bitmap("images/bleed.png"))) });
+	templateEffectObjectList.insert({ "HEAL", new RegenerationEffectGameObject(1, 3, 2, "Regeneration", GraphicalSymbol(al_load_bitmap("images/regeneration.png"))) });
+	templateEffectObjectList.insert({ "HEALPLUS", new RegenerationEffectGameObject(1, 4, 5, "Regeneration+", GraphicalSymbol(al_load_bitmap("images/bigregeneration.png"))) });
 
-	templateItemList.insert({ "GHHD", new WeaponGameObject(3, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"Ghul Hand", GraphicalSymbol(al_load_bitmap("images/ghullhand.png")), 2, 5) });
-	templateItemList.insert({ "GRSW", new WeaponGameObject(7, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"Great Sword", GraphicalSymbol(al_load_bitmap("images/sprite.png")), 10, 16) });
-	templateItemList.insert({ "AXE", new WeaponGameObject(10, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"Axe", GraphicalSymbol(al_load_bitmap("images/sprite.png")), 12, 19) });
-	templateItemList.insert({ "HLARM", new ArmorGameObject(10, (EffectGameObject*)templateEffectObjectList["HEAL"]->clone(), "Heal Chain Armor", GraphicalSymbol(al_load_bitmap("images/healingarmor.png")), 4) });
-	templateItemList.insert({ "HLMT", new ArmorGameObject(8, (EffectGameObject*)templateEffectObjectList["HEALPLUS"], "Healing Helmet", GraphicalSymbol(al_load_bitmap("images/sprite.png")), 3) });
+	templateItemList.insert({ "GHHD", new WeaponGameObject(3, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"Ghul Arm", GraphicalSymbol(al_load_bitmap("images/ghularm.png")), 2, 5) });
+	templateItemList.insert({ "GRSW", new WeaponGameObject(7, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"Great Sword", GraphicalSymbol(al_load_bitmap("images/sword.png")), 10, 16) });
+	templateItemList.insert({ "AXE", new WeaponGameObject(10, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"Axe", GraphicalSymbol(al_load_bitmap("images/axe.png")), 12, 19) });
+	templateItemList.insert({ "HLARM", new ArmorGameObject(10, (EffectGameObject*)templateEffectObjectList["HEAL"]->clone(), "Heal Chain Armor", GraphicalSymbol(al_load_bitmap("images/kolczuga.png")), 4) });
+	templateItemList.insert({ "HLMT", new ArmorGameObject(8, (EffectGameObject*)templateEffectObjectList["HEALPLUS"], "Healing Helmet", GraphicalSymbol(al_load_bitmap("images/helmet.png")), 3) });
 
-	templateCreatureList.insert({ "GH", new EnemyGameObject(20, 10, 5, 1, "Ghul", GraphicalSymbol(al_load_bitmap("images/ghull.png")), {(ItemGameObject*)templateItemList.at("GHHD")->clone()}) });
-	templateCreatureList.insert({ "YA", new EnemyGameObject(30, 12, 7, 3, "Yasuo", GraphicalSymbol(al_load_bitmap("images/sprite.png")), {	(ItemGameObject*)templateItemList.at("HLMT")->clone(),
+	templateCreatureList.insert({ "GH", new EnemyGameObject(20, 10, 5, 1, "Ghul", GraphicalSymbol(al_load_bitmap("images/ghul.png")), {(ItemGameObject*)templateItemList.at("GHHD")->clone()}) });
+	templateCreatureList.insert({ "YA", new EnemyGameObject(30, 12, 7, 3, "Yasuo", GraphicalSymbol(al_load_bitmap("images/lilyasuo.png")), {	(ItemGameObject*)templateItemList.at("HLMT")->clone(),
 																													(ItemGameObject*)templateItemList.at("HLARM")->clone(), 
 																													(ItemGameObject*)templateItemList.at("GRSW")->clone()}) });
-	templateCreatureList.insert({ "IT", new EnemyGameObject(50, 15, 10, 0, "IT", GraphicalSymbol(al_load_bitmap("images/sprite.png"))) });
-	templateCreatureList.insert({ "GH", new EnemyGameObject(20, 10, 5, 2, "Ghul", GraphicalSymbol(al_load_bitmap("images/sprite.png")), {	(ItemGameObject*)templateItemList.at("GHHD")->clone(),
+	templateCreatureList.insert({ "IT", new EnemyGameObject(50, 15, 10, 0, "IT", GraphicalSymbol(al_load_bitmap("images/informatyk.png"))) });
+	templateCreatureList.insert({ "GH", new EnemyGameObject(20, 10, 5, 2, "Ghul", GraphicalSymbol(NULL), {	(ItemGameObject*)templateItemList.at("GHHD")->clone(),
 																												(ItemGameObject*)templateItemList.at("HLARM")->clone()}) });
-
-	templateCreatureList.insert({ "SPRITE", new EnemyGameObject(20, 10, 10, 1, "Sprite", GraphicalSymbol(al_load_bitmap("images/sprite.png")), {(ItemGameObject*)templateItemList.at("AXE")->clone()}) });	
 }
 
 void Game::logMessage(string message)

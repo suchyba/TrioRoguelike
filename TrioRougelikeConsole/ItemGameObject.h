@@ -64,6 +64,8 @@ public:
 	/// <returns>value</returns>
 	int getValue() const;
 
+	EffectGameObject* getEffect() const;
+
 	/// <summary>
 	/// Metoda wywo³ywana bezpoœrednio przed atakiem na przeciwnika.
 	/// </summary>
