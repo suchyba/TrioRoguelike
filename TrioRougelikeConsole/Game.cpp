@@ -184,29 +184,17 @@ void Game::registerObjects()
 	templateItemList.insert({ "GHHD", new WeaponGameObject(3, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"Ghul Hand", GraphicalSymbol('L', 4, 0), 2, 5) });
 	templateItemList.insert({ "HLARM", new ArmorGameObject(10, (EffectGameObject*)templateEffectObjectList["HEAL"]->clone(), "Heal Chain Armor", GraphicalSymbol((char)177, 10, 0), 4) });
 	templateItemList.insert({ "HLMT", new ArmorGameObject(8, (EffectGameObject*)templateEffectObjectList["HEALPLUS"], "Healing Helmet", GraphicalSymbol('n', 10, 0), 3) });
-
 	templateItemList.insert({ "GRSW", new WeaponGameObject(7, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"Great Sword", GraphicalSymbol('t', 8, 0), 10, 16) });
 	templateItemList.insert({ "AXE", new WeaponGameObject(10, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"Axe", GraphicalSymbol('P', 8, 0), 12, 19) });
+	templateItemList.insert({ "HLARM", new ArmorGameObject(10, (EffectGameObject*)templateEffectObjectList["HEAL"]->clone(), "Heal Chain Armor", GraphicalSymbol((char)177, 10, 0), 4) });
+
 	templateCreatureList.insert({ "GH", new EnemyGameObject(20, 10, 5, 1, "Ghul", GraphicalSymbol('&', 4, 0), {(ItemGameObject*)templateItemList.at("GHHD")->clone()}) });
 	templateCreatureList.insert({ "YA", new EnemyGameObject(30, 12, 7, 3, "Yasuo", GraphicalSymbol('Y', 11, 0), {	(ItemGameObject*)templateItemList.at("HLMT")->clone(), 
 																													(ItemGameObject*)templateItemList.at("HLARM")->clone(), 
 																													(ItemGameObject*)templateItemList.at("GRSW")->clone()}) });
 	templateCreatureList.insert({ "IT", new EnemyGameObject(50, 15, 10, 0, "IT", GraphicalSymbol('I', 14, 0)) });
-
-
-	templateItemList.insert({ "HLARM", new ArmorGameObject(10, (EffectGameObject*)templateEffectObjectList["HEAL"]->clone(), "Heal Chain Armor", GraphicalSymbol((char)177, 10, 0), 4) });
-
-	templateCreatureList.insert({ "GH", new EnemyGameObject(20, 10, 5, 2, "Ghul", GraphicalSymbol('&', 4, 0), {(ItemGameObject*)templateItemList.at("GHHD")->clone(), (ItemGameObject*)templateItemList.at("HLARM")->clone()}) });
-
-	/*CreatureGameObject* ghul = (CreatureGameObject*)templateCreatureList.at("GH")->clone();
-	FloorGameObject* floor = (FloorGameObject*)templateOtherObjectsList.at("FL")->clone();
-	WallGameObject* wall = (WallGameObject*)templateOtherObjectsList.at("WA")->clone();
-	WeaponGameObject* GreatSword = (WeaponGameObject*)templateItemList.at("GRSW")->clone();
-	WeaponGameObject* Axe = (WeaponGameObject*)templateItemList.at("AXE")->clone();
-
-	ArmorGameObject* Helmet = (ArmorGameObject*)templateItemList.at("HLMT")->clone();
-	CreatureGameObject* Yasuo = (CreatureGameObject*)templateCreatureList.at("YA")->clone();
-	CreatureGameObject* IT = (CreatureGameObject*)templateCreatureList.at("YA")->clone();*/
+	templateCreatureList.insert({ "GH", new EnemyGameObject(20, 10, 5, 2, "Ghul", GraphicalSymbol('&', 4, 0), {	(ItemGameObject*)templateItemList.at("GHHD")->clone(), 
+																												(ItemGameObject*)templateItemList.at("HLARM")->clone()}) });
 }
 
 void Game::logMessage(string message)
