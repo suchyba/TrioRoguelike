@@ -106,7 +106,7 @@ int DisplayAllegro::drawMenu() // Sebastian
 
 		animationIterator++;
 
-		if (GetCursorPos(&mousePosition)) //obs³uga myszki
+		if (GetCursorPos(&mousePosition))
 		{
 			if (mousePosition.x > categorytextX + 180 && mousePosition.x < categorytextX + 450)
 			{
@@ -115,8 +115,7 @@ int DisplayAllegro::drawMenu() // Sebastian
 					selectedCategory = 0;
 					if ((GetKeyState(VK_LBUTTON) & 0x100) != 0)
 					{
-						al_rest(0.05); //delay po to ¿eby wybieranie lepiej dzia³a³o
-						/*START GAME*/ //tutaj trzeba wywo³aæ drawInterface();
+						return 1;
 					}
 				}
 				else if (mousePosition.y > categoryGameInstructionY + 170 && mousePosition.y < categoryGameInstructionY + 220)
@@ -124,8 +123,7 @@ int DisplayAllegro::drawMenu() // Sebastian
 					selectedCategory = 1;
 					if ((GetKeyState(VK_LBUTTON) & 0x100) != 0)
 					{
-						al_rest(0.05);
-						showInstructions();
+						return 2;
 					}
 				}
 				else if (mousePosition.y > categoryGameAutorsY + 170 && mousePosition.y < categoryGameAutorsY + 220)
@@ -133,9 +131,7 @@ int DisplayAllegro::drawMenu() // Sebastian
 					selectedCategory = 2;
 					if ((GetKeyState(VK_LBUTTON) & 0x100) != 0)
 					{
-						al_rest(0.05);
-						showAuthors();
-						//	drawOver();     // dla testów
+						return 3;
 					}
 				}
 				else if (mousePosition.y > categoryExitGameY + 170 && mousePosition.y < categoryExitGameY + 220)
@@ -143,8 +139,7 @@ int DisplayAllegro::drawMenu() // Sebastian
 					selectedCategory = 3;
 					if ((GetKeyState(VK_LBUTTON) & 0x100) != 0)
 					{
-						al_rest(0.05);
-						exit(0);
+						return 4;
 					}
 				}
 			}
@@ -218,21 +213,16 @@ int DisplayAllegro::drawMenu() // Sebastian
 			switch (selectedCategory)
 			{
 			case 0:
-				/*START GAME*/ //tu te¿ wywo³anie drawInterface();
-				al_rest(0.15);
-
+				return 1;
 				break;
 			case 1:
-				showInstructions();
-				al_rest(0.15);
+				return 2;
 				break;
-
 			case 2:
-				showAuthors();
-				al_rest(0.15);
+				return 3;
 				break;
 			case 3:
-				exit(0);
+				return 4;
 				break;
 			default:
 				break;
