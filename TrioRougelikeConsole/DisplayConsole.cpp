@@ -1,4 +1,4 @@
-#include "Draw.h"
+#include "DisplayConsole.h"
 #include <Windows.h>
 #include <iostream>
 #include <conio.h>
@@ -7,9 +7,10 @@
 #include "PlayerGameObject.h"
 #include "Map.h"
 #include "ItemGameObject.h"
+#include "DisplayConsole.h"
 
 
-int  drawMenu()
+int DisplayConsole::drawMenu()
 {
 	enum KEYCODES { UP = 72, DOWN = 80, ENTER = 13 };
 	char c = 254;
@@ -127,7 +128,7 @@ std::cout<<"			    \\_| \\_|\\___/ \\____/\\___/\\____/   \\_____/\\___/\\_| \\_
 
 }
 
-void showAuthors()
+void DisplayConsole::showAuthors()
 {
 	system("cls");
 	std::cout << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl <<  std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl;
@@ -147,7 +148,7 @@ void showAuthors()
 	int g = _getch();
 }
 
-void showInstructions()
+void DisplayConsole::showInstructions()
 {
 	system("cls");
 	std::cout << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl;
@@ -173,7 +174,7 @@ void showInstructions()
 	cout << "				       Wcisnij dowolny klawisz by kontynuowac";
 	int g = _getch();
 }
-void drawStats(PlayerGameObject* player)
+void DisplayConsole::drawStats(PlayerGameObject* player)
 {
 	std::cout << "------------------------------------------------------------------------------------------------------------------------" << std::endl;
 	std::cout << "Imie: " << player->getName() << std::endl;
@@ -211,7 +212,7 @@ void drawStats(PlayerGameObject* player)
 
 }
 
-void drawMap(Map* map1)
+void DisplayConsole::drawMap(Map* map1)
 {
 	system("cls");
 	//cout << map1->getMapDesignObject()->size() << endl;
@@ -251,7 +252,7 @@ void drawMap(Map* map1)
 	cout << (char)188 << endl;
 }
 
-void drawOver()
+void DisplayConsole::drawOver()
 {
 	int i = 0;
 	system("cls");
@@ -271,3 +272,10 @@ void drawOver()
 	system("cls");
 }
 
+int DisplayConsole::drawInterface(Map* map, PlayerGameObject* player)
+{
+	drawMap(map);
+	drawStats(player);
+
+	return _getch();
+}

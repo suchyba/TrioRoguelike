@@ -3,7 +3,6 @@
 #include <Windows.h>
 
 using namespace std;
-GameObject::GameObject() {}
 
 GameObject::GameObject(string Name, GraphicalSymbol GSymbol) : name(Name), representation(GSymbol)
 {

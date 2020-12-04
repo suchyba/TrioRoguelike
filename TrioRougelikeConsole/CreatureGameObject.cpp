@@ -7,7 +7,7 @@ CreatureGameObject::CreatureGameObject(int hp, int armor, int exp, int activeIte
 	DynamicGameObject(Name, Symbol)
 {
 	//	DEBUG
-	//cout << getTag() << "Created CreatureGameObject (hp=" << hp << ", armor=" << armor << ", actItems=" << activeItemsCount << ")" << endl;
+	cout << getTag() << "Created CreatureGameObject (hp=" << hp << ", armor=" << armor << ", actItems=" << activeItemsCount << ")" << endl;
 	//	END DEBUG
 
 	for (int i = 0; i < activeItemsCount; ++i)
@@ -19,10 +19,10 @@ CreatureGameObject::CreatureGameObject(int hp, int armor, int exp, int activeIte
 	DynamicGameObject(Name, Symbol)
 {
 	//	DEBUG
-//	cout << getTag() << "Created CreatureGameObject (hp=" << hp << ", armor=" << armor << ", actItems=" << activeItemsCount << ") with items: ";
-//	for (auto item : itemList)
-//		cout << item->getName() << "|";
-//  cout << endl;
+	cout << getTag() << "Created CreatureGameObject (hp=" << hp << ", armor=" << armor << ", actItems=" << activeItemsCount << ") with items: ";
+	for (auto item : itemList)
+		cout << item->getName() << "|";
+	 cout << endl;
 	//	END DEBUG
 
 	activeInventory = vector<ItemGameObject*>(itemList);

@@ -1,8 +1,7 @@
 #include "Game.h"
-#include "Bars.h"
-#include "Draw.h"
+#include "DisplayConsole.h"
+#include "DisplayAllegro.h"
 #include "WallGameObject.h"
-#include <Windows.h>
 #include "GameObject.h"
 #include "FloorGameObject.h"
 #include "BleedingEffectGameObject.h"
@@ -13,11 +12,10 @@
 #include "PlayerGameObject.h"
 #include "Map.h"
 #include "EndGameObject.h"
-#include "CreateMap.h"
-#include <conio.h>
-#include <cstdio>
+#include <Windows.h>
 #include <fstream>
 #include <string>
+#include <conio.h>
 
 map<string, const GameObject*> Game::templateOtherObjectsList;
 map<string, const CreatureGameObject*> Game::templateCreatureList;
@@ -27,19 +25,20 @@ map<string, const EffectGameObject*> Game::templateEffectObjectList;
 Map* Game::gameMap;
 bool Game::nextLevel;
 bool Game::gameOver;
+Display* Game::displayControl;
 
 void Game::mainLoop()
 {
 	logMessage("Entering main loop");
 	while (true)
 	{
-		// ob�uga menu g��wnego
+		// obsługa menu głównego
 		bool start = false;
 		while (!start)
 		{
-			// tutaj wy�wietlanie menu
+			// wyświetlanie menu
 			int i = 0;
-			switch (drawMenu())
+			switch (displayControl->drawMenu())
 			{
 			default:
 				break;
@@ -50,12 +49,12 @@ void Game::mainLoop()
 			}
 			case 2:
 			{
-				showInstructions();
+				displayControl->showInstructions();
 				break;
 			}
 			case 3:
 			{
-				showAuthors();
+				displayControl->showAuthors();
 				break;
 			}
 			case 4:
@@ -67,7 +66,8 @@ void Game::mainLoop()
 		start = false;
 
 		// tworzenie gracza
-		PlayerGameObject* p = new PlayerGameObject(0, 0, 20, 4, 10, 0, 2, 0, "Gracz", GraphicalSymbol('@', 7, 0));
+		//PlayerGameObject* p = new PlayerGameObject(0, 0, 20, 4, 10, 0, 2, 0, "Gracz", GraphicalSymbol('@', 7, 0));
+		PlayerGameObject* p = new PlayerGameObject(0, 0, 20, 4, 10, 0, 2, 0, "Gracz", GraphicalSymbol(al_load_bitmap("images/player.png")));
 		gameMap->setPlayer(p);
 
 		//przygotowanie mapy
@@ -79,12 +79,10 @@ void Game::mainLoop()
 		{
 			//logMessage("Iteration");
 			// wy�wietlanie interfejsu
-			drawMap(gameMap);
-			drawStats(gameMap->getPlayer());
-
+			
 			bool quit = false;
 
-			int key = _getch();
+			int key = displayControl->drawInterface(gameMap, gameMap->getPlayer());
 			int x = 0, y = 0;
 			switch (key)
 			{
@@ -138,7 +136,7 @@ void Game::mainLoop()
 			{
 				// tutaj rysowanie game over
 				gameOver = false;
-				drawOver();
+				displayControl->drawOver();
 				break;
 			}
 			if (quit)
@@ -157,6 +155,8 @@ void Game::mainLoop()
 void Game::init()
 {
 	logMessage("Entering init");
+	displayControl = new DisplayAllegro();
+
 	registerObjects();
 
 	logMessage("Creating Map object");
@@ -172,9 +172,8 @@ void Game::init()
 void Game::registerObjects()
 {
 	logMessage("Registering objects");
-	templateOtherObjectsList.insert({ "WL", new WallGameObject("Wall", GraphicalSymbol((char)219, 8, 0)) });
+	/*templateOtherObjectsList.insert({ "WL", new WallGameObject("Wall", GraphicalSymbol((char)219, 8, 0)) });
 	templateOtherObjectsList.insert({ "FL", new FloorGameObject("FLOOR", GraphicalSymbol((char)176, 2, 0)) });
-	templateOtherObjectsList.insert({ "DR", new GameObject("Door", GraphicalSymbol((char)219, 6, 0)) });
 	templateOtherObjectsList.insert({ "EN", new EndGameObject("End", GraphicalSymbol('%', 1, 0)) });
 
 	templateEffectObjectList.insert({ "BLEFF", new BleedingEffectGameObject(2, 3, 1, 5, "Bleeding", GraphicalSymbol('!', 4, 0)) });
@@ -182,11 +181,10 @@ void Game::registerObjects()
 	templateEffectObjectList.insert({ "HEALPLUS", new RegenerationEffectGameObject(1, 4, 5, "Regeneration+", GraphicalSymbol('+', 2, 0)) });
 
 	templateItemList.insert({ "GHHD", new WeaponGameObject(3, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"Ghul Hand", GraphicalSymbol('L', 4, 0), 2, 5) });
-	templateItemList.insert({ "HLARM", new ArmorGameObject(10, (EffectGameObject*)templateEffectObjectList["HEAL"]->clone(), "Heal Chain Armor", GraphicalSymbol((char)177, 10, 0), 4) });
-	templateItemList.insert({ "HLMT", new ArmorGameObject(8, (EffectGameObject*)templateEffectObjectList["HEALPLUS"], "Healing Helmet", GraphicalSymbol('n', 10, 0), 3) });
 	templateItemList.insert({ "GRSW", new WeaponGameObject(7, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"Great Sword", GraphicalSymbol('t', 8, 0), 10, 16) });
 	templateItemList.insert({ "AXE", new WeaponGameObject(10, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"Axe", GraphicalSymbol('P', 8, 0), 12, 19) });
 	templateItemList.insert({ "HLARM", new ArmorGameObject(10, (EffectGameObject*)templateEffectObjectList["HEAL"]->clone(), "Heal Chain Armor", GraphicalSymbol((char)177, 10, 0), 4) });
+	templateItemList.insert({ "HLMT", new ArmorGameObject(8, (EffectGameObject*)templateEffectObjectList["HEALPLUS"], "Healing Helmet", GraphicalSymbol('n', 10, 0), 3) });
 
 	templateCreatureList.insert({ "GH", new EnemyGameObject(20, 10, 5, 1, "Ghul", GraphicalSymbol('&', 4, 0), {(ItemGameObject*)templateItemList.at("GHHD")->clone()}) });
 	templateCreatureList.insert({ "YA", new EnemyGameObject(30, 12, 7, 3, "Yasuo", GraphicalSymbol('Y', 11, 0), {	(ItemGameObject*)templateItemList.at("HLMT")->clone(), 
@@ -194,6 +192,27 @@ void Game::registerObjects()
 																													(ItemGameObject*)templateItemList.at("GRSW")->clone()}) });
 	templateCreatureList.insert({ "IT", new EnemyGameObject(50, 15, 10, 0, "IT", GraphicalSymbol('I', 14, 0)) });
 	templateCreatureList.insert({ "GH", new EnemyGameObject(20, 10, 5, 2, "Ghul", GraphicalSymbol('&', 4, 0), {	(ItemGameObject*)templateItemList.at("GHHD")->clone(), 
+																												(ItemGameObject*)templateItemList.at("HLARM")->clone()}) });*/
+	templateOtherObjectsList.insert({ "WL", new WallGameObject("Wall", GraphicalSymbol(al_load_bitmap("images/wall.png"))) });
+	templateOtherObjectsList.insert({ "FL", new FloorGameObject("FLOOR", GraphicalSymbol(al_load_bitmap("images/floor.png"))) });
+	templateOtherObjectsList.insert({ "EN", new EndGameObject("End", GraphicalSymbol(al_load_bitmap("images/schody.png"))) });
+
+	templateEffectObjectList.insert({ "BLEFF", new BleedingEffectGameObject(2, 3, 1, 5, "Bleeding", GraphicalSymbol(al_load_bitmap("images/bleed.png"))) });
+	templateEffectObjectList.insert({ "HEAL", new RegenerationEffectGameObject(1, 3, 2, "Regeneration", GraphicalSymbol(al_load_bitmap("images/regeneration.png"))) });
+	templateEffectObjectList.insert({ "HEALPLUS", new RegenerationEffectGameObject(1, 4, 5, "Regeneration+", GraphicalSymbol(al_load_bitmap("images/bigregeneration.png"))) });
+
+	templateItemList.insert({ "GHHD", new WeaponGameObject(3, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"Ghul Arm", GraphicalSymbol(al_load_bitmap("images/ghularm.png")), 2, 5) });
+	templateItemList.insert({ "GRSW", new WeaponGameObject(7, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"Great Sword", GraphicalSymbol(al_load_bitmap("images/sword.png")), 10, 16) });
+	templateItemList.insert({ "AXE", new WeaponGameObject(10, (EffectGameObject*)templateEffectObjectList["BLEFF"]->clone(),"Axe", GraphicalSymbol(al_load_bitmap("images/axe.png")), 12, 19) });
+	templateItemList.insert({ "HLARM", new ArmorGameObject(10, (EffectGameObject*)templateEffectObjectList["HEAL"]->clone(), "Heal Chain Armor", GraphicalSymbol(al_load_bitmap("images/kolczuga.png")), 4) });
+	templateItemList.insert({ "HLMT", new ArmorGameObject(8, (EffectGameObject*)templateEffectObjectList["HEALPLUS"], "Healing Helmet", GraphicalSymbol(al_load_bitmap("images/helmet.png")), 3) });
+
+	templateCreatureList.insert({ "GH", new EnemyGameObject(20, 10, 5, 1, "Ghul", GraphicalSymbol(al_load_bitmap("images/ghul.png")), {(ItemGameObject*)templateItemList.at("GHHD")->clone()}) });
+	templateCreatureList.insert({ "YA", new EnemyGameObject(30, 12, 7, 3, "Yasuo", GraphicalSymbol(al_load_bitmap("images/lilyasuo.png")), {	(ItemGameObject*)templateItemList.at("HLMT")->clone(),
+																													(ItemGameObject*)templateItemList.at("HLARM")->clone(), 
+																													(ItemGameObject*)templateItemList.at("GRSW")->clone()}) });
+	templateCreatureList.insert({ "IT", new EnemyGameObject(50, 15, 10, 0, "IT", GraphicalSymbol(al_load_bitmap("images/informatyk.png"))) });
+	templateCreatureList.insert({ "GH", new EnemyGameObject(20, 10, 5, 2, "Ghul", GraphicalSymbol(NULL), {	(ItemGameObject*)templateItemList.at("GHHD")->clone(),
 																												(ItemGameObject*)templateItemList.at("HLARM")->clone()}) });
 }
 
@@ -222,6 +241,7 @@ void Game::quit()
 	templateOtherObjectsList.clear();
 
 	delete gameMap;
+	delete displayControl;
 }
 
 void Game::registerRooms()
